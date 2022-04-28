@@ -201,7 +201,7 @@ class BasePanel(ScreenPanel):
                 for device in self._screen.printer.get_temp_store_devices():
                     # Users can fill the bar if they want
                     if self._screen.printer.has_heated_bed():
-                        self.control['temp_box'].pack_start(self.labels['temperature_sensor'], True, True, 3)
+                        self.control['temp_box'].pack_start(self.labels["temperature_sensor"], True, True, 3)
                         n += 1
                     if n >= nlimit + 1:
                         break
