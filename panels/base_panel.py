@@ -203,7 +203,7 @@ class BasePanel(ScreenPanel):
                     if n >= nlimit + 1:
                         break
                     if not (device.startswith("extruder") or device.startswith("heater_bed")):
-                        name = heat_img
+                        name = "heat-up"
                         name = device.split(" ")[1:][0]
                     else:
                         name = device
