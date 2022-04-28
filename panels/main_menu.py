@@ -341,6 +341,7 @@ class MainPanel(MenuPanel):
 
     def update_graph(self):
         self.labels['da'].queue_draw()
+        self.deactivate
         return True
 
     def update_temp(self, device, temp, target):
