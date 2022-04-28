@@ -160,7 +160,7 @@ class SettingsPanel(ScreenPanel):
             scale.set_hexpand(True)
             scale.set_digits(0)
             scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
-            scale.set_property("width-request", round(self._screen.width/2.2))
+            # scale.set_property("width-request", round(self._screen.width/2.2))
             dev.add(scale)
         elif option['type'] == "printer":
             logging.debug("Option: %s" % option)
