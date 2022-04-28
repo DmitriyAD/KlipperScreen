@@ -15,7 +15,7 @@ class MainPanel(MenuPanel):
     def __init__(self, screen, title, back=False):
         super().__init__(screen, title, False)
         self.devices = {}
-        self.graph_update = None
+        # self.graph_update = None
         self.active_heater = None
 
     def initialize(self, panel_name, items, extrudercount):
@@ -47,16 +47,16 @@ class MainPanel(MenuPanel):
         self.content.add(self.grid)
         self.layout.show_all()
 
-    def activate(self):
-        if self.graph_update is None:
-            # This has a high impact on load
-            self.graph_update = GLib.timeout_add_seconds(5, self.update_graph)
-        return
+    # def activate(self):
+    #     if self.graph_update is None:
+    #         # This has a high impact on load
+    #         self.graph_update = GLib.timeout_add_seconds(5, self.update_graph)
+    #     return
 
-    def deactivate(self):
-        if self.graph_update is not None:
-            GLib.source_remove(self.graph_update)
-            self.graph_update = None
+    # def deactivate(self):
+    #     if self.graph_update is not None:
+    #         GLib.source_remove(self.graph_update)
+    #         self.graph_update = None
 
     def add_device(self, device):
         _ = self.lang.gettext
@@ -83,12 +83,12 @@ class MainPanel(MenuPanel):
                 image = "extruder-%s" % i
             else:
                 image = "extruder"
-            class_name = "graph_label_%s" % device
+            # class_name = "graph_label_%s" % device
             type = "extruder"
         elif device == "heater_bed":
             image = "bed"
             devname = "Heater Bed"
-            class_name = "graph_label_heater_bed"
+            # class_name = "graph_label_heater_bed"
             type = "bed"
         elif device.startswith("heater_generic"):
             self.h = 1
@@ -96,7 +96,7 @@ class MainPanel(MenuPanel):
                 if "heater_generic" in d:
                     self.h += 1
             image = "heater"
-            class_name = "graph_label_sensor_%s" % self.h
+            # class_name = "graph_label_sensor_%s" % self.h
             type = "sensor"
         elif device.startswith("temperature_fan"):
             f = 1
@@ -104,7 +104,7 @@ class MainPanel(MenuPanel):
                 if "temperature_fan" in d:
                     f += 1
             image = "fan"
-            class_name = "graph_label_fan_%s" % f
+            # class_name = "graph_label_fan_%s" % f
             type = "fan"
         elif self._config.get_main_config_option('only_heaters') == "True":
             return False
@@ -118,7 +118,7 @@ class MainPanel(MenuPanel):
                 if "sensor" in d:
                     s += 1
             image = "heat-up"
-            class_name = "graph_label_sensor_%s" % s
+            # class_name = "graph_label_sensor_%s" % s
             type = "sensor"
 
         rgb, color = self._gtk.get_temp_color(type)
@@ -207,23 +207,23 @@ class MainPanel(MenuPanel):
         # self.labels['devices'].attach(name, 0, 0, 1, 1)
         # self.labels['devices'].attach(temp, 1, 0, 1, 1)
 
-        da = HeaterGraph(self._printer, self._gtk.get_font_size())
-        da.set_vexpand(True)
-        self.labels['da'] = da
+        # da = HeaterGraph(self._printer, self._gtk.get_font_size())
+        # da.set_vexpand(True)
+        # self.labels['da'] = da
 
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_hexpand(True)
-        scroll.set_vexpand(True)
-        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
-        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        scroll.add(self.labels['devices'])
+        # scroll = Gtk.ScrolledWindow()
+        # scroll.set_property("overlay-scrolling", False)
+        # scroll.set_hexpand(True)
+        # scroll.set_vexpand(True)
+        # scroll.add_events(Gdk.EventMask.TOUCH_MASK)
+        # scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        # scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        # scroll.add(self.labels['devices'])
 
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
-        box.set_vexpand(True)
-        box.add(scroll)
-        box.add(self.labels['da'])
+        # box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        # box.set_vexpand(True)
+        # box.add(scroll)
+        # box.add(self.labels['da'])
 
 
         # self.labels['graph_settemp'] = self._gtk.Button(label=_("Set Temp"))
@@ -339,9 +339,9 @@ class MainPanel(MenuPanel):
 
         self.labels['popover'].popdown()
 
-    def update_graph(self):
-        self.labels['da'].queue_draw()
-        return True
+    # def update_graph(self):
+    #     self.labels['da'].queue_draw()
+    #     return True
 
     def update_temp(self, device, temp, target):
         if device not in self.devices:
