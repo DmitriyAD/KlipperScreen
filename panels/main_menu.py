@@ -58,118 +58,118 @@ class MainPanel(MenuPanel):
             GLib.source_remove(self.graph_update)
             self.graph_update = None
 
-    def add_device(self, device):
-        _ = self.lang.gettext
-        logging.info("Adding device: %s" % device)
+    # def add_device(self, device):
+        # _ = self.lang.gettext
+        # logging.info("Adding device: %s" % device)
 
-        temperature = self._printer.get_dev_stat(device, "temperature")
-        if temperature is None:
-            return False
+        # temperature = self._printer.get_dev_stat(device, "temperature")
+        # if temperature is None:
+        #     return False
 
-        if not (device.startswith("extruder") or device.startswith("heater_bed")):
-            devname = " ".join(device.split(" ")[1:])
-            # Support for hiding devices by name
-            if devname.startswith("_"):
-                return False
-        else:
-            devname = device
+        # if not (device.startswith("extruder") or device.startswith("heater_bed")):
+        #     devname = " ".join(device.split(" ")[1:])
+        #     # Support for hiding devices by name
+        #     if devname.startswith("_"):
+        #         return False
+        # else:
+        #     devname = device
 
-        if device.startswith("extruder"):
-            i = 0
-            for d in self.devices:
-                if d.startswith('extruder'):
-                    i += 1
-            if self._printer.extrudercount > 1:
-                image = "extruder-%s" % i
-            else:
-                image = "extruder"
-            class_name = "graph_label_%s" % device
-            type = "extruder"
-        elif device == "heater_bed":
-            image = "bed"
-            devname = "Heater Bed"
-            class_name = "graph_label_heater_bed"
-            type = "bed"
-        elif device.startswith("heater_generic"):
-            self.h = 1
-            for d in self.devices:
-                if "heater_generic" in d:
-                    self.h += 1
-            image = "heater"
-            class_name = "graph_label_sensor_%s" % self.h
-            type = "sensor"
-        elif device.startswith("temperature_fan"):
-            f = 1
-            for d in self.devices:
-                if "temperature_fan" in d:
-                    f += 1
-            image = "fan"
-            class_name = "graph_label_fan_%s" % f
-            type = "fan"
-        elif self._config.get_main_config_option('only_heaters') == "True":
-            return False
-        else:
-            s = 1
-            try:
-                s += self.h
-            except Exception:
-                pass
-            for d in self.devices:
-                if "sensor" in d:
-                    s += 1
-            image = "heat-up"
-            class_name = "graph_label_sensor_%s" % s
-            type = "sensor"
+        # if device.startswith("extruder"):
+        #     i = 0
+        #     for d in self.devices:
+        #         if d.startswith('extruder'):
+        #             i += 1
+        #     if self._printer.extrudercount > 1:
+        #         image = "extruder-%s" % i
+        #     else:
+        #         image = "extruder"
+        #     class_name = "graph_label_%s" % device
+        #     type = "extruder"
+        # elif device == "heater_bed":
+        #     image = "bed"
+        #     devname = "Heater Bed"
+        #     class_name = "graph_label_heater_bed"
+        #     type = "bed"
+        # elif device.startswith("heater_generic"):
+        #     self.h = 1
+        #     for d in self.devices:
+        #         if "heater_generic" in d:
+        #             self.h += 1
+        #     image = "heater"
+        #     class_name = "graph_label_sensor_%s" % self.h
+        #     type = "sensor"
+        # elif device.startswith("temperature_fan"):
+        #     f = 1
+        #     for d in self.devices:
+        #         if "temperature_fan" in d:
+        #             f += 1
+        #     image = "fan"
+        #     class_name = "graph_label_fan_%s" % f
+        #     type = "fan"
+        # elif self._config.get_main_config_option('only_heaters') == "True":
+        #     return False
+        # else:
+        #     s = 1
+        #     try:
+        #         s += self.h
+        #     except Exception:
+        #         pass
+        #     for d in self.devices:
+        #         if "sensor" in d:
+        #             s += 1
+        #     image = "heat-up"
+        #     class_name = "graph_label_sensor_%s" % s
+        #     type = "sensor"
 
-        rgb, color = self._gtk.get_temp_color(type)
+        # rgb, color = self._gtk.get_temp_color(type)
 
-        can_target = self._printer.get_temp_store_device_has_target(device)
-        self.labels['da'].add_object(device, "temperatures", rgb, False, True)
-        if can_target:
-            self.labels['da'].add_object(device, "targets", rgb, True, False)
+        # can_target = self._printer.get_temp_store_device_has_target(device)
+        # self.labels['da'].add_object(device, "temperatures", rgb, False, True)
+        # if can_target:
+        #     self.labels['da'].add_object(device, "targets", rgb, True, False)
 
-        text = "<span underline='double' underline_color='#%s'>%s</span>" % (color, devname.capitalize())
-        name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "),
-                                     None, .5, Gtk.PositionType.LEFT, False)
-        name.connect('clicked', self.on_popover_clicked, device)
-        name.set_alignment(0, .5)
-        name.get_style_context().add_class(class_name)
-        child = name.get_children()[0].get_children()[0].get_children()[1]
-        child.set_ellipsize(True)
-        child.set_ellipsize(Pango.EllipsizeMode.END)
+        # text = "<span underline='double' underline_color='#%s'>%s</span>" % (color, devname.capitalize())
+        # name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "),
+        #                              None, .5, Gtk.PositionType.LEFT, False)
+        # name.connect('clicked', self.on_popover_clicked, device)
+        # name.set_alignment(0, .5)
+        # name.get_style_context().add_class(class_name)
+        # child = name.get_children()[0].get_children()[0].get_children()[1]
+        # child.set_ellipsize(True)
+        # child.set_ellipsize(Pango.EllipsizeMode.END)
 
-        temp = self._gtk.Button("")
-        temp.connect('clicked', self.on_popover_clicked, device)
+        # temp = self._gtk.Button("")
+        # temp.connect('clicked', self.on_popover_clicked, device)
 
-        labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        # labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
 
-        dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
-        dev.set_hexpand(True)
-        dev.set_vexpand(False)
-        dev.add(labels)
+        # dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        # dev.set_hexpand(True)
+        # dev.set_vexpand(False)
+        # dev.add(labels)
 
-        self.devices[device] = {
-            "class": class_name,
-            "type": type,
-            "name": name,
-            "temp": temp,
-            "can_target": can_target
-        }
+        # self.devices[device] = {
+        #     "class": class_name,
+        #     "type": type,
+        #     "name": name,
+        #     "temp": temp,
+        #     "can_target": can_target
+        # }
 
-        if self.devices[device]["can_target"]:
-            temp.get_child().set_label("%.1f %s" %
-                                       (temperature, self.format_target(self._printer.get_dev_stat(device, "target"))))
-        else:
-            temp.get_child().set_label("%.1f " % temperature)
+        # if self.devices[device]["can_target"]:
+        #     temp.get_child().set_label("%.1f %s" %
+        #                                (temperature, self.format_target(self._printer.get_dev_stat(device, "target"))))
+        # else:
+        #     temp.get_child().set_label("%.1f " % temperature)
 
-        devices = sorted(self.devices)
-        pos = devices.index(device) + 1
+        # devices = sorted(self.devices)
+        # pos = devices.index(device) + 1
 
-        self.labels['devices'].insert_row(pos)
-        self.labels['devices'].attach(name, 0, pos, 1, 1)
-        self.labels['devices'].attach(temp, 1, pos, 1, 1)
-        self.labels['devices'].show_all()
-        return True
+        # self.labels['devices'].insert_row(pos)
+        # self.labels['devices'].attach(name, 0, pos, 1, 1)
+        # self.labels['devices'].attach(temp, 1, pos, 1, 1)
+        # self.labels['devices'].show_all()
+        # return True
 
     def change_target_temp(self, temp):
         _ = self.lang.gettext
