@@ -208,7 +208,7 @@ class BasePanel(ScreenPanel):
                         name = device
                     for item in titlebar_items:
                         if name == item:
-                            self.control['temp_box'].pack_start(self.labels["%s_box" % 'heat-up'], True, True, 3)
+                            self.control['temp_box'].pack_start(self.labels["%s_box" % "heat-up"], True, True, 3)
                             n += 1
                             break
 
