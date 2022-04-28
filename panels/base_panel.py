@@ -192,7 +192,7 @@ class BasePanel(ScreenPanel):
         # Options in the config have priority
         printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
         if printer_cfg is not None:
-            titlebar_items = printer_cfg.get("titlebar_items", "temperature_fan")
+            titlebar_items = printer_cfg.get("titlebar_items", "")
             if titlebar_items is not None:
                 titlebar_items = [str(i.strip()) for i in titlebar_items.split(',')]
                 logging.info("Titlebar items: %s", titlebar_items)
@@ -200,6 +200,9 @@ class BasePanel(ScreenPanel):
                 logging.info("Titlebar name type: %s", self.titlebar_name_type)
                 for device in self._screen.printer.get_temp_store_devices():
                     # Users can fill the bar if they want
+                    if self._screen.printer.has_heated_bed():
+                        self.control['temp_box'].pack_start(self.labels['temperature_sensor'], True, True, 3)
+                        n += 1
                     if n >= nlimit + 1:
                         break
                     if not (device.startswith("extruder") or device.startswith("heater_bed")):
