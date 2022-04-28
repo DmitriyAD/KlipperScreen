@@ -192,7 +192,7 @@ class BasePanel(ScreenPanel):
         # Options in the config have priority
         printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
         if printer_cfg is not None:
-            titlebar_items = printer_cfg.get("titlebar_items", "heat-up")
+            titlebar_items = printer_cfg.get("titlebar_items", "temperature_fan")
             if titlebar_items is not None:
                 titlebar_items = [str(i.strip()) for i in titlebar_items.split(',')]
                 logging.info("Titlebar items: %s", titlebar_items)
