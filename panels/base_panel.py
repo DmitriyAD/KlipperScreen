@@ -219,6 +219,9 @@ class BasePanel(ScreenPanel):
             if device.startswith("temperature_sensor"):
                 self.control['temp_box'].pack_start(self.labels["%s_box" % device], True, True, 3)
                 n += 1
+            if device.startswith("temperature_fan"):
+                self.control['temp_box'].pack_start(self.labels["%s_box" % device], True, True, 3)
+                n += 1
         self.control['temp_box'].show_all()
 
     def activate(self):
