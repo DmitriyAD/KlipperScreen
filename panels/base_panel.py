@@ -186,9 +186,7 @@ class BasePanel(ScreenPanel):
         if self._screen.printer.has_heated_bed():
             self.control['temp_box'].pack_start(self.labels['heater_bed_box'], True, True, 3)
             n += 1
-        if self._screen.printer.get_temp_store_devices():
-            self.control['temp_box'].pack_start(self.labels['heat-up'], True, True, 3)
-            n += 1
+    
             
 
         # Options in the config have priority
@@ -210,7 +208,7 @@ class BasePanel(ScreenPanel):
                         name = device
                     for item in titlebar_items:
                         if name == item:
-                            self.control['temp_box'].pack_start(self.labels["%s_box" % device], True, True, 3)
+                            self.control['temp_box'].pack_start(self.labels["%s_box" % 'heat-up'], True, True, 3)
                             n += 1
                             break
 
