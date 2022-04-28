@@ -58,201 +58,140 @@ class MainPanel(MenuPanel):
             GLib.source_remove(self.graph_update)
             self.graph_update = None
 
-    def add_device(self, device, items):
-        grid = self._gtk.HomogeneousGrid()
-        grid.set_hexpand(True)
-        grid.set_vexpand(True)
+    def add_device(self, device):
+        _ = self.lang.gettext
+        logging.info("Adding device: %s" % device)
 
-        # Create Extruders and bed icons
-        eq_grid = Gtk.Grid()
-        eq_grid.set_hexpand(True)
-        eq_grid.set_vexpand(True)
+        temperature = self._printer.get_dev_stat(device, "temperature")
+        if temperature is None:
+            return False
 
-        self.heaters = []
+        if not (device.startswith("extruder") or device.startswith("heater_bed")):
+            devname = " ".join(device.split(" ")[1:])
+            # Support for hiding devices by name
+            if devname.startswith("_"):
+                return False
+        else:
+            devname = device
 
-        i = 0
-        for x in self._printer.get_tools():
-            self.labels[x] = self._gtk.ButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(0, 0))
-            self.labels[x].connect("clicked", self.menu_item_clicked, "temperature", {
-            "name": "Temperature",
-            "panel": "temperature"
-            
-            })
-            self.heaters.append(x)
-            i += 1
-
-        add_heaters = self._printer.get_heaters()
-        for h in add_heaters:
-            if h == "heater_bed":
-                self.labels[h] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
-                self.labels[h].connect("clicked", self.menu_item_clicked, "temperature", {
-                "name": "Temperature",
-                "panel": "temperature"
-            
-                })
+        if device.startswith("extruder"):
+            i = 0
+            for d in self.devices:
+                if d.startswith('extruder'):
+                    i += 1
+            if self._printer.extrudercount > 1:
+                image = "extruder-%s" % i
             else:
-                name = " ".join(h.split(" ")[1:])
-                self.labels[h] = self._gtk.ButtonImage("heat-up", name)
-            self.heaters.append(h)
+                image = "extruder"
+            class_name = "graph_label_%s" % device
+            type = "extruder"
+        elif device == "heater_bed":
+            image = "bed"
+            devname = "Heater Bed"
+            class_name = "graph_label_heater_bed"
+            type = "bed"
+        elif device.startswith("heater_generic"):
+            self.h = 1
+            for d in self.devices:
+                if "heater_generic" in d:
+                    self.h += 1
+            image = "heater"
+            class_name = "graph_label_sensor_%s" % self.h
+            type = "sensor"
+        elif device.startswith("temperature_fan"):
+            f = 1
+            for d in self.devices:
+                if "temperature_fan" in d:
+                    f += 1
+            image = "fan"
+            class_name = "graph_label_fan_%s" % f
+            type = "fan"
+        elif self._config.get_main_config_option('only_heaters') == "True":
+            return False
+        else:
+            s = 1
+            try:
+                s += self.h
+            except Exception:
+                pass
+            for d in self.devices:
+                if "sensor" in d:
+                    s += 1
+            image = "heat-up"
+            class_name = "graph_label_sensor_%s" % s
+            type = "sensor"
 
-        i = 0
-        cols = 3 if len(self.heaters) > 4 else (1 if len(self.heaters) <= 2 else 2)
-        for h in self.heaters:
-            eq_grid.attach(self.labels[h], i % cols, int(i/cols), 1, 1)
-            i += 1
+        rgb, color = self._gtk.get_temp_color(type)
 
-        self.items = items
-        self.create_menu_items()
+        can_target = self._printer.get_temp_store_device_has_target(device)
+        self.labels['da'].add_object(device, "temperatures", rgb, False, True)
+        if can_target:
+            self.labels['da'].add_object(device, "targets", rgb, True, False)
 
-        self.grid = Gtk.Grid()
-        self.grid.set_row_homogeneous(True)
-        self.grid.set_column_homogeneous(True)
+        text = "<span underline='double' underline_color='#%s'>%s</span>" % (color, devname.capitalize())
+        name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "),
+                                     None, .5, Gtk.PositionType.LEFT, False)
+        name.connect('clicked', self.on_popover_clicked, device)
+        name.set_alignment(0, .5)
+        name.get_style_context().add_class(class_name)
+        child = name.get_children()[0].get_children()[0].get_children()[1]
+        child.set_ellipsize(True)
+        child.set_ellipsize(Pango.EllipsizeMode.END)
 
-        grid.attach(eq_grid, 0, 0, 1, 1)
-        grid.attach(self.arrangeMenuItems(items, 2, True), 1, 0, 1, 1)
+        temp = self._gtk.Button("")
+        temp.connect('clicked', self.on_popover_clicked, device)
 
-        self.grid = grid
+        labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
 
-        self.target_temps = {
-            "heater_bed": 0,
-            "extruder": 0
+        dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        dev.set_hexpand(True)
+        dev.set_vexpand(False)
+        dev.add(labels)
+
+        self.devices[device] = {
+            "class": class_name,
+            "type": type,
+            "name": name,
+            "temp": temp,
+            "can_target": can_target
         }
 
-        self.content.add(self.grid)
-        self.layout.show_all()
-    #     _ = self.lang.gettext
-    #     logging.info("Adding device: %s" % device)
+        if self.devices[device]["can_target"]:
+            temp.get_child().set_label("%.1f %s" %
+                                       (temperature, self.format_target(self._printer.get_dev_stat(device, "target"))))
+        else:
+            temp.get_child().set_label("%.1f " % temperature)
 
-    #     temperature = self._printer.get_dev_stat(device, "temperature")
-    #     if temperature is None:
-    #         return False
+        devices = sorted(self.devices)
+        pos = devices.index(device) + 1
 
-    #     if not (device.startswith("extruder") or device.startswith("heater_bed")):
-    #         devname = " ".join(device.split(" ")[1:])
-    #         # Support for hiding devices by name
-    #         if devname.startswith("_"):
-    #             return False
-    #     else:
-    #         devname = device
+        self.labels['devices'].insert_row(pos)
+        self.labels['devices'].attach(name, 0, pos, 1, 1)
+        self.labels['devices'].attach(temp, 1, pos, 1, 1)
+        self.labels['devices'].show_all()
+        return True
 
-    #     if device.startswith("extruder"):
-    #         i = 0
-    #         for d in self.devices:
-    #             if d.startswith('extruder'):
-    #                 i += 1
-    #         if self._printer.extrudercount > 1:
-    #             image = "extruder-%s" % i
-    #         else:
-    #             image = "extruder"
-    #         class_name = "graph_label_%s" % device
-    #         type = "extruder"
-    #     elif device == "heater_bed":
-    #         image = "bed"
-    #         devname = "Heater Bed"
-    #         class_name = "graph_label_heater_bed"
-    #         type = "bed"
-    #     elif device.startswith("heater_generic"):
-    #         self.h = 1
-    #         for d in self.devices:
-    #             if "heater_generic" in d:
-    #                 self.h += 1
-    #         image = "heater"
-    #         class_name = "graph_label_sensor_%s" % self.h
-    #         type = "sensor"
-    #     elif device.startswith("temperature_fan"):
-    #         f = 1
-    #         for d in self.devices:
-    #             if "temperature_fan" in d:
-    #                 f += 1
-    #         image = "fan"
-    #         class_name = "graph_label_fan_%s" % f
-    #         type = "fan"
-    #     elif self._config.get_main_config_option('only_heaters') == "True":
-    #         return False
-    #     else:
-    #         s = 1
-    #         try:
-    #             s += self.h
-    #         except Exception:
-    #             pass
-    #         for d in self.devices:
-    #             if "sensor" in d:
-    #                 s += 1
-    #         image = "heat-up"
-    #         class_name = "graph_label_sensor_%s" % s
-    #         type = "sensor"
+    def change_target_temp(self, temp):
+        _ = self.lang.gettext
 
-    #     rgb, color = self._gtk.get_temp_color(type)
+        MAX_TEMP = int(float(self._printer.get_config_section(self.active_heater)['max_temp']))
+        if temp > MAX_TEMP:
+            self._screen.show_popup_message(_("Can't set above the maximum:") + (" %s" % MAX_TEMP))
+            return
+        temp = 0 if temp < 0 else temp
 
-    #     can_target = self._printer.get_temp_store_device_has_target(device)
-    #     self.labels['da'].add_object(device, "temperatures", rgb, False, True)
-    #     if can_target:
-    #         self.labels['da'].add_object(device, "targets", rgb, True, False)
-
-    #     text = "<span underline='double' underline_color='#%s'>%s</span>" % (color, devname.capitalize())
-    #     name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "),
-    #                                  None, .5, Gtk.PositionType.LEFT, False)
-    #     name.connect('clicked', self.on_popover_clicked, device)
-    #     name.set_alignment(0, .5)
-    #     name.get_style_context().add_class(class_name)
-    #     child = name.get_children()[0].get_children()[0].get_children()[1]
-    #     child.set_ellipsize(True)
-    #     child.set_ellipsize(Pango.EllipsizeMode.END)
-
-    #     temp = self._gtk.Button("")
-    #     temp.connect('clicked', self.on_popover_clicked, device)
-
-    #     labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-
-    #     dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
-    #     dev.set_hexpand(True)
-    #     dev.set_vexpand(False)
-    #     dev.add(labels)
-
-    #     self.devices[device] = {
-    #         "class": class_name,
-    #         "type": type,
-    #         "name": name,
-    #         "temp": temp,
-    #         "can_target": can_target
-    #     }
-
-    #     if self.devices[device]["can_target"]:
-    #         temp.get_child().set_label("%.1f %s" %
-    #                                    (temperature, self.format_target(self._printer.get_dev_stat(device, "target"))))
-    #     else:
-    #         temp.get_child().set_label("%.1f " % temperature)
-
-    #     devices = sorted(self.devices)
-    #     pos = devices.index(device) + 1
-
-    #     self.labels['devices'].insert_row(pos)
-    #     self.labels['devices'].attach(name, 0, pos, 1, 1)
-    #     self.labels['devices'].attach(temp, 1, pos, 1, 1)
-    #     self.labels['devices'].show_all()
-    #     return True
-
-    # def change_target_temp(self, temp):
-    #     _ = self.lang.gettext
-
-    #     MAX_TEMP = int(float(self._printer.get_config_section(self.active_heater)['max_temp']))
-    #     if temp > MAX_TEMP:
-    #         self._screen.show_popup_message(_("Can't set above the maximum:") + (" %s" % MAX_TEMP))
-    #         return
-    #     temp = 0 if temp < 0 else temp
-
-    #     if self.active_heater.startswith('extruder'):
-    #         self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(self.active_heater), temp)
-    #     elif self.active_heater == "heater_bed":
-    #         self._screen._ws.klippy.set_bed_temp(temp)
-    #     elif self.active_heater.startswith('heater_generic '):
-    #         self._screen._ws.klippy.set_heater_temp(" ".join(self.active_heater.split(" ")[1:]), temp)
-    #     elif self.active_heater.startswith('temperature_fan '):
-    #         self._screen._ws.klippy.set_temp_fan_temp(" ".join(self.active_heater.split(" ")[1:]), temp)
-    #     else:
-    #         logging.info("Unknown heater: %s" % self.active_heater)
-    #         self._screen.show_popup_message(_("Unknown Heater") + " " + self.active_heater)
-    #     self._printer.set_dev_stat(self.active_heater, "target", temp)
+        if self.active_heater.startswith('extruder'):
+            self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(self.active_heater), temp)
+        elif self.active_heater == "heater_bed":
+            self._screen._ws.klippy.set_bed_temp(temp)
+        elif self.active_heater.startswith('heater_generic '):
+            self._screen._ws.klippy.set_heater_temp(" ".join(self.active_heater.split(" ")[1:]), temp)
+        elif self.active_heater.startswith('temperature_fan '):
+            self._screen._ws.klippy.set_temp_fan_temp(" ".join(self.active_heater.split(" ")[1:]), temp)
+        else:
+            logging.info("Unknown heater: %s" % self.active_heater)
+            self._screen.show_popup_message(_("Unknown Heater") + " " + self.active_heater)
+        self._printer.set_dev_stat(self.active_heater, "target", temp)
 
     def create_left_panel(self):
         _ = self.lang.gettext
