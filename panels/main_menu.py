@@ -207,23 +207,23 @@ class MainPanel(MenuPanel):
         # self.labels['devices'].attach(name, 0, 0, 1, 1)
         # self.labels['devices'].attach(temp, 1, 0, 1, 1)
 
-        # da = HeaterGraph(self._printer, self._gtk.get_font_size())
-        # da.set_vexpand(True)
-        # self.labels['da'] = da
+        da = HeaterGraph(self._printer, self._gtk.get_font_size())
+        da.set_vexpand(True)
+        self.labels['da'] = da
 
-        # scroll = Gtk.ScrolledWindow()
-        # scroll.set_property("overlay-scrolling", False)
-        # scroll.set_hexpand(True)
-        # scroll.set_vexpand(True)
-        # scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        # scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
-        # scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        # scroll.add(self.labels['devices'])
+        scroll = Gtk.ScrolledWindow()
+        scroll.set_property("overlay-scrolling", False)
+        scroll.set_hexpand(True)
+        scroll.set_vexpand(True)
+        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
+        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add(self.labels['devices'])
 
-        # box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
-        # box.set_vexpand(True)
-        # box.add(scroll)
-        # box.add(self.labels['da'])
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        box.set_vexpand(True)
+        box.add(scroll)
+        box.add(self.labels['da'])
 
 
         self.labels['graph_settemp'] = self._gtk.Button(label=_("Set Temp"))
