@@ -200,8 +200,7 @@ class BasePanel(ScreenPanel):
                 logging.info("Titlebar name type: %s", self.titlebar_name_type)
                 for device in self._screen.printer.get_temp_store_devices():
                     # Users can fill the bar if they want
-                    self.control['temp_box'].pack_start(self.labels['heater_bed_box'], True, True, 3)
-                    n += 1
+                    device.startswith("temperature_sensor")
                     if n >= nlimit + 1:
                         break
                     if not (device.startswith("extruder") or device.startswith("heater_bed")):
