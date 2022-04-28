@@ -81,31 +81,31 @@ class MainPanel(MenuPanel):
                     i += 1
             if self._printer.extrudercount > 1:
                 image = "extruder-%s" % i
-            else:
-                image = "extruder"
-            class_name = "graph_label_%s" % device
-            type = "extruder"
+            # else:
+            #     image = "extruder"
+            # class_name = "graph_label_%s" % device
+            # type = "extruder"
         elif device == "heater_bed":
             image = "bed"
             devname = "Heater Bed"
-            class_name = "graph_label_heater_bed"
-            type = "bed"
+            # class_name = "graph_label_heater_bed"
+            # type = "bed"
         elif device.startswith("heater_generic"):
             self.h = 1
             for d in self.devices:
                 if "heater_generic" in d:
                     self.h += 1
             image = "heater"
-            class_name = "graph_label_sensor_%s" % self.h
-            type = "sensor"
+            # class_name = "graph_label_sensor_%s" % self.h
+            # type = "sensor"
         elif device.startswith("temperature_fan"):
             f = 1
             for d in self.devices:
                 if "temperature_fan" in d:
                     f += 1
             image = "fan"
-            class_name = "graph_label_fan_%s" % f
-            type = "fan"
+            # class_name = "graph_label_fan_%s" % f
+            # type = "fan"
         elif self._config.get_main_config_option('only_heaters') == "True":
             return False
         else:
@@ -118,8 +118,8 @@ class MainPanel(MenuPanel):
                 if "sensor" in d:
                     s += 1
             image = "heat-up"
-            class_name = "graph_label_sensor_%s" % s
-            type = "sensor"
+            # class_name = "graph_label_sensor_%s" % s
+            # type = "sensor"
 
         rgb, color = self._gtk.get_temp_color(type)
 
@@ -133,7 +133,7 @@ class MainPanel(MenuPanel):
                                      None, .5, Gtk.PositionType.LEFT, False)
         name.connect('clicked', self.on_popover_clicked, device)
         name.set_alignment(0, .5)
-        name.get_style_context().add_class(class_name)
+        # name.get_style_context().add_class(class_name)
         child = name.get_children()[0].get_children()[0].get_children()[1]
         child.set_ellipsize(True)
         child.set_ellipsize(Pango.EllipsizeMode.END)
@@ -149,7 +149,7 @@ class MainPanel(MenuPanel):
         dev.add(labels)
 
         self.devices[device] = {
-            "class": class_name,
+            # "class": class_name,
             "type": type,
             "name": name,
             "temp": temp,
