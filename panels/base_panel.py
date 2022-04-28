@@ -196,14 +196,13 @@ class BasePanel(ScreenPanel):
             if titlebar_items is not None:
                 titlebar_items = [str(i.strip()) for i in titlebar_items.split(',')]
                 logging.info("Titlebar items: %s", titlebar_items)
-                self.titlebar_name_type = printer_cfg.get("titlebar_name_type", None)
+                self.titlebar_name_type = printer_cfg.get("heat-up", None)
                 logging.info("Titlebar name type: %s", self.titlebar_name_type)
                 for device in self._screen.printer.get_temp_store_devices():
                     # Users can fill the bar if they want
                     if n >= nlimit + 1:
                         break
                     if not (device.startswith("extruder") or device.startswith("heater_bed")):
-                        name = "heat-up"
                         name = device.split(" ")[1:][0]
                     else:
                         name = device
