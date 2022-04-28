@@ -186,7 +186,9 @@ class BasePanel(ScreenPanel):
         if self._screen.printer.has_heated_bed():
             self.control['temp_box'].pack_start(self.labels['heater_bed_box'], True, True, 3)
             n += 1
-
+        if self._screen.printer.get_temp_store_devices():
+            self.control['temp_box'].pack_start(self.labels["temperature_fan"], True, True, 3)
+            n += 1
             
 
         # Options in the config have priority
