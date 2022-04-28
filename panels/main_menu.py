@@ -339,9 +339,9 @@ class MainPanel(MenuPanel):
 
         self.labels['popover'].popdown()
 
-    def update_graph(self):
-        self.labels['da'].queue_draw()
-        return True
+    # def update_graph(self):
+    #     self.labels['da'].queue_draw()
+    #     return True
 
     def update_temp(self, device, temp, target):
         if device not in self.devices:
