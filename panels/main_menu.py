@@ -285,19 +285,19 @@ class MainPanel(MenuPanel):
         self.popover_populate_menu()
         po.show_all()
 
-    def popover_populate_menu(self):
-        pobox = self.labels['popover_vbox']
-        for child in pobox.get_children():
-            pobox.remove(child)
+    # def popover_populate_menu(self):
+    #     pobox = self.labels['popover_vbox']
+    #     for child in pobox.get_children():
+    #         pobox.remove(child)
 
-        if self.labels['da'].is_showing(self.popover_device):
-            pobox.pack_start(self.labels['graph_hide'], True, True, 5)
-            if self.devices[self.popover_device]['type'] != "sensor":
-                pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
-        else:
-            pobox.pack_start(self.labels['graph_show'], True, True, 5)
-            if self.devices[self.popover_device]['type'] != "sensor":
-                pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
+    #     if self.labels['da'].is_showing(self.popover_device):
+    #         pobox.pack_start(self.labels['graph_hide'], True, True, 5)
+    #         if self.devices[self.popover_device]['type'] != "sensor":
+    #             pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
+    #     else:
+    #         pobox.pack_start(self.labels['graph_show'], True, True, 5)
+    #         if self.devices[self.popover_device]['type'] != "sensor":
+    #             pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
 
     def process_update(self, action, data):
         if action != "notify_status_update":
