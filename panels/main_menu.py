@@ -233,11 +233,11 @@ class MainPanel(MenuPanel):
         self.labels['graph_show'] = self._gtk.Button(label=_("Show"))
         self.labels['graph_show'].connect("clicked", self.graph_show_device)
 
-        popover = Gtk.Popover()
-        self.labels['popover_vbox'] = Gtk.VBox()
-        popover.add(self.labels['popover_vbox'])
-        popover.set_position(Gtk.PositionType.BOTTOM)
-        self.labels['popover'] = popover
+        # popover = Gtk.Popover()
+        # self.labels['popover_vbox'] = Gtk.VBox()
+        # popover.add(self.labels['popover_vbox'])
+        # popover.set_position(Gtk.PositionType.BOTTOM)
+        # self.labels['popover'] = popover
 
         i = 2
         for d in self._printer.get_temp_store_devices():
@@ -251,20 +251,20 @@ class MainPanel(MenuPanel):
         self.labels['da'].set_size_request(0, graph_height)
         return box
 
-    def graph_show_device(self, widget, show=True):
-        logging.info("Graph show: %s %s" % (self.popover_device, show))
-        self.labels['da'].set_showing(self.popover_device, show)
-        if show:
-            self.devices[self.popover_device]['name'].get_style_context().remove_class("graph_label_hidden")
-            self.devices[self.popover_device]['name'].get_style_context().add_class(
-                self.devices[self.popover_device]['class'])
-        else:
-            self.devices[self.popover_device]['name'].get_style_context().remove_class(
-                self.devices[self.popover_device]['class'])
-            self.devices[self.popover_device]['name'].get_style_context().add_class("graph_label_hidden")
-        self.labels['da'].queue_draw()
-        self.popover_populate_menu()
-        self.labels['popover'].show_all()
+    # def graph_show_device(self, widget, show=True):
+    #     logging.info("Graph show: %s %s" % (self.popover_device, show))
+    #     self.labels['da'].set_showing(self.popover_device, show)
+    #     if show:
+    #         self.devices[self.popover_device]['name'].get_style_context().remove_class("graph_label_hidden")
+    #         self.devices[self.popover_device]['name'].get_style_context().add_class(
+    #             self.devices[self.popover_device]['class'])
+    #     else:
+    #         self.devices[self.popover_device]['name'].get_style_context().remove_class(
+    #             self.devices[self.popover_device]['class'])
+    #         self.devices[self.popover_device]['name'].get_style_context().add_class("graph_label_hidden")
+    #     self.labels['da'].queue_draw()
+    #     self.popover_populate_menu()
+    #     self.labels['popover'].show_all()
 
     def hide_numpad(self, widget):
         self.devices[self.active_heater]['name'].get_style_context().remove_class("active_device")
@@ -278,12 +278,12 @@ class MainPanel(MenuPanel):
             self.grid.attach(self.labels['menu'], 1, 0, 1, 1)
         self.grid.show_all()
 
-    def on_popover_clicked(self, widget, device):
-        self.popover_device = device
-        po = self.labels['popover']
-        po.set_relative_to(widget)
-        self.popover_populate_menu()
-        po.show_all()
+    # def on_popover_clicked(self, widget, device):
+    #     self.popover_device = device
+    #     po = self.labels['popover']
+    #     po.set_relative_to(widget)
+    #     self.popover_populate_menu()
+    #     po.show_all()
 
     # def popover_populate_menu(self):
     #     pobox = self.labels['popover_vbox']
