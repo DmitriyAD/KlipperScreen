@@ -226,12 +226,12 @@ class MainPanel(MenuPanel):
         box.add(self.labels['da'])
 
 
-        self.labels['graph_settemp'] = self._gtk.Button(label=_("Set Temp"))
-        self.labels['graph_settemp'].connect("clicked", self.show_numpad)
-        self.labels['graph_hide'] = self._gtk.Button(label=_("Hide"))
-        self.labels['graph_hide'].connect("clicked", self.graph_show_device, False)
-        self.labels['graph_show'] = self._gtk.Button(label=_("Show"))
-        self.labels['graph_show'].connect("clicked", self.graph_show_device)
+        # self.labels['graph_settemp'] = self._gtk.Button(label=_("Set Temp"))
+        # self.labels['graph_settemp'].connect("clicked", self.show_numpad)
+        # self.labels['graph_hide'] = self._gtk.Button(label=_("Hide"))
+        # self.labels['graph_hide'].connect("clicked", self.graph_show_device, False)
+        # self.labels['graph_show'] = self._gtk.Button(label=_("Show"))
+        # self.labels['graph_show'].connect("clicked", self.graph_show_device)
 
         popover = Gtk.Popover()
         self.labels['popover_vbox'] = Gtk.VBox()
