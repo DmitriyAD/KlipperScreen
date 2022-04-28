@@ -164,7 +164,7 @@ class KlippyGtk:
         b.connect("clicked", self.screen.reset_screensaver_timeout)
         return b
 
-    def ButtonImage(self, image_name, label=None, style=None, scale=1.38,
+    def ButtonImage(self, image_name, label=None, style=None, scale=1,
                     position=Gtk.PositionType.TOP, word_wrap=True):
 
         b = Gtk.Button(label=label)
