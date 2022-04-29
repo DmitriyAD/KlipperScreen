@@ -93,7 +93,7 @@ class SettingsPanel(ScreenPanel):
         scroll.add(self.labels[name])
 
         # Create a box to contain all of the above
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         box.set_vexpand(True)
         if insert is not None:
             box.pack_start(insert, False, False, 0)
