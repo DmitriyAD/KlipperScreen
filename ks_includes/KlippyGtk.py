@@ -201,7 +201,7 @@ class KlippyGtk:
             button = dialog.get_children()[0].get_children()[0].get_children()[0].get_children()[i]
             button.get_child().set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
             button.get_child().set_line_wrap(True)
-            button.set_size_request((screen.width-30)/3, screen.height/5)
+            button.set_size_request((screen.width-60)/3, screen.height/5)
 
         dialog.connect("response", callback, *args)
         dialog.get_style_context().add_class("dialog")
