@@ -93,7 +93,7 @@ class SettingsPanel(ScreenPanel):
         scroll.add(self.labels[name])
 
         # Create a box to contain all of the above
-        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         box.set_vexpand(True)
         if insert is not None:
             box.pack_start(insert, False, False, 0)
@@ -119,7 +119,7 @@ class SettingsPanel(ScreenPanel):
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         labels.add(name)
 
-        dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        dev = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
         dev.set_hexpand(True)
         dev.set_vexpand(False)
         dev.set_valign(Gtk.Align.CENTER)
@@ -156,7 +156,7 @@ class SettingsPanel(ScreenPanel):
         elif option['type'] == "scale":
             val = int(self._config.get_config().get(option['section'], opt_name, fallback=option['value']))
             adj = Gtk.Adjustment(val, option['range'][0], option['range'][1], option['step'], option['step']*5)
-            scale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adj)
+            scale = Gtk.Scale(orientation=Gtk.Orientation.VERTICAL, adjustment=adj)
             scale.set_hexpand(True)
             scale.set_digits(0)
             scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
