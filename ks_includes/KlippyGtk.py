@@ -113,7 +113,7 @@ class KlippyGtk:
             la.get_style_context().add_class(style)
         return la
 
-    def Image(self, image_name, scale=5):
+    def Image(self, image_name, scale=1):
         filename = os.path.join(self.themedir, str(image_name) + ".svg")
         if os.path.exists(filename):
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename,
