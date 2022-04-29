@@ -45,8 +45,8 @@ class MovePanel(ScreenPanel):
         self.labels['home-xy'] = self._gtk.ButtonImage("home", _("Home XY"), "color4")
         self.labels['home-xy'].connect("clicked", self.homexy)
 
-        self.labels['z_tilt'] = self._gtk.ButtonImage("z-tilt", _("Z Tilt"), "color4")
-        self.labels['z_tilt'].connect("clicked", self.z_tilt)
+        # self.labels['z_tilt'] = self._gtk.ButtonImage("z-tilt", _("Z Tilt"), "color4")
+        # self.labels['z_tilt'].connect("clicked", self.z_tilt)
 
         self.labels['quad_gantry_level'] = self._gtk.ButtonImage("z-tilt", _("Quad Gantry Level"), "color4")
         self.labels['quad_gantry_level'].connect("clicked", self.quad_gantry_level)
