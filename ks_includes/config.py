@@ -147,8 +147,8 @@ class KlipperScreenConfig:
                                "value": "False"}},
             {"only_heaters": {"section": "main", "name": _("Hide sensors in Temp."), "type": "binary",
                               "value": "False", "callback": screen.restart_warning}},
-            {"use_dpms": {"section": "main", "name": _("Screen DPMS"), "type": "binary",
-                          "value": "True", "callback": screen.set_dpms}},
+            # {"use_dpms": {"section": "main", "name": _("Screen DPMS"), "type": "binary",
+            #               "value": "True", "callback": screen.set_dpms}},
             {"print_estimate_compensation": {
                 "section": "main", "name": _("Slicer Time correction (%)"), "type": "scale", "value": "100",
                 "range": [50, 150], "step": 1}},
