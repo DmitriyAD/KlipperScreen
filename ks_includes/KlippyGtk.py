@@ -164,16 +164,31 @@ class KlippyGtk:
         b.connect("clicked", self.screen.reset_screensaver_timeout)
         return b
 
-    def ButtonImage(self, image_name, label=None, style=None, scale=1.38,
+    def ButtonImage(self, image_name, label=None, style=None, width_scale=1.38, height_scale=1.38,
                     position=Gtk.PositionType.TOP, word_wrap=True):
+        filename = "%s/styles/%s/images/%s.svg" % (klipperscreendir, self.theme, str(image_name))
+        if not os.path.exists(filename):
+            logging.error("Unable to find button image (theme, image): (%s, %s)" % (self.theme, str(image_name)))
+            filename = "%s/styles/%s/images/%s.svg" % (klipperscreendir, self.theme, "warning")
 
         b = Gtk.Button(label=label)
+
+        if os.path.exists(filename):
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+                filename,
+                int(round(self.img_width * width_scale)),
+                int(round(self.img_height * height_scale)),
+                True
+            )
+            img = Gtk.Image.new_from_pixbuf(pixbuf)
+            b.set_image(img)
+
         b.set_hexpand(True)
         b.set_vexpand(True)
         b.set_can_focus(False)
-        b.set_image(self.Image(image_name, scale))
         b.set_image_position(position)
         b.set_always_show_image(True)
+        b.props.relief = Gtk.ReliefStyle.NONE
 
         if word_wrap is True:
             try:
@@ -186,7 +201,7 @@ class KlippyGtk:
 
         if style is not None:
             b.get_style_context().add_class(style)
-        b.connect("clicked", self.screen.reset_screensaver_timeout)
+
         return b
 
     def Dialog(self, screen, buttons, content, callback=None, *args):
