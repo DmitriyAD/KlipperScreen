@@ -116,7 +116,7 @@ class KlipperScreenConfig:
             {"move_speed_z": {
                 "section": "main", "name": _("Z Move Speed (mm/s)"), "type": "scale", "value": "20",
                 "range": [5, 200], "step": 1}},
-            # {"print_sort_dir": {"section": "main", "type": None, "value": "name_asc"}},
+            {"print_sort_dir": {"section": "main", "type": None, "value": "name_asc"}},
             {"print_estimate_method": {
                 "section": "main", "name": _("Estimated Time Method"), "type": "dropdown",
                 "value": "file", "options": [
