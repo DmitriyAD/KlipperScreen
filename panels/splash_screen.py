@@ -22,7 +22,7 @@ class SplashScreenPanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
 
-        image = self._gtk.Image("klipper", 3.2)
+        image = self._gtk.Image("klipper1", 3.2)
 
         self.labels['text'] = Gtk.Label(_("Initializing printer..."))
         self.labels['text'].set_line_wrap(True)
