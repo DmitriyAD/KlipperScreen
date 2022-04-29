@@ -9,6 +9,7 @@ from gi.repository import Gdk, GdkPixbuf, Gio, Gtk, Pango
 
 class KlippyGtk:
     labels = {}
+    font_ratio = [43, 29]
     keyboard_ratio = .22
     width_ratio = 16
     height_ratio = 9.375
