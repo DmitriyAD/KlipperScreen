@@ -57,11 +57,11 @@ class SplashScreenPanel(ScreenPanel):
         scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
         scroll.add(self.labels['text'])
 
-        info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        info = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         info.pack_start(image, False, True, 8)
         info.pack_end(scroll, True, True, 8)
 
-        main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        main = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         main.pack_start(info, True, True, 8)
         main.pack_end(self.labels['actions'], False, False, 0)
 
