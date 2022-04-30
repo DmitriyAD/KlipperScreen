@@ -58,8 +58,8 @@ class SplashScreenPanel(ScreenPanel):
         scroll.add(self.labels['text'])
 
         info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
-        info.pack_start(image, False, True, 8)
-        info.pack_end(scroll, True, True, 8)
+        info.pack_start(image, False, True, 10)
+        info.pack_end(scroll, True, True, 10)
 
         main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         main.pack_start(info, True, True, 8)
