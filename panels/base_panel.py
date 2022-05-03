@@ -187,6 +187,8 @@ class BasePanel(ScreenPanel):
             self.control['temp_box'].pack_start(self.labels['heater_bed_box'], True, True, 3)
             n += 1
 
+            
+
         # Options in the config have priority
         printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
         if printer_cfg is not None:
@@ -214,7 +216,7 @@ class BasePanel(ScreenPanel):
         for device in self._screen.printer.get_temp_store_devices():
             if n >= nlimit:
                 break
-            if device.startswith("heater_generic"):
+            if device.startswith("temperature_sensor"):
                 self.control['temp_box'].pack_start(self.labels["%s_box" % device], True, True, 3)
                 n += 1
         self.control['temp_box'].show_all()

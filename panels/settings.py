@@ -11,7 +11,7 @@ def create_panel(*args):
 
 class SettingsPanel(ScreenPanel):
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+        _ = self.lang.gettext   
         self.settings = {}
         self.macros = {}
         self.menu_cur = 'main_box'

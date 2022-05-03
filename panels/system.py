@@ -21,9 +21,9 @@ class SystemPanel(ScreenPanel):
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
 
-        update_all = self._gtk.ButtonImage('refresh', "\n".join(_('Full\nUpdate').split(' ')), 'color1')
-        update_all.connect("clicked", self.show_update_info, "full")
-        update_all.set_vexpand(False)
+        restart = self._gtk.ButtonImage('refresh', "\n".join(_('Klipper Restart').split(' ')), 'color1')
+        restart.connect("clicked", self.restart_klippy)
+        restart.set_vexpand(False)
         firmrestart = self._gtk.ButtonImage('refresh', "\n".join(_('Firmware\nRestart').split(' ')), 'color2')
         firmrestart.connect("clicked", self.restart_klippy, "firmware")
         firmrestart.set_vexpand(False)
@@ -82,7 +82,7 @@ class SystemPanel(ScreenPanel):
         scroll.add(infogrid)
 
         grid.attach(scroll, 0, 0, 4, 2)
-        grid.attach(update_all, 0, 2, 1, 1)
+        grid.attach(restart, 0, 2, 1, 1)
         grid.attach(firmrestart, 1, 2, 1, 1)
         grid.attach(reboot, 2, 2, 1, 1)
         grid.attach(shutdown, 3, 2, 1, 1)
