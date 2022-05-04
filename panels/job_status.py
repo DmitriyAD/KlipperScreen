@@ -646,7 +646,7 @@ class JobStatusPanel(ScreenPanel):
         if type(msg) == str:
             self.labels['lcdmessage'].set_text(msg)
 
-    # def update_temp(self, x, temp, target):
-    #     self.labels[x].set_markup(
-    #         "%.1f<big>/</big>%.0f °C" % (temp, target)
-    #     )
+    def update_temp(self, x, temp, target):
+        self.labels[x].set_markup(
+            "%.1f<big>/</big>%.0f °C" % (temp, target)
+        )
