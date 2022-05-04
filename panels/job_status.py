@@ -114,31 +114,44 @@ class JobStatusPanel(ScreenPanel):
         # self.labels['temp_grid'] = temp_grid
 
         # Create time remaining items
-        hourglass = self._gtk.Image("hourglass", .6)
-        self.labels['left'] = Gtk.Label(label=_("Left:"))
-        self.labels['left'].get_style_context().add_class("printing-info")
-        self.labels['time_left'] = Gtk.Label(label="0s")
-        self.labels['time_left'].get_style_context().add_class("printing-info")
-        itl_box = Gtk.Box(spacing=0)
-        itl_box.add(hourglass)
-        itl_box.add(self.labels['left'])
-        itl_box.add(self.labels['time_left'])
-        self.labels['itl_box'] = itl_box
-
-        # Create overall items
-        clock = self._gtk.Image("clock.svg", None, .6, .6)
+        clock = self._gtk.Image("clock", .6)
+        
         self.labels['elapsed'] = Gtk.Label(label=_("Elapsed:"))
         self.labels['elapsed'].get_style_context().add_class("printing-info")
         self.labels['duration'] = Gtk.Label(label="0s")
         self.labels['duration'].get_style_context().add_class("printing-info")
-        self.labels['est_time'] = Gtk.Label(label="/ 0s")
+        self.labels['total'] = Gtk.Label(label=_("Total:"))
+        self.labels['total'].get_style_context().add_class("printing-info")
+        self.labels['est_time'] = Gtk.Label(label="0s")
         self.labels['est_time'].get_style_context().add_class("printing-info")
-        it_box = Gtk.Box(spacing=0)
-        it_box.add(clock)
-        it_box.add(self.labels['elapsed'])
-        it_box.add(self.labels['duration'])
-        it_box.add(self.labels['est_time'])
-        self.labels['it_box'] = it_box
+        timegrid = Gtk.Grid()
+        it1_box = Gtk.Box(spacing=0)
+        it1_box.add(self.labels['elapsed'])
+        it1_box.add(self.labels['duration'])
+        it2_box = Gtk.Box(spacing=0)
+        it2_box.add(self.labels['total'])
+        it2_box.add(self.labels['est_time'])
+        timegrid.attach(clock, 0, 0, 1, 2)
+        timegrid.attach(it1_box, 1, 0, 1, 1)
+        timegrid.attach(it2_box, 1, 1, 1, 1)
+        self.labels['timegrid'] = timegrid
+
+        position = self._gtk.Image("move", .6)
+        self.labels['pos_x'] = Gtk.Label(label="X: 0")
+        self.labels['pos_x'].get_style_context().add_class("printing-info")
+        self.labels['pos_y'] = Gtk.Label(label="Y: 0")
+        self.labels['pos_y'].get_style_context().add_class("printing-info")
+        self.labels['pos_z'] = Gtk.Label(label="Z: 0")
+        self.labels['pos_z'].get_style_context().add_class("printing-info")
+        pos_box = Gtk.Box(spacing=0)
+        posgrid = self._gtk.HomogeneousGrid()
+        posgrid.set_hexpand(True)
+        posgrid.attach(self.labels['pos_x'], 0, 0, 1, 1)
+        posgrid.attach(self.labels['pos_y'], 1, 0, 1, 1)
+        posgrid.attach(self.labels['pos_z'], 2, 0, 1, 1)
+        pos_box.add(position)
+        pos_box.add(posgrid)
+        self.labels['pos_box'] = pos_box
 
         # position = self._gtk.Image("move", .6)
         # self.labels['pos_x'] = Gtk.Label(label="X: 0")
