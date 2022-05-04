@@ -378,30 +378,30 @@ class JobStatusPanel(ScreenPanel):
             return
         _ = self.lang.gettext
 
-        # if self._printer.has_heated_bed():
-        #     self.update_temp(
-        #         "heater_bed",
-        #         self._printer.get_dev_stat("heater_bed", "temperature"),
-        #         self._printer.get_dev_stat("heater_bed", "target")
-        #     )
-        # for x in self._printer.get_tools():
-        #     self.update_temp(
-        #         x,
-        #         self._printer.get_dev_stat(x, "temperature"),
-        #         self._printer.get_dev_stat(x, "target")
-        #     )
+        if self._printer.has_heated_bed():
+            self.update_temp(
+                "heater_bed",
+                self._printer.get_dev_stat("heater_bed", "temperature"),
+                self._printer.get_dev_stat("heater_bed", "target")
+            )
+        for x in self._printer.get_tools():
+            self.update_temp(
+                x,
+                self._printer.get_dev_stat(x, "temperature"),
+                self._printer.get_dev_stat(x, "target")
+            )
 
         ps = self._printer.get_stat("print_stats")
         self.update_message()
 
-        # if "toolhead" in data:
-        #     if "extruder" in data["toolhead"]:
-        #         if data["toolhead"]["extruder"] != self.current_extruder:
-        #             self.labels['temp_grid'].remove_column(0)
-        #             self.labels['temp_grid'].insert_column(0)
-        #             self.current_extruder = data["toolhead"]["extruder"]
-        #             self.labels['temp_grid'].attach(self.labels[self.current_extruder + '_box'], 0, 0, 1, 1)
-        #             self._screen.show_all()
+        if "toolhead" in data:
+            if "extruder" in data["toolhead"]:
+                if data["toolhead"]["extruder"] != self.current_extruder:
+                    self.labels['temp_grid'].remove_column(0)
+                    self.labels['temp_grid'].insert_column(0)
+                    self.current_extruder = data["toolhead"]["extruder"]
+                    self.labels['temp_grid'].attach(self.labels[self.current_extruder + '_box'], 0, 0, 1, 1)
+                    self._screen.show_all()
 
         if "gcode_move" in data:
             if "gcode_position" in data["gcode_move"]:
