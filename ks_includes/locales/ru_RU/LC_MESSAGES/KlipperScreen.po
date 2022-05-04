@@ -354,7 +354,7 @@ msgid "Moonraker: connected"
 msgstr "Мунрейкер: подключен"
 
 msgid "Move"
-msgstr "Двигать"
+msgstr "Движение"
 
 msgid "Move Distance (mm)"
 msgstr "Дистанция перемещения (мм)"
