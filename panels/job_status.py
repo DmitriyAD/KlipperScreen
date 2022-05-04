@@ -89,29 +89,29 @@ class JobStatusPanel(ScreenPanel):
 
         self.labels['thumbnail'] = self._gtk.Image("file", 2)
 
-        i = 0
-        for extruder in self._printer.get_tools():
-            self.labels[extruder + '_box'] = Gtk.Box(spacing=0)
-            self.labels[extruder] = Gtk.Label(label="")
-            self.labels[extruder].get_style_context().add_class("printing-info")
-            if i <= 4:
-                ext_img = self._gtk.Image("extruder-%s" % i, .6)
-                self.labels[extruder + '_box'].add(ext_img)
-            self.labels[extruder + '_box'].add(self.labels[extruder])
-            i += 1
+        # i = 0
+        # for extruder in self._printer.get_tools():
+        #     self.labels[extruder + '_box'] = Gtk.Box(spacing=0)
+        #     self.labels[extruder] = Gtk.Label(label="")
+        #     self.labels[extruder].get_style_context().add_class("printing-info")
+        #     if i <= 4:
+        #         ext_img = self._gtk.Image("extruder-%s" % i, .6)
+        #         self.labels[extruder + '_box'].add(ext_img)
+        #     self.labels[extruder + '_box'].add(self.labels[extruder])
+        #     i += 1
 
-        temp_grid = self._gtk.HomogeneousGrid()
-        self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-        temp_grid.attach(self.labels[self.current_extruder + '_box'], 0, 0, 1, 1)
-        if self._printer.has_heated_bed():
-            heater_bed = self._gtk.Image("bed", .6)
-            self.labels['heater_bed'] = Gtk.Label(label="")
-            self.labels['heater_bed'].get_style_context().add_class("printing-info")
-            heater_bed_box = Gtk.Box(spacing=0)
-            heater_bed_box.add(heater_bed)
-            heater_bed_box.add(self.labels['heater_bed'])
-            temp_grid.attach(heater_bed_box, 1, 0, 1, 1)
-        self.labels['temp_grid'] = temp_grid
+        # temp_grid = self._gtk.HomogeneousGrid()
+        # self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+        # temp_grid.attach(self.labels[self.current_extruder + '_box'], 0, 0, 1, 1)
+        # if self._printer.has_heated_bed():
+        #     heater_bed = self._gtk.Image("bed", .6)
+        #     self.labels['heater_bed'] = Gtk.Label(label="")
+        #     self.labels['heater_bed'].get_style_context().add_class("printing-info")
+        #     heater_bed_box = Gtk.Box(spacing=0)
+        #     heater_bed_box.add(heater_bed)
+        #     heater_bed_box.add(self.labels['heater_bed'])
+        #     temp_grid.attach(heater_bed_box, 1, 0, 1, 1)
+        # self.labels['temp_grid'] = temp_grid
 
         # Create time remaining items
         hourglass = self._gtk.Image("hourglass", .6)
@@ -126,43 +126,36 @@ class JobStatusPanel(ScreenPanel):
         self.labels['itl_box'] = itl_box
 
         # Create overall items
-        clock = self._gtk.Image("clock", .6)
+        clock = self._gtk.Image("clock.svg", None, .6, .6)
         self.labels['elapsed'] = Gtk.Label(label=_("Elapsed:"))
         self.labels['elapsed'].get_style_context().add_class("printing-info")
         self.labels['duration'] = Gtk.Label(label="0s")
         self.labels['duration'].get_style_context().add_class("printing-info")
-        self.labels['total'] = Gtk.Label(label=_("Total:"))
-        self.labels['total'].get_style_context().add_class("printing-info")
-        self.labels['est_time'] = Gtk.Label(label="0s")
+        self.labels['est_time'] = Gtk.Label(label="/ 0s")
         self.labels['est_time'].get_style_context().add_class("printing-info")
-        timegrid = Gtk.Grid()
-        it1_box = Gtk.Box(spacing=0)
-        it1_box.add(self.labels['elapsed'])
-        it1_box.add(self.labels['duration'])
-        it2_box = Gtk.Box(spacing=0)
-        it2_box.add(self.labels['total'])
-        it2_box.add(self.labels['est_time'])
-        timegrid.attach(clock, 0, 0, 1, 2)
-        timegrid.attach(it1_box, 1, 0, 1, 1)
-        timegrid.attach(it2_box, 1, 1, 1, 1)
-        self.labels['timegrid'] = timegrid
+        it_box = Gtk.Box(spacing=0)
+        it_box.add(clock)
+        it_box.add(self.labels['elapsed'])
+        it_box.add(self.labels['duration'])
+        it_box.add(self.labels['est_time'])
+        self.labels['it_box'] = it_box
 
-        position = self._gtk.Image("move", .6)
-        self.labels['pos_x'] = Gtk.Label(label="X: 0")
-        self.labels['pos_x'].get_style_context().add_class("printing-info")
-        self.labels['pos_y'] = Gtk.Label(label="Y: 0")
-        self.labels['pos_y'].get_style_context().add_class("printing-info")
-        self.labels['pos_z'] = Gtk.Label(label="Z: 0")
-        self.labels['pos_z'].get_style_context().add_class("printing-info")
-        pos_box = Gtk.Box(spacing=0)
-        posgrid = self._gtk.HomogeneousGrid()
-        posgrid.set_hexpand(True)
-        posgrid.attach(self.labels['pos_x'], 0, 0, 1, 1)
-        posgrid.attach(self.labels['pos_y'], 1, 0, 1, 1)
-        posgrid.attach(self.labels['pos_z'], 2, 0, 1, 1)
-        pos_box.add(position)
-        pos_box.add(posgrid)
-        self.labels['pos_box'] = pos_box
+        # position = self._gtk.Image("move", .6)
+        # self.labels['pos_x'] = Gtk.Label(label="X: 0")
+        # self.labels['pos_x'].get_style_context().add_class("printing-info")
+        # self.labels['pos_y'] = Gtk.Label(label="Y: 0")
+        # self.labels['pos_y'].get_style_context().add_class("printing-info")
+        # self.labels['pos_z'] = Gtk.Label(label="Z: 0")
+        # self.labels['pos_z'].get_style_context().add_class("printing-info")
+        # pos_box = Gtk.Box(spacing=0)
+        # posgrid = self._gtk.HomogeneousGrid()
+        # posgrid.set_hexpand(True)
+        # posgrid.attach(self.labels['pos_x'], 0, 0, 1, 1)
+        # posgrid.attach(self.labels['pos_y'], 1, 0, 1, 1)
+        # posgrid.attach(self.labels['pos_z'], 2, 0, 1, 1)
+        # pos_box.add(position)
+        # pos_box.add(posgrid)
+        # self.labels['pos_box'] = pos_box
 
         speed = self._gtk.Image("speed+", .6)
         self.labels['speed'] = Gtk.Label(label="")
@@ -378,30 +371,30 @@ class JobStatusPanel(ScreenPanel):
             return
         _ = self.lang.gettext
 
-        if self._printer.has_heated_bed():
-            self.update_temp(
-                "heater_bed",
-                self._printer.get_dev_stat("heater_bed", "temperature"),
-                self._printer.get_dev_stat("heater_bed", "target")
-            )
-        for x in self._printer.get_tools():
-            self.update_temp(
-                x,
-                self._printer.get_dev_stat(x, "temperature"),
-                self._printer.get_dev_stat(x, "target")
-            )
+        # if self._printer.has_heated_bed():
+        #     self.update_temp(
+        #         "heater_bed",
+        #         self._printer.get_dev_stat("heater_bed", "temperature"),
+        #         self._printer.get_dev_stat("heater_bed", "target")
+        #     )
+        # for x in self._printer.get_tools():
+        #     self.update_temp(
+        #         x,
+        #         self._printer.get_dev_stat(x, "temperature"),
+        #         self._printer.get_dev_stat(x, "target")
+        #     )
 
         ps = self._printer.get_stat("print_stats")
         self.update_message()
 
-        if "toolhead" in data:
-            if "extruder" in data["toolhead"]:
-                if data["toolhead"]["extruder"] != self.current_extruder:
-                    self.labels['temp_grid'].remove_column(0)
-                    self.labels['temp_grid'].insert_column(0)
-                    self.current_extruder = data["toolhead"]["extruder"]
-                    self.labels['temp_grid'].attach(self.labels[self.current_extruder + '_box'], 0, 0, 1, 1)
-                    self._screen.show_all()
+        # if "toolhead" in data:
+        #     if "extruder" in data["toolhead"]:
+        #         if data["toolhead"]["extruder"] != self.current_extruder:
+        #             self.labels['temp_grid'].remove_column(0)
+        #             self.labels['temp_grid'].insert_column(0)
+        #             self.current_extruder = data["toolhead"]["extruder"]
+        #             self.labels['temp_grid'].attach(self.labels[self.current_extruder + '_box'], 0, 0, 1, 1)
+        #             self._screen.show_all()
 
         if "gcode_move" in data:
             if "gcode_position" in data["gcode_move"]:
@@ -646,7 +639,7 @@ class JobStatusPanel(ScreenPanel):
         if type(msg) == str:
             self.labels['lcdmessage'].set_text(msg)
 
-    def update_temp(self, x, temp, target):
-        self.labels[x].set_markup(
-            "%.1f<big>/</big>%.0f °C" % (temp, target)
-        )
+    # def update_temp(self, x, temp, target):
+    #     self.labels[x].set_markup(
+    #         "%.1f<big>/</big>%.0f °C" % (temp, target)
+    #     )
