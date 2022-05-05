@@ -126,19 +126,27 @@ class JobStatusPanel(ScreenPanel):
         self.labels['itl_box'] = itl_box
 
         # Create overall items
-        clock = self._gtk.Image("clock.svg", None, .6, .6)
+        clock = self._gtk.Image("clock", .6)
         self.labels['elapsed'] = Gtk.Label(label=_("Elapsed:"))
         self.labels['elapsed'].get_style_context().add_class("printing-info")
         self.labels['duration'] = Gtk.Label(label="0s")
         self.labels['duration'].get_style_context().add_class("printing-info")
+        # self.labels['total'] = Gtk.Label(label=_("Total:"))
+        # self.labels['total'].get_style_context().add_class("printing-info")
         self.labels['est_time'] = Gtk.Label(label="/ 0s")
         self.labels['est_time'].get_style_context().add_class("printing-info")
-        it_box = Gtk.Box(spacing=0)
-        it_box.add(clock)
-        it_box.add(self.labels['elapsed'])
-        it_box.add(self.labels['duration'])
-        it_box.add(self.labels['est_time'])
-        self.labels['it_box'] = it_box
+        timegrid = Gtk.Grid()
+        it1_box = Gtk.Box(spacing=0)
+        it1_box.add(self.labels['elapsed'])
+        it1_box.add(self.labels['duration'])
+        it1_box.add(self.labels['est_time'])
+        # it2_box = Gtk.Box(spacing=0)
+        # it2_box.add(self.labels['total'])
+        # it2_box.add(self.labels['est_time'])
+        timegrid.attach(clock, 0, 0, 1, 2)
+        timegrid.attach(it1_box, 1, 1, 1, 1)
+        # timegrid.attach(it2_box, 1, 1, 1, 1)
+        self.labels['timegrid'] = timegrid
 
         position = self._gtk.Image("move", .6)
         self.labels['pos_x'] = Gtk.Label(label="X: 0")
@@ -242,7 +250,7 @@ class JobStatusPanel(ScreenPanel):
         # self.labels['i2_box'].add(self.labels['temp_grid'])
         # self.labels['i2_box'].add(self.labels['pos_box'])
         self.labels['i2_box'].add(self.labels['sfe_grid'])
-        self.labels['i2_box'].add(self.labels['it_box'])
+        self.labels['i2_box'].add(self.labels['timegrid'])
         self.labels['i2_box'].add(self.labels['itl_box'])
 
 
