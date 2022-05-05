@@ -38,6 +38,8 @@ class BasePanel(ScreenPanel):
         self.control['back'].connect("clicked", self.back)
         self.control['home'] = self._gtk.ButtonImage('main', None, None, 1)
         self.control['home'].connect("clicked", self.menu_return, True)
+        self.control['off'] = self._gtk.ButtonImage('shutdown', None, None, 1)
+        self.control['off'].connect("clicked", self.back)
 
         if len(self._config.get_printers()) > 1:
             self.control['printer_select'] = self._gtk.ButtonImage('shuffle', None, None, 1)
