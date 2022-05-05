@@ -36,7 +36,7 @@ class BasePanel(ScreenPanel):
 
         self.control['back'] = self._gtk.ButtonImage('back', None, None, 1)
         self.control['back'].connect("clicked", self.back)
-        self.control['home'] = self._gtk.ButtonImage('shutdown', None, None, 1)
+        self.control['home'] = self._gtk.ButtonImage('main', None, None, 1)
         self.control['home'].connect("clicked", self.menu_return, True)
         
 
