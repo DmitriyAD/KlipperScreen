@@ -144,7 +144,7 @@ class JobStatusPanel(ScreenPanel):
         # it2_box.add(self.labels['total'])
         # it2_box.add(self.labels['est_time'])
         timegrid.attach(clock, 0, 0, 1, 2)
-        timegrid.attach(it1_box, 1, 1, 1, 1)
+        timegrid.add(it1_box, 1, 1, 1, 1)
         # timegrid.attach(it2_box, 1, 1, 1, 1)
         self.labels['timegrid'] = timegrid
 
