@@ -1,8 +1,9 @@
+import gettext
 import gi
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, Gdk, GLib
 from jinja2 import Environment, Template
 
 from ks_includes.screen_panel import ScreenPanel
@@ -12,34 +13,23 @@ def create_panel(*args):
 
 class MenuPanel(ScreenPanel):
     i = 0
-    j2_data = None
     def initialize(self, panel_name, display_name, items):
         _ = self.lang.gettext
 
         self.items = items
         self.create_menu_items()
 
-        self.grid = self._gtk.HomogeneousGrid()
-
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_hexpand(True)
-        scroll.set_vexpand(True)
-        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        scroll.add(self.grid)
-
-        self.content.add(scroll)
+        self.grid = Gtk.Grid()
+        self.grid.set_row_homogeneous(True)
+        self.grid.set_column_homogeneous(True)
+        self.content.add(self.grid)
 
     def activate(self):
-        if not self.j2_data:
-            self.j2_data = self._printer.get_printer_status_data()
+        self.j2_data = self._printer.get_printer_status_data()
         self.j2_data.update({
             'moonraker_connected': self._screen._ws.is_connected()
         })
-        if self._screen.vertical_mode:
-            self.arrangeMenuItems(self.items, 3)
-        else:
-            self.arrangeMenuItems(self.items, 4)
+        self.arrangeMenuItems(self.items, 4)
 
     def arrangeMenuItems(self, items, columns, expandLast=False):
         for child in self.grid.get_children():
@@ -96,8 +86,6 @@ class MenuPanel(ScreenPanel):
         if enable is False:
             return False
 
-        if not self.j2_data:
-            self.j2_data = self._printer.get_printer_status_data()
         try:
             logging.debug("Template: '%s'" % enable)
             logging.debug("Data: %s" % self.j2_data)
