@@ -133,7 +133,7 @@ class JobStatusPanel(ScreenPanel):
         self.labels['duration'].get_style_context().add_class("printing-info")
         # self.labels['total'] = Gtk.Label(label=_("Total:"))
         # self.labels['total'].get_style_context().add_class("printing-info")
-        self.labels['est_time'] = Gtk.Label(label="/ 0s")
+        self.labels['est_time'] = Gtk.Label(label=" 0s /")
         self.labels['est_time'].get_style_context().add_class("printing-info")
         timegrid = Gtk.Grid()
         it1_box = Gtk.Box(spacing=0)
@@ -144,7 +144,7 @@ class JobStatusPanel(ScreenPanel):
         # it2_box.add(self.labels['total'])
         # it2_box.add(self.labels['est_time'])
         timegrid.attach(clock, 0, 0, 1, 2)
-        timegrid.attach(it1_box, 1, 2, 1, 2)
+        timegrid.attach(it1_box, 1, 1, 1, 1)
         # timegrid.attach(it2_box, 1, 1, 1, 1)
         self.labels['timegrid'] = timegrid
 
