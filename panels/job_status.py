@@ -246,8 +246,8 @@ class JobStatusPanel(ScreenPanel):
             self.labels['i2_box'].remove(child)
 
         self.labels['i1_box'].add(self.labels['thumbnail'])
-        self.labels['i2_box'].add(self.labels['temp_grid'])
-        self.labels['i2_box'].add(self.labels['pos_box'])
+        # self.labels['i2_box'].add(self.labels['temp_grid'])
+        # self.labels['i2_box'].add(self.labels['pos_box'])
         self.labels['i2_box'].add(self.labels['sfe_grid'])
         self.labels['i2_box'].add(self.labels['timegrid'])
         self.labels['i2_box'].add(self.labels['itl_box'])
