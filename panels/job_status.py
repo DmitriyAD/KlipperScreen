@@ -100,7 +100,7 @@ class JobStatusPanel(ScreenPanel):
         #     self.labels[extruder + '_box'].add(self.labels[extruder])
         #     i += 1
 
-        # temp_grid = self._gtk.HomogeneousGrid()
+        temp_grid = self._gtk.HomogeneousGrid()
         # self.current_extruder = self._printer.get_stat("toolhead", "extruder")
         # temp_grid.attach(self.labels[self.current_extruder + '_box'], 0, 0, 1, 1)
         # if self._printer.has_heated_bed():
@@ -111,7 +111,7 @@ class JobStatusPanel(ScreenPanel):
         #     heater_bed_box.add(heater_bed)
         #     heater_bed_box.add(self.labels['heater_bed'])
         #     temp_grid.attach(heater_bed_box, 1, 0, 1, 1)
-        # self.labels['temp_grid'] = temp_grid
+        self.labels['temp_grid'] = temp_grid
 
         # Create time remaining items
         hourglass = self._gtk.Image("hourglass", .6)
@@ -154,7 +154,7 @@ class JobStatusPanel(ScreenPanel):
         # self.labels['pos_y'].get_style_context().add_class("printing-info")
         # self.labels['pos_z'] = Gtk.Label(label="Z: 0")
         # self.labels['pos_z'].get_style_context().add_class("printing-info")
-        # pos_box = Gtk.Box(spacing=0)
+        pos_box = Gtk.Box(spacing=0)
         # posgrid = self._gtk.HomogeneousGrid()
         # posgrid.set_hexpand(True)
         # posgrid.attach(self.labels['pos_x'], 0, 0, 1, 1)
@@ -162,7 +162,7 @@ class JobStatusPanel(ScreenPanel):
         # posgrid.attach(self.labels['pos_z'], 2, 0, 1, 1)
         # pos_box.add(position)
         # pos_box.add(posgrid)
-        # self.labels['pos_box'] = pos_box
+        self.labels['pos_box'] = pos_box
 
         speed = self._gtk.Image("speed+", .6)
         self.labels['speed'] = Gtk.Label(label="")
@@ -246,8 +246,8 @@ class JobStatusPanel(ScreenPanel):
             self.labels['i2_box'].remove(child)
 
         self.labels['i1_box'].add(self.labels['thumbnail'])
-        # self.labels['i2_box'].add(self.labels['temp_grid'])
-        # self.labels['i2_box'].add(self.labels['pos_box'])
+        self.labels['i2_box'].add(self.labels['temp_grid'])
+        self.labels['i2_box'].add(self.labels['pos_box'])
         self.labels['i2_box'].add(self.labels['sfe_grid'])
         self.labels['i2_box'].add(self.labels['timegrid'])
         self.labels['i2_box'].add(self.labels['itl_box'])
