@@ -1,14 +1,17 @@
 #!/usr/bin/python
 
 import gi
+import time
 import threading
 
 import json
+import requests
 import websocket
+import asyncio
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import GLib, Gdk
+from gi.repository import Gtk, Gdk, GLib
 from ks_includes.KlippyGcodes import KlippyGcodes
 
 api_key = ""
@@ -30,8 +33,7 @@ class KlippyWebsocket(threading.Thread):
     _req_id = 0
     connected = False
     callback_table = {}
-    reconnect_timeout = None
-    reconnect_count = 0
+    timeout = None
 
     def __init__(self, screen, callback, host, port):
         threading.Thread.__init__(self)
@@ -39,19 +41,16 @@ class KlippyWebsocket(threading.Thread):
         self._callback = callback
         self.klippy = MoonrakerApi(self)
         self.closing = False
-        self.ws = None
 
         self._url = "%s:%s" % (host, port)
 
     def initial_connect(self):
         # Enable a timeout so that way if moonraker is not running, it will attempt to reconnect
-        if self.reconnect_timeout is None:
-            self.reconnect_timeout = GLib.timeout_add_seconds(3, self.reconnect)
+        if self.timeout is None:
+            self.timeout = GLib.timeout_add(500, self.reconnect)
         self.connect()
 
     def connect(self):
-        _ = self._screen.lang.gettext
-
         def ws_on_close(ws, a=None, b=None):
             self.on_close(ws)
 
@@ -65,14 +64,6 @@ class KlippyWebsocket(threading.Thread):
             self.on_open(ws)
 
         try:
-            state = self._screen.apiclient.get_server_info()
-            if state is False:
-                if self.reconnect_count > 3:
-                    self._screen.panels['splash_screen'].update_text(
-                        _("Cannot connect to Moonraker") +
-                        ("\n\n%s\n\n") % self._url +
-                        _("Retry #%s") % self.reconnect_count)
-                return False
             token = self._screen.apiclient.get_oneshot_token()
         except Exception:
             logging.debug("Unable to get oneshot token")
@@ -82,17 +73,16 @@ class KlippyWebsocket(threading.Thread):
         self.ws = websocket.WebSocketApp(
             self.ws_url, on_close=ws_on_close, on_error=ws_on_error, on_message=ws_on_message, on_open=ws_on_open)
 
-        self._wst = threading.Thread(target=self.ws.run_forever, daemon=True)
+        self._wst = threading.Thread(target=self.ws.run_forever)
+        self._wst.daemon = True
         try:
-            logging.debug("Starting websocket thread")
             self._wst.start()
         except Exception:
             logging.debug("Error starting web socket")
 
     def close(self):
         self.closing = True
-        if self.ws is not None:
-            self.ws.close()
+        self.ws.close()
 
     def is_connected(self):
         return self.connected
@@ -142,10 +132,9 @@ class KlippyWebsocket(threading.Thread):
         logging.info("Moonraker Websocket Open")
         logging.info("Self.connected = %s" % self.is_connected())
         self.connected = True
-        self.reconnect_count = 0
-        if self.reconnect_timeout is not None:
-            GLib.source_remove(self.reconnect_timeout)
-            self.reconnect_timeout = None
+        if self.timeout is not None:
+            GLib.source_remove(self.timeout)
+            self.timeout = None
         if "on_connect" in self._callback:
             Gdk.threads_add_idle(
                 GLib.PRIORITY_HIGH_IDLE,
@@ -155,29 +144,23 @@ class KlippyWebsocket(threading.Thread):
     def on_close(self, ws):
         if self.is_connected() is False:
             logging.debug("Connection already closed")
-            if self.reconnect_timeout is not None:
-                GLib.source_remove(self.reconnect_timeout)
-                self.reconnect_timeout = None
             return
 
         if self.closing is True:
             logging.debug("Closing websocket")
-            self.ws.keep_running = False
-            self.close()
-            self.closing = False
+            self.ws.stop()
             return
 
         logging.info("Moonraker Websocket Closed")
         self.connected = False
-        if self.reconnect_timeout is None:
-            self.reconnect_timeout = GLib.timeout_add_seconds(3, self.reconnect)
+        if self.timeout is None:
+            self.timeout = GLib.timeout_add(500, self.reconnect)
 
         if "on_close" in self._callback:
             Gdk.threads_add_idle(
                 GLib.PRIORITY_HIGH_IDLE,
                 self._callback['on_close'],
-                "Lost Connection to Moonraker",
-                True
+                "Lost Connection to Moonraker"
             )
 
     def reconnect(self):
@@ -186,7 +169,6 @@ class KlippyWebsocket(threading.Thread):
             return False
 
         logging.debug("Attempting to reconnect")
-        self.reconnect_count += 1
         self.connect()
         return True
 
@@ -343,17 +325,6 @@ class MoonrakerApi:
             "printer.gcode.script",
             {
                 "script": KlippyGcodes.set_heater_temp(heater, target)
-            },
-            callback,
-            *args
-        )
-
-    def set_temp_fan_temp(self, temp_fan, target, callback=None, *args):
-        logging.debug("Sending temperature fan %s to temp: %s", temp_fan, target)
-        return self._ws.send_method(
-            "printer.gcode.script",
-            {
-                "script": KlippyGcodes.set_temp_fan_temp(temp_fan, target)
             },
             callback,
             *args
