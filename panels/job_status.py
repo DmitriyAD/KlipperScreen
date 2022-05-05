@@ -129,7 +129,7 @@ class JobStatusPanel(ScreenPanel):
         clock = self._gtk.Image("clock", .6)
         self.labels['elapsed'] = Gtk.Label(label=_("Elapsed:"))
         self.labels['elapsed'].get_style_context().add_class("printing-info")
-        self.labels['duration'] = Gtk.Label(label="/ 0s")
+        self.labels['duration'] = Gtk.Label(label="0s")
         self.labels['duration'].get_style_context().add_class("printing-info")
         # self.labels['total'] = Gtk.Label(label=_("Total:"))
         # self.labels['total'].get_style_context().add_class("printing-info")
