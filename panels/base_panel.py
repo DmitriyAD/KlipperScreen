@@ -53,7 +53,7 @@ class BasePanel(ScreenPanel):
         self.control['estop'] = self._gtk.ButtonImage('emergency', None, None, 1)
         self.control['estop'].connect("clicked", self.emergency_stop)
         self.control['off'] = self._gtk.ButtonImage('shutdown', None, None, 1)
-        self.control['off'].connect("clicked", self.emergency_stop)
+        self.control['off'].connect("clicked", self.shutdown)
 
         self.locations = {
             'macro_shortcut': 2,
@@ -407,3 +407,5 @@ class BasePanel(ScreenPanel):
             else:
                 self.control['time'].set_text(now.strftime("%I:%M %p"))
         return True
+    def shutdown(self):
+        self._screen._ws.klippy.gcode_script("M81")
