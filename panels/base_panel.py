@@ -54,6 +54,9 @@ class BasePanel(ScreenPanel):
         self.control['estop'].connect("clicked", self.emergency_stop)
         self.control['off'] = self._gtk.ButtonImage('shutdown', None, None, 1)
         self.control['off'].connect("clicked", self.shutdown)
+        self.control['off'].connect("clicked", self._screen._confirm_send_action,
+                         _("Are you sure you wish to shutdown the system?"), self.shutdown)
+        self.control['off'].set_vexpand(False)
 
         self.locations = {
             'macro_shortcut': 2,
@@ -408,9 +411,6 @@ class BasePanel(ScreenPanel):
                 self.control['time'].set_text(now.strftime("%I:%M %p"))
         return True
     def shutdown(self):
-        _ = self.lang.gettext
-        self._screen._confirm_send_action, _("Are you sure you wish to shutdown the system?")
         self._screen._ws.klippy.gcode_script("M81")
-        # self._screen._confirm_send_action, _("Are you sure you wish to shutdown the system?")
         # self._screen._ws.klippy.gcode_script("script":"M81") 
         
