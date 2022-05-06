@@ -54,6 +54,7 @@ class BasePanel(ScreenPanel):
         self.control['estop'].connect("clicked", self.emergency_stop)
         self.control['off'] = self._gtk.ButtonImage('shutdown', None, None, 1)
         self.control['off'].connect("clicked", self.shutdown)
+        _ = self.lang.gettext
         self.control['off'].connect("clicked", self._screen._confirm_send_action,
                          _("Are you sure you wish to shutdown the system?"), self.shutdown)
         self.control['off'].set_vexpand(False)
