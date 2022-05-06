@@ -38,6 +38,8 @@ class BasePanel(ScreenPanel):
         self.control['back'].connect("clicked", self.back)
         self.control['home'] = self._gtk.ButtonImage('main', None, None, 1)
         self.control['home'].connect("clicked", self.menu_return, True)
+        self.control['off'] = self._gtk.ButtonImage('shutdown', None, None, 1)
+        self.control['off'].connect("clicked", self.menu_return, True)
         
 
         if len(self._config.get_printers()) > 1:
@@ -61,7 +63,7 @@ class BasePanel(ScreenPanel):
         if len(self._config.get_printers()) > 1:
             self.locations['macro_shortcut'] = 3
             if self._config.get_main_config_option('side_macro_shortcut') == "True":
-                button_range = 4
+                button_range = 5
 
         for i in range(button_range):
             self.control['space%s' % i] = Gtk.Label("")
@@ -282,7 +284,8 @@ class BasePanel(ScreenPanel):
             self.control_grid.attach(self.control['back'], 0, 0, 1, 1)
             if self._screen.vertical_mode:
                 self.control_grid.remove(self.control_grid.get_child_at(1, 0))
-                self.control_grid.attach(self.control['home'], 1, 0, 1, 1)
+                self.control_grid.attach(self.control['home'], 1, 0, 0, 1, 1)
+                self.control_grid.attach(self.control['off'], 0, 1, 0, 1, 1)
             else:
                 self.control_grid.remove(self.control_grid.get_child_at(0, 1))
                 self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
