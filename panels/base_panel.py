@@ -52,14 +52,16 @@ class BasePanel(ScreenPanel):
 
         self.control['estop'] = self._gtk.ButtonImage('emergency', None, None, 1)
         self.control['estop'].connect("clicked", self.emergency_stop)
+        self.control['off'] = self._gtk.ButtonImage('shutdown', None, None, 1)
+        self.control['off'].connect("clicked", self.emergency_stop)
 
         self.locations = {
             'macro_shortcut': 2,
             'printer_select': 2
         }
-        button_range = 3
+        button_range = 4
         if len(self._config.get_printers()) > 1:
-            self.locations['macro_shortcut'] = 3
+            self.locations['macro_shortcut'] = 4
             if self._config.get_main_config_option('side_macro_shortcut') == "True":
                 button_range = 4
 
@@ -73,6 +75,10 @@ class BasePanel(ScreenPanel):
             self.control_grid.attach(self.control['estop'], 4, 0, 1, 1)
         else:
             self.control_grid.attach(self.control['estop'], 0, 4, 1, 1)
+        if self._screen.vertical_mode:
+            self.control_grid.attach(self.control['off'], 3, 0, 1, 1)
+        else:
+            self.control_grid.attach(self.control['off'], 0, 3, 1, 1)    
 
         try:
             env = Environment(extensions=["jinja2.ext.i18n"])
