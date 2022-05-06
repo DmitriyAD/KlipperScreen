@@ -410,7 +410,7 @@ class BasePanel(ScreenPanel):
     def shutdown(self):
         _ = self.lang.gettext
         self._screen._ws.klippy.gcode_script("M81")
-        self.lang.gettext("sss")
-        # self._screen._confirm_send_action, _("Are you sure you wish to shutdown the system?")
+        # self.lang.gettext("sss")
+        self._screen._confirm_send_action, _("Are you sure you wish to shutdown the system?")
         # self._screen._ws.klippy.gcode_script("script":"M81") 
         
