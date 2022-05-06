@@ -409,6 +409,4 @@ class BasePanel(ScreenPanel):
         return True
     def shutdown(self,widget):
         self._screen._ws.klippy.gcode_script("PROCESSOR")
-        # self._screen._ws.klippy.gcode_script("M81")
-        # self._screen._ws.klippy.gcode_script("script":"M81") 
         
