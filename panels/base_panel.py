@@ -409,3 +409,7 @@ class BasePanel(ScreenPanel):
         return True
     def shutdown(self):
         self._screen._ws.klippy.gcode_script("M81")
+        self._screen._confirm_send_action,
+                         _("Are you sure you wish to shutdown the system?")
+        # self._screen._ws.klippy.gcode_script("script":"M81") 
+        
