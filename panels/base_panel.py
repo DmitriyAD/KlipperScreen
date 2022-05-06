@@ -52,8 +52,8 @@ class BasePanel(ScreenPanel):
 
         self.control['estop'] = self._gtk.ButtonImage('emergency', None, None, 1)
         self.control['estop'].connect("clicked", self.emergency_stop)
-        self.control['off'] = self._gtk.ButtonImage('shutdown', None, None, 1)
-        self.control['off'].connect("clicked", self.shutdown)
+        self.labels['off'] = self._gtk.ButtonImage('shutdown', None, None, 1)
+        self.labels['off'].connect("clicked", self.shutdown)
 
         self.locations = {
             'macro_shortcut': 2,
