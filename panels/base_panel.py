@@ -84,15 +84,7 @@ class BasePanel(ScreenPanel):
         if self._screen.vertical_mode:
             self.control_grid.attach(self.control['wifi'], 5, 0, 1, 1)
         else:
-            self.control_grid.attach(self.control['wifi'], 0, 5, 1, 1) 
-        if self._screen.vertical_mode:
-            self.control_grid.attach(self.control['wifi'], 6, 0, 1, 1)
-        else:
-            self.control_grid.attach(self.control['wifi'], 0, 6, 1, 1) 
-        if self._screen.vertical_mode:
-            self.control_grid.attach(self.control['wifi'], 7, 0, 1, 1)
-        else:
-            self.control_grid.attach(self.control['wifi'], 0, 7, 1, 1)                
+            self.control_grid.attach(self.control['wifi'], 0, 5, 1, 1)               
 
         try:
             env = Environment(extensions=["jinja2.ext.i18n"])
