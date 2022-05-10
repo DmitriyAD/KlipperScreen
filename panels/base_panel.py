@@ -54,6 +54,8 @@ class BasePanel(ScreenPanel):
         self.control['estop'].connect("clicked", self.emergency_stop)
         self.control['off'] = self._gtk.ButtonImage('shutdown', None, None, 1)
         self.control['off'].connect("clicked", self.shutdown)
+        self.control['wifi'] = self._gtk.ButtonImage('network', None, None, 1)
+        self.control['wifi'].connect("clicked", self.menu_item_clicked, "network")
 
         self.locations = {
             'macro_shortcut': 2,
