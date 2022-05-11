@@ -153,6 +153,8 @@ class KlipperScreenConfig:
                 "section": "main", "name": _("Slicer Time correction (%)"), "type": "scale", "value": "100",
                 "range": [50, 150], "step": 1}},
             # {"": {"section": "main", "name": _(""), "type": ""}}
+            {"Open sistem": {"section": "main", "name": "Открыть систему", "type": "binary",
+                               "value": "False"}},
         ]
 
         lang_path = os.path.join(klipperscreendir, "ks_includes", "locales")
