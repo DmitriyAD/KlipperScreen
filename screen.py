@@ -806,9 +806,9 @@ class KlipperScreen(Gtk.Window):
             self.base_panel.show_macro_shortcut(False, True)
     def toggle_sistem(self, value):
         if value is True:
-            self.base_panel.show_macro_shortcut(True, True)
+            self.base_panel.show_sistem(True, True)
         else:
-            self.base_panel.show_macro_shortcut(False, True)        
+            self.base_panel.show_sistem(False, True)        
 
     def _websocket_callback(self, action, data):
         _ = self.lang.gettext
