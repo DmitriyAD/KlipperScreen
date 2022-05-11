@@ -77,9 +77,9 @@ class BasePanel(ScreenPanel):
             else:
                 self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
         if self._screen.vertical_mode:
-            self.control_grid.attach(self.control['estop'], 6, 0, 1, 1)
+            self.control_grid.attach(self.control['estop'], 10, 0, 1, 1)
         else:
-            self.control_grid.attach(self.control['estop'], 0, 6, 1, 1)
+            self.control_grid.attach(self.control['estop'], 0, 10, 1, 1)
         if self._screen.vertical_mode:
             self.control_grid.attach(self.control['off'], 4, 0, 1, 1)
         else:
