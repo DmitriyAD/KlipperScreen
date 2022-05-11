@@ -154,7 +154,7 @@ class KlipperScreenConfig:
                 "range": [50, 150], "step": 1}},
             # {"": {"section": "main", "name": _(""), "type": ""}}
             {"Open sistem": {"section": "main", "name": "Открыть систему", "type": "binary",
-                               "value": "False"}},
+                               "value": "False", "callback" : screen.toggle_sistem}},
         ]
 
         lang_path = os.path.join(klipperscreendir, "ks_includes", "locales")
