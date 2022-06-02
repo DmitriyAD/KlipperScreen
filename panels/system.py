@@ -19,7 +19,7 @@ class SystemPanel(ScreenPanel):
         _ = self.lang.gettext
 
         grid = self._gtk.HomogeneousGrid()
-        grid.set_row_homogeneous(True)
+        grid.set_row_homogeneous(False)
 
         restart = self._gtk.ButtonImage('refresh', "\n".join(_('Klipper Restart').split(' ')), 'color1')
         restart.connect("clicked", self.restart_klippy)
