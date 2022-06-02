@@ -207,35 +207,25 @@ class TemperaturePanel(ScreenPanel):
         return
 
     def change_target_temp(self, widget, dir):
-        _ = self.lang.gettext
-        if len(self.active_heaters) == 0:
-            self._screen.show_popup_message(_("Nothing selected"))
+        logging.debug("Dev stats %s: %s" % (self.active_heater, self._printer.get_dev_stats(self.active_heater)))
+        target = self._printer.get_dev_stat(self.active_heater, "target")
+        if dir == "+":
+            target += int(self.tempdelta)
+            if target > KlippyGcodes.MAX_EXT_TEMP:
+                target = KlippyGcodes.MAX_EXT_TEMP
         else:
-            for heater in self.active_heaters:
-                target = self._printer.get_dev_stat(heater, "target")
-                if dir == "+":
-                    target += int(self.tempdelta)
-                    MAX_TEMP = int(float(self._printer.get_config_section(heater)['max_temp']))
-                    if target > MAX_TEMP:
-                        target = MAX_TEMP
-                        self._screen.show_popup_message(_("Can't set above the maximum:") + (" %s" % MAX_TEMP))
-                else:
-                    target -= int(self.tempdelta)
-                    if target < 0:
-                        target = 0
-                if heater.startswith('extruder'):
-                    self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), target)
-                elif heater.startswith('heater_bed'):
-                    self._screen._ws.klippy.set_bed_temp(target)
-                elif heater.startswith('heater_generic '):
-                    self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]), target)
-                elif heater.startswith("temperature_fan "):
-                    self._screen._ws.klippy.set_temp_fan_temp(" ".join(heater.split(" ")[1:]), target)
-                else:
-                    logging.info("Unknown heater: %s" % heater)
-                    self._screen.show_popup_message(_("Unknown Heater") + " " + heater)
-                self._printer.set_dev_stat(heater, "target", int(target))
-                logging.info("Setting %s to %d" % (heater, target))
+            target -= int(self.tempdelta)
+            if target < 0:
+                target = 0
+
+        self._printer.set_dev_stat(self.active_heater, "target", target)
+
+        if self.active_heater.startswith("heater_generic "):
+            self._screen._ws.klippy.set_heater_temp(" ".join(self.active_heater.split(" ")[1:]), target)
+        elif self.active_heater == "heater_bed":
+            self._screen._ws.klippy.set_bed_temp(target)
+        else:
+            self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(self.active_heater), target)
 
     def update_entry(self, widget, digit):
         text = self.labels['entry'].get_text()
