@@ -52,6 +52,14 @@ class BasePanel(ScreenPanel):
 
         self.control['estop'] = self._gtk.ButtonImage('emergency', None, None, 1)
         self.control['estop'].connect("clicked", self.emergency_stop)
+        _ = self.lang.gettext
+        self.control['shutdown'] = self._gtk.ButtonImage('shutdown', None, None, 1)
+        self.control['shutdown'].connect ( "clicked", self._screen._confirm_test, _("Are you sure you wish to shutdown the system?"))
+        self.control['wifi'] = self._gtk.ButtonImage('network', None, None, 1)
+        self.control['wifi'].connect("clicked", self.menu_item_clicked, "network",{
+                "name": _('Network'),
+                "panel": "network"
+                })
 
         self.locations = {
             'macro_shortcut': 2,
@@ -73,6 +81,14 @@ class BasePanel(ScreenPanel):
             self.control_grid.attach(self.control['estop'], 4, 0, 1, 1)
         else:
             self.control_grid.attach(self.control['estop'], 0, 4, 1, 1)
+        if self._screen.vertical_mode:
+            self.control_grid.attach(self.control['shutdown'], 4, 0, 1, 1)
+        else:
+            self.control_grid.attach(self.control['shutdown'], 0, 4, 1, 1)    
+        if self._screen.vertical_mode:
+            self.control_grid.attach(self.control['wifi'], 3, 0, 1, 1)
+        else:
+            self.control_grid.attach(self.control['wifi'], 0, 3, 1, 1)     
 
         try:
             env = Environment(extensions=["jinja2.ext.i18n"])
