@@ -86,7 +86,7 @@ class LimitsPanel(ScreenPanel):
 
         adj = Gtk.Adjustment(0, 1, (value * 1.5), 1, 5, 0)
         self.values[option] = value
-        scale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adj)
+        scale = Gtk.Scale(orientation=Gtk.Orientation.VERTICAL, adjustment=adj)
         scale.set_value(self.values[option])
         scale.set_digits(0)
         scale.set_hexpand(True)
