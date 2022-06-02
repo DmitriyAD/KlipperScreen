@@ -23,11 +23,7 @@ class MenuPanel(ScreenPanel):
         self.create_menu_items()
 
         self.grid = self._gtk.HomogeneousGrid()
-        
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_hexpand(True)
-        scroll.set_vexpand(True)
+            
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(self.grid)
@@ -56,24 +52,15 @@ class MenuPanel(ScreenPanel):
             if not self.evaluate_enable(item[key]['enable']):
                 continue
 
-            if columns == 4:
-                if length <= 4:
-                    # Arrange 2 x 2
-                    columns = 2
-                elif 4 < length <= 6:
-                    # Arrange 3 x 2
-                    columns = 3
-
             col = i % columns
-            row = int(i / columns)
+            row = int(i/columns)
+            width = 1
 
-            width = height = 1
-            if expandLast is True and i + 1 == length and length % 2 == 1:
+            if expandLast is True and i+1 == length and length % 2 == 1:
                 width = 2
 
-            self.grid.attach(self.labels[key], col, row, width, height)
+            self.grid.attach(self.labels[key], col, row, width, 1)
             i += 1
-
         return self.grid
 
     def create_menu_items(self):
