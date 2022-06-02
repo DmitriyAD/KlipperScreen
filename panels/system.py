@@ -8,11 +8,13 @@ from datetime import datetime
 
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return SystemPanel(*args)
 
 
 ALLOWED_SERVICES = ["KlipperScreen", "MoonCord", "klipper", "moonraker"]
+
 
 class SystemPanel(ScreenPanel):
     def initialize(self, panel_name):
@@ -21,9 +23,9 @@ class SystemPanel(ScreenPanel):
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
 
-        restart = self._gtk.ButtonImage('refresh', "\n".join(_('Klipper Restart').split(' ')), 'color1')
-        restart.connect("clicked", self.restart_klippy)
-        restart.set_vexpand(False)
+        update_all = self._gtk.ButtonImage('refresh', "\n".join(_('Full\nUpdate').split(' ')), 'color1')
+        update_all.connect("clicked", self.show_update_info, "full")
+        update_all.set_vexpand(False)
         firmrestart = self._gtk.ButtonImage('refresh', "\n".join(_('Firmware\nRestart').split(' ')), 'color2')
         firmrestart.connect("clicked", self.restart_klippy, "firmware")
         firmrestart.set_vexpand(False)
@@ -37,12 +39,8 @@ class SystemPanel(ScreenPanel):
                          _("Are you sure you wish to shutdown the system?"), "machine.shutdown")
         shutdown.set_vexpand(False)
 
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_vexpand(True)
+        scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
 
         infogrid = Gtk.Grid()
         infogrid.get_style_context().add_class("system-program-grid")
@@ -74,7 +72,6 @@ class SystemPanel(ScreenPanel):
                 logging.info("Updating program: %s " % prog)
                 self.update_program_info(prog)
 
-
                 infogrid.attach(self.labels[prog], 1, i, 1, 1)
                 self.labels[prog].get_style_context().add_class('updater-item')
                 i = i + 1
@@ -82,7 +79,7 @@ class SystemPanel(ScreenPanel):
         scroll.add(infogrid)
 
         grid.attach(scroll, 0, 0, 4, 2)
-        grid.attach(restart, 0, 2, 1, 1)
+        grid.attach(update_all, 0, 2, 1, 1)
         grid.attach(firmrestart, 1, 2, 1, 1)
         grid.attach(reboot, 2, 2, 1, 1)
         grid.attach(shutdown, 3, 2, 1, 1)
@@ -116,7 +113,6 @@ class SystemPanel(ScreenPanel):
             if 'application' in data:
                 self.labels['update_progress'].set_text(self.labels['update_progress'].get_text().strip() + "\n" +
                                                         data['message'] + "\n")
-                self.labels['update_progress'].set_ellipsize(True)
                 self.labels['update_progress'].set_ellipsize(Pango.EllipsizeMode.END)
                 adjustment = self.labels['update_scroll'].get_vadjustment()
                 adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size())
@@ -199,7 +195,7 @@ class SystemPanel(ScreenPanel):
                     grid.attach(label, 0, i, 1, 1)
                     i = i + 1
 
-                    details = Gtk.Label(label=c['message']+"\n\n\n")
+                    details = Gtk.Label(label=c['message'] + "\n\n\n")
                     details.set_line_wrap(True)
                     details.set_halign(Gtk.Align.START)
                     grid.attach(details, 0, i, 1, 1)
@@ -216,12 +212,11 @@ class SystemPanel(ScreenPanel):
                 label = Gtk.Label()
                 label.set_markup("  %s  " % c)
                 label.set_halign(Gtk.Align.START)
-                label.set_ellipsize(True)
                 label.set_ellipsize(Pango.EllipsizeMode.END)
                 pos = (j % 3)
                 grid.attach(label, pos, i, 1, 1)
                 j = j + 1
-                if (pos == 2):
+                if pos == 2:
                     i = i + 1
         elif "full" in info:
             label.set_markup("<b>" + _("Perform a full upgrade?") + "</b>")
