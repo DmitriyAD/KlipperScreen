@@ -49,7 +49,7 @@ class BedMeshPanel(ScreenPanel):
         abox.add(addprofile)
 
         # Create a box to contain all of the above
-        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         box.set_vexpand(True)
         box.pack_start(abox, False, False, 0)
         box.pack_end(scroll, True, True, 0)
@@ -135,10 +135,10 @@ class BedMeshPanel(ScreenPanel):
         delete.set_hexpand(False)
         delete.set_halign(Gtk.Align.END)
 
-        labels = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         labels.add(name)
 
-        dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        dev = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
         dev.set_margin_top(10)
         dev.set_margin_end(15)
         dev.set_margin_start(15)
