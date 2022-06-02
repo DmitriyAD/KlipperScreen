@@ -65,7 +65,7 @@ class BasePanel(ScreenPanel):
             'macro_shortcut': 2,
             'printer_select': 2
         }
-        button_range = 4
+        button_range = 3
         if len(self._config.get_printers()) > 1:
             self.locations['macro_shortcut'] = 3
             if self._config.get_main_config_option('side_macro_shortcut') == "True":
@@ -78,9 +78,9 @@ class BasePanel(ScreenPanel):
             else:
                 self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
         if self._screen.vertical_mode:
-            self.control_grid.attach(self.control['estop'], 4, 0, 1, 1)
+            self.control_grid.attach(self.control['estop'], 5, 0, 1, 2)
         else:
-            self.control_grid.attach(self.control['estop'], 0, 4, 1, 1)
+            self.control_grid.attach(self.control['estop'], 0, 5, 1, 2)
         if self._screen.vertical_mode:
             self.control_grid.attach(self.control['shutdown'], 4, 0, 1, 1)
         else:
