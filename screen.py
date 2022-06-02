@@ -12,6 +12,8 @@ import signal
 import subprocess
 import pathlib
 import traceback  # noqa
+import time
+
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
@@ -45,12 +47,10 @@ PRINTER_BASE_STATUS_OBJECTS = [
     'print_stats',
     'toolhead',
     'virtual_sdcard',
-    'webhooks',
-    'motion_report'
+    'webhooks'
 ]
 
 klipperscreendir = pathlib.Path(__file__).parent.resolve()
-
 
 class KlipperScreen(Gtk.Window):
     """ Class for creating a screen for Klipper via HDMI """
@@ -252,7 +252,7 @@ class KlipperScreen(Gtk.Window):
                 "configfile": ["config"],
                 "display_status": ["progress", "message"],
                 "fan": ["speed"],
-                "gcode_move": ["extrude_factor", "gcode_position", "homing_origin", "speed_factor", "speed"],
+                "gcode_move": ["extrude_factor", "gcode_position", "homing_origin", "speed_factor"],
                 "idle_timeout": ["state"],
                 "pause_resume": ["is_paused"],
                 "print_stats": ["print_duration", "total_duration", "filament_used", "filename", "state", "message"],
@@ -260,8 +260,7 @@ class KlipperScreen(Gtk.Window):
                              "max_accel", "max_accel_to_decel", "max_velocity", "square_corner_velocity"],
                 "virtual_sdcard": ["file_position", "is_active", "progress"],
                 "webhooks": ["state", "state_message"],
-                "firmware_retraction": ["retract_length", "retract_speed", "unretract_extra_length", "unretract_speed"],
-                "motion_report": ["live_position", "live_velocity", "live_extruder_velocity"]
+                "firmware_retraction": ["retract_length", "retract_speed", "unretract_extra_length", "unretract_speed"]
             }
         }
         for extruder in self.printer.get_tools():
@@ -270,8 +269,6 @@ class KlipperScreen(Gtk.Window):
             requested_updates['objects'][h] = ["target", "temperature"]
         for f in self.printer.get_fans():
             requested_updates['objects'][f] = ["speed"]
-        for f in self.printer.get_filament_sensors():
-            requested_updates['objects'][f] = ["enabled", "filament_detected"]
 
         self._ws.klippy.object_subscription(requested_updates)
 
@@ -441,6 +438,7 @@ class KlipperScreen(Gtk.Window):
         widget.destroy()
 
     def init_style(self):
+        style_provider = Gtk.CssProvider()
         css = open(os.path.join(klipperscreendir, "styles", "base.css"))
         css_data = css.read()
         css.close()
@@ -475,17 +473,17 @@ class KlipperScreen(Gtk.Window):
             )
         for i in range(len(style_options['graph_colors']['bed']['colors'])):
             css_data += "\n.graph_label_heater_bed%s {border-left-color: #%s}" % (
-                "" if i + 1 == 1 else i + 1,
+                "" if i+1 == 1 else i+1,
                 style_options['graph_colors']['bed']['colors'][i]
             )
         for i in range(len(style_options['graph_colors']['fan']['colors'])):
             css_data += "\n.graph_label_fan_%s {border-left-color: #%s}" % (
-                i + 1,
+                i+1,
                 style_options['graph_colors']['fan']['colors'][i]
             )
         for i in range(len(style_options['graph_colors']['sensor']['colors'])):
             css_data += "\n.graph_label_sensor_%s {border-left-color: #%s}" % (
-                i + 1,
+                i+1,
                 style_options['graph_colors']['sensor']['colors'][i]
             )
 
@@ -887,6 +885,43 @@ class KlipperScreen(Gtk.Window):
 
     def _send_action(self, widget, method, params):
         self._ws.send_method(method, params)
+            
+
+    def _confirm_test(self, widget, text):
+        _ = self.lang.gettext
+
+        buttons = [
+            {"name": _("Continue"), "response": Gtk.ResponseType.OK},
+            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
+        ]
+
+        try:
+            env = Environment(extensions=["jinja2.ext.i18n"])
+            env.install_gettext_translations(self.lang)
+            j2_temp = env.from_string(text)
+            text = j2_temp.render()
+        except Exception:
+            logging.debug("Error parsing jinja for confirm_send_action")
+
+        label = Gtk.Label()
+        label.set_markup(text)
+        label.set_hexpand(True)
+        label.set_halign(Gtk.Align.CENTER)
+        label.set_vexpand(True)
+        label.set_valign(Gtk.Align.CENTER)
+        label.set_line_wrap(True)
+        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+
+        self.gtk.Dialog(self, buttons, label, self._confirm_send_test)
+   
+    def _confirm_send_test(self, widget, response_id):
+        if response_id == Gtk.ResponseType.OK:
+            self._ws.klippy.gcode_script("M81")
+            # time.sleep(3)
+            os.system("sudo shutdown -P now")
+        widget.destroy()
+
+           
 
     def printer_initializing(self, text=None, disconnect=False):
         self.close_popup_message()
@@ -943,7 +978,7 @@ class KlipperScreen(Gtk.Window):
         if state['result']['klippy_connected'] is False:
             self.panels['splash_screen'].update_text(
                 _("Moonraker: connected") +
-                "\n\nKlipper: %s\n\n" % state['result']['klippy_state'] +
+                ("\n\nKlipper: %s\n\n") % state['result']['klippy_state'] +
                 _("Retry #%s") % self.reinit_count)
             return False
 
@@ -972,14 +1007,16 @@ class KlipperScreen(Gtk.Window):
         self.printer.reinit(printer_info['result'], config['result']['status'])
 
         self.ws_subscribe()
-        extra_items = (self.printer.get_tools()
-                       + self.printer.get_heaters()
-                       + self.printer.get_fans()
-                       + self.printer.get_filament_sensors()
-                       )
+        extra_items = []
+        for extruder in self.printer.get_tools():
+            extra_items.append(extruder)
+        for h in self.printer.get_heaters():
+            extra_items.append(h)
+        for f in self.printer.get_fans():
+            extra_items.append(f)
 
         data = self.apiclient.send_request("printer/objects/query?" + "&".join(PRINTER_BASE_STATUS_OBJECTS +
-                                                                               extra_items))
+                                           extra_items))
         if data is False:
             msg = "Error getting printer object data with extra items"
             logging.info(msg)
@@ -1002,7 +1039,7 @@ class KlipperScreen(Gtk.Window):
     def printer_ready(self):
         _ = self.lang.gettext
         self.close_popup_message()
-        # Force an update to printer webhooks state in case the update is missed due to websocket subscribe not yet sent
+        # Force update to printer webhooks state in case the update is missed due to websocket subscribe not yet sent
         self.printer.process_update({"webhooks": {"state": "ready", "state_message": "Printer is ready"}})
         self.show_panel('main_panel', "main_menu", _("Home"), 2,
                         items=self._config.get_menu_items("__main"), extrudercount=self.printer.get_extruder_count())
@@ -1073,8 +1110,8 @@ class KlipperScreen(Gtk.Window):
             os.system("xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")
         return
 
-
 def main():
+
     version = functions.get_software_version()
     parser = argparse.ArgumentParser(description="KlipperScreen - A GUI for Klipper")
     parser.add_argument(
@@ -1095,6 +1132,7 @@ def main():
     functions.patch_threading_excepthook()
 
     logging.info("KlipperScreen version: %s" % version)
+
 
     win = KlipperScreen(args, version)
     win.connect("destroy", Gtk.main_quit)
