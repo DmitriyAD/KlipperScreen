@@ -135,7 +135,7 @@ class BedMeshPanel(ScreenPanel):
         delete.set_hexpand(False)
         delete.set_halign(Gtk.Align.END)
 
-        labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        labels = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         labels.add(name)
 
         dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
