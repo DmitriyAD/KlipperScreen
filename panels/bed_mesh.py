@@ -138,7 +138,7 @@ class BedMeshPanel(ScreenPanel):
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         labels.add(name)
 
-        dev = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+        dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
         dev.set_margin_top(10)
         dev.set_margin_end(15)
         dev.set_margin_start(15)
@@ -147,7 +147,7 @@ class BedMeshPanel(ScreenPanel):
         dev.set_vexpand(False)
         dev.add(labels)
 
-        buttons = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        buttons = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
         logging.debug("Profile compare: '%s' '%s'" % (self.active_mesh, profile))
         if self.active_mesh == profile:
             buttons.pack_start(refresh, False, False, 0)
