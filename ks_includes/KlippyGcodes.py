@@ -42,10 +42,10 @@ class KlippyGcodes:
 
     @staticmethod
     def vacuum_on():
-        return TRUE
+        return True
     @staticmethod
     def vacuum_off():
-        return FALSE
+        return False
 
     @staticmethod
     def set_bed_temp(temp):
