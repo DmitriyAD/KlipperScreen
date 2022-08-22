@@ -1,3 +1,6 @@
+from pickle import FALSE, TRUE
+
+
 class KlippyGcodes:
 
     HOME = "G28"
@@ -37,6 +40,12 @@ class KlippyGcodes:
     VACUUM_ON = "vac_on"
     VACUUM_OFF = "vac_off"
 
+    @staticmethod
+    def vacuum_on():
+        return TRUE
+    @staticmethod
+    def vacuum_off():
+        return FALSE
 
     @staticmethod
     def set_bed_temp(temp):
