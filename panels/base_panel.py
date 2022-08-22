@@ -140,10 +140,10 @@ class BasePanel(ScreenPanel):
         else:
             self.titlebar.set_size_request(self._screen.width - action_bar_width, self.title_spacing)
         self.titlebar.attach(self.control['temp_box'], 0, 0, 1, 1)
-        self.titlebar.attach(self.titlelbl, 1, 0, 1, 1)
+        self.titlebar.attach(self.titlelbl, 2, 0, 1, 1)
         self.titlebar.attach(self.control['time_box'], 2, 0, 1, 1)
-        self.titlebar.attach(self.control['vac_set'], 1, 0, 1, 1)
-        self.titlebar.attach(self.control['vac_set'], 3, 0, 1, 1)
+        self.titlebar.attach(self.control['vac_set'], 0, 0, 1, 1)
+        self.titlebar.attach(self.control['vac_set'], 2, 0, 1, 1)
 
         if self._screen.vertical_mode:
             self.layout.put(self.titlebar, 0, 0)
