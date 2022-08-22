@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+from pickle import TRUE
 import gi
 import logging
 
@@ -127,7 +128,10 @@ class BasePanel(ScreenPanel):
 
         self.control['vac_set'] = Gtk.Box()
         self.control['vac_set'].set_halign(Gtk.Align.END)
-        self.control['vacuum'] = Gtk.Label("sosiska")
+        if self.KlippyGcodes.vacuum_on() == True:
+            self.control['vacuum'] = Gtk.Label("sosiska")
+        elif self.KlippyGcodes.vacuum_off() == False:
+            self.control['vacuum'] = Gtk.Label("sosiska2")
         self.control['vac_set'].pack_end(self.control['vacuum'], True, True, self.hmargin)
 
         self.control['temp_box'] = Gtk.Box()
