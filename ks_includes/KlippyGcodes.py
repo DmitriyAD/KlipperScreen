@@ -34,6 +34,8 @@ class KlippyGcodes:
     SAVE_CONFIG = "SAVE_CONFIG"
     RESTART = "RESTART"
     FIRMWARE_RESTART = "FIRMWARE_RESTART"
+    VACUUM_ON = "vac_on"
+    VACUUM_OFF = "vac_off"
 
 
     @staticmethod
