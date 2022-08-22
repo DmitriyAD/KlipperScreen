@@ -126,7 +126,7 @@ class BasePanel(ScreenPanel):
         self.control['vac_set'].set_halign(Gtk.Align.END)
         self.control['time'] = Gtk.Label("00:00 AM")
         self.control['time_box'].pack_end(self.control['time'], True, True, self.hmargin)
-        self.control['time_box'].pack_end(True, True, self.hmargin)
+        self.control['va_set'].pack_end(True, True, self.hmargin)
         self.control['vac_set'] = Gtk.Label("sosiska")
 
 
