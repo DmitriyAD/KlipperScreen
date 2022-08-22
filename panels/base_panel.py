@@ -126,7 +126,7 @@ class BasePanel(ScreenPanel):
         self.control['time_box'].pack_end(self.control['time'], True, True, self.hmargin)
 
         self.control['vac_set'] = Gtk.Box()
-        self.control['vac_set'].set_halign(Gtk.Align.END)
+        self.control['vac_set'].set_halign(Gtk.Align.TOP)
         self.control['vacuum'] = Gtk.Label("sosiska")
         self.control['vac_set'].pack_end(self.control['vacuum'], True, True, self.hmargin)
 
