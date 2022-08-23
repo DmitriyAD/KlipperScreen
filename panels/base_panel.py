@@ -128,7 +128,7 @@ class BasePanel(ScreenPanel):
         self.control['vac_set'] = Gtk.Box()
         self.control['vac_set'].set_halign(Gtk.Align.END)
        
-        if self._printer.config_section_exists("input_shaper")("vac_off") :
+        if self._config.get_menu_name("vac_on"):
             self.control['vacuum'] = Gtk.Label("sosiska")
    
         elif self._config.get_menu_name("vac_on") :   
