@@ -27,6 +27,12 @@ class VacuumPanel(ScreenPanel):
         vacumoff.set_vexpand(False)
 
 
+        grid.attach(vacumoff, 3, 2, 1, 1)
+        grid.attach(vacumon, 1, 2, 1, 1)
+    
+        self.content.add(grid)
+
+
     def vac_on(self):
        self._ws.klippy.gcode_script("vac_on")
        
