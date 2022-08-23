@@ -21,11 +21,14 @@ class VacuumPanel(ScreenPanel):
         vacumon = self._gtk.ButtonImage('fan',_('Vacuum ON'), 'color1')
         vacumon.connect("clicked", self.vac_on)
         vacumoff = self._gtk.ButtonImage('refresh', _('Vacuum OFF'), 'color2')
-        vacumoff.connect("clicked", self.vac_off)
+        vacumoff.connect("clicked", self.menu_item_clicked, "network",{
+                "name": _('Network'),
+                "panel": "network"
+                })
 
         grid.attach(vacumoff, 2, 2, 1, 1)
         grid.attach(vacumon, 1, 2, 1, 1)
-        
+
         self.content.add(grid)
 
 
