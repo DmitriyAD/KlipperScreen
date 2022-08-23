@@ -129,8 +129,12 @@ class BasePanel(ScreenPanel):
 
         self.control['vac_set'] = Gtk.Box()
         self.control['vac_set'].set_halign(Gtk.Align.END)
-       
-        self.control['vacuum'] = Gtk.Label(self.icon) 
+        if self.vacuum_img() == True:
+            self.control['vacuum'] = Gtk.Label("sos") 
+        elif self.vacuum_img() == False:
+            self.control['vacuum'] = Gtk.Label("sosiska") 
+        else:
+            self.control['vacuum'] = Gtk.Label("enot")
         self.control['vac_set'].pack_end(self.control['vacuum'], True, True, self.hmargin)
 
         self.control['temp_box'] = Gtk.Box()
