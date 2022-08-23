@@ -127,8 +127,8 @@ class BasePanel(ScreenPanel):
 
         self.control['vac_set'] = Gtk.Box()
         self.control['vac_set'].set_halign(Gtk.Align.END)
-        vacuum =  self._printer.get_vacuum()
-        if  vacuum == "vac_off" :
+        vac =  self._printer.get_vacuum()
+        if  vac == "vac_off" :
             self.control['vacuum'] = Gtk.Label("sosiska")
    
         elif self._config.get_menu_name("vac_on") :   
