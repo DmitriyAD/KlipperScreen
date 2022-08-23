@@ -272,8 +272,7 @@ class Printer:
                 },
                 "probe": self.config_section_exists("probe"),
                 "firmware_retraction": self.config_section_exists("firmware_retraction"),
-                "input_shaper": self.config_section_exists("input_shaper"),
-                "vacuum" : self.get_config_section_list("vac_on")
+                "input_shaper": self.config_section_exists("input_shaper")
             }
         }
 
