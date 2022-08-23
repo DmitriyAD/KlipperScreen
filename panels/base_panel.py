@@ -168,6 +168,7 @@ class BasePanel(ScreenPanel):
 
 
 
+
     def show_heaters(self, show=True):
         for child in self.control['temp_box'].get_children():
             self.control['temp_box'].remove(child)

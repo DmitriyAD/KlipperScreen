@@ -15,7 +15,7 @@ def create_panel(*args):
 class VacuumPanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
-        self.vaccheck = 0
+        self.vaccheck = 1
         grid = Gtk.Grid()
 
         self.labels['vacumon'] = self._gtk.ButtonImage('fan',_('Vacuum ON'), 'color1')
