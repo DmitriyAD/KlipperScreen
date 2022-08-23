@@ -20,7 +20,7 @@ class BasePanel(ScreenPanel):
         self.title_spacing = self._gtk.font_size * 2
         self.time_update = None
         self.titlebar_name_type = None
-        self.icon = ""
+        self.icon = "sos"
         self.buttons_showing = {
             'back': False if back else True,
             'macros_shortcut': False,
