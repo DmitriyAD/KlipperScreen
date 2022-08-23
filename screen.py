@@ -499,10 +499,10 @@ class KlipperScreen(Gtk.Window):
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
 
-    def is_keyboard_showing(self):
-        if self.keyboard is None:
-            return False
-        return True
+    # def is_keyboard_showing(self):
+    #     if self.keyboard is None:
+    #         return False
+    #     return True
 
     def is_printing(self):
         return self.printer.get_state() == "printing"
@@ -560,7 +560,8 @@ class KlipperScreen(Gtk.Window):
     def _menu_go_back(self, widget=None):
         logging.info("#### Menu go back")
         self.remove_keyboard()
-        self.close_popup_message()
+        if self._config.get_main_config().getboolean('autoclose_popups'):
+            self.close_popup_message()
         self._remove_current_panel()
 
     def _menu_go_home(self):
@@ -592,6 +593,7 @@ class KlipperScreen(Gtk.Window):
         logging.debug("Showing Screensaver")
         if self.screensaver is not None:
             self.close_screensaver()
+        self.remove_keyboard()
 
         close = Gtk.Button()
         close.connect("clicked", self.close_screensaver)
@@ -1103,6 +1105,11 @@ class KlipperScreen(Gtk.Window):
     def remove_keyboard(self, widget=None, event=None):
         if self.keyboard is None:
             return
+
+        if 'process' in self.keyboard:
+            os.kill(self.keyboard['process'].pid, signal.SIGTERM)
+        self.base_panel.get_content().remove(self.keyboard['box'])
+        self.keyboard = None
 
         if 'process' in self.keyboard:
             os.kill(self.keyboard['process'].pid, signal.SIGTERM)
