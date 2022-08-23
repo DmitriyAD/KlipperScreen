@@ -130,7 +130,7 @@ class BasePanel(ScreenPanel):
         self.control['vac_set'] = Gtk.Box()
         self.control['vac_set'].set_halign(Gtk.Align.END)
         
-        self.control['vacuum'] = Gtk.Label(self.icon) 
+        self.control['vacuum'] = Gtk.Label("sos") 
       
         self.control['vac_set'].pack_end(self.control['vacuum'], True, True, self.hmargin)
 
@@ -303,9 +303,9 @@ class BasePanel(ScreenPanel):
                 self.control['temp_box'].reorder_child(self.labels["%s_box" % self.current_extruder], 0)
                 self.control['temp_box'].show_all()
         if VacuumPanel.chek_n == True:
-            self.icon = "sos1"
+            self.control['vacuum'] = Gtk.Label("sos1")
         if VacuumPanel.chek_n == False:
-            self.icon = "sos2"    
+            self.control['vacuum'] = Gtk.Label("sos2")    
     def remove(self, widget):
         self.content.remove(widget)
 
