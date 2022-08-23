@@ -404,6 +404,21 @@ class Printer:
 
         self.devices[dev][stat] = value
 
+    # def get_vacuum(self):
+    #     vacuum = []
+    #     if self.config_section_exists("vac_off", "vac_on"):
+    #         vacuum.append("vac_off")
+    #     vacuum_types = ["vac_off", "vac_onc"]
+    #     for type in vacuum_types:
+    #         for f in self.get_config_section_list("%s " % type):
+    #             vacuum.append(f)
+    #     return vacuum
+
+    def get_vacuum(self):
+        vacuum = []
+        if self.config_section_exists("vac_off"):
+            vacuum.append("vac_off")
+        return vacuum    
     def _update_temp_store(self):
         for device in self.tempstore:
             for x in self.tempstore[device]:
