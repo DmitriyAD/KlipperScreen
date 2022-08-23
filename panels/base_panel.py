@@ -69,7 +69,7 @@ class BasePanel(ScreenPanel):
         if len(self._config.get_printers()) > 1:
             self.locations['macro_shortcut'] = 3
             if self._config.get_main_config_option('side_macro_shortcut') == "True":
-                button_range = 4
+                button_range = 6
 
         for i in range(button_range):
             self.control['space%s' % i] = Gtk.Label("")
@@ -80,15 +80,15 @@ class BasePanel(ScreenPanel):
         if self._screen.vertical_mode:
             self.control_grid.attach(self.control['estop'], 5, 0, 1, 1)
         else:
-            self.control_grid.attach(self.control['estop'], 0, 5, 1, 1)
+            self.control_grid.attach(self.control['estop'], 0, 6, 1, 1)
         if self._screen.vertical_mode:
             self.control_grid.attach(self.control['shutdown'], 4, 0, 1, 1)
         else:
-            self.control_grid.attach(self.control['shutdown'], 0, 4, 1, 1)    
+            self.control_grid.attach(self.control['shutdown'], 0, 5, 1, 1)    
         if self._screen.vertical_mode:
             self.control_grid.attach(self.control['wifi'], 3, 0, 1, 1)
         else:
-            self.control_grid.attach(self.control['wifi'], 0, 3, 1, 1)          
+            self.control_grid.attach(self.control['wifi'], 0, 4, 1, 1)          
 
         try:
             env = Environment(extensions=["jinja2.ext.i18n"])
