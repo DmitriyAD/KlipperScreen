@@ -46,7 +46,7 @@ class ExtrudePanel(ScreenPanel):
         self.labels['nozzle'] = self._gtk.ButtonImage("clean-nozzle", _("Очистка"), "color3")
         self.labels['nozzle'].connect("clicked", self.clean_nozzle)
         self.labels['vacuumon'] = self._gtk.ButtonImage("fan", _("asd"), "color3")
-        self.labels['nozzle'].connect("clicked", self.vac_on)
+        self.labels['vacuumon'].connect("clicked", self.vac_on)
         self.labels['temperature'] = self._gtk.ButtonImage("heat-up", _("Temperature"), "color4")
         self.labels['temperature'].connect("clicked", self.menu_item_clicked, "temperature", {
             "name":  _('Temperature'),
