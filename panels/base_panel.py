@@ -158,8 +158,7 @@ class BasePanel(ScreenPanel):
         return
     def vacuum_img(self):
         if VacuumPanel.chek_n == True:
-            a = "sosiska"
-            return a
+            self.control['vacuum'] = Gtk.Label('sosiska') 
         elif VacuumPanel.chek_n == False:
             a = "sosiska2"
             return a
