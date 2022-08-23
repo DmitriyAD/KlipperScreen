@@ -153,10 +153,6 @@ class BasePanel(ScreenPanel):
         else:
             self.layout.put(self.titlebar, action_bar_width, 0)
             self.layout.put(self.content, action_bar_width + self.hmargin, self.title_spacing)
-
-    def initialize(self, panel_name):
-        self.update_time()
-        return
     def vacuum_img(self):
         if VacuumPanel.chek_n == True:
             self.icon = "sosiskaON"
@@ -164,10 +160,10 @@ class BasePanel(ScreenPanel):
             self.icon = "sosiskaOFF"
         else:
             self.icon = "sosiskaNothing"
-
-
-
-
+            
+    def initialize(self, panel_name):
+        self.update_time()
+        return
     def show_heaters(self, show=True):
         for child in self.control['temp_box'].get_children():
             self.control['temp_box'].remove(child)
