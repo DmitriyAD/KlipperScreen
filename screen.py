@@ -25,6 +25,7 @@ from ks_includes.KlippyRest import KlippyRest
 from ks_includes.files import KlippyFiles
 from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.printer import Printer
+from ks_includes.widgets.keyboard import Keyboard
 
 from ks_includes.config import KlipperScreenConfig
 from panels.base_panel import BasePanel
