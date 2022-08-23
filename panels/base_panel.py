@@ -69,7 +69,7 @@ class BasePanel(ScreenPanel):
         if len(self._config.get_printers()) > 1:
             self.locations['macro_shortcut'] = 3
             if self._config.get_main_config_option('side_macro_shortcut') == "True":
-                button_range = 7
+                button_range = 4
 
         for i in range(button_range):
             self.control['space%s' % i] = Gtk.Label("")
@@ -78,9 +78,9 @@ class BasePanel(ScreenPanel):
             else:
                 self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
         if self._screen.vertical_mode:
-            self.control_grid.attach(self.control['estop'], 6, 0, 1, 1)
+            self.control_grid.attach(self.control['estop'], 5, 0, 1, 1)
         else:
-            self.control_grid.attach(self.control['estop'], 0, 6, 1, 1)
+            self.control_grid.attach(self.control['estop'], 0, 5, 1, 1)
         if self._screen.vertical_mode:
             self.control_grid.attach(self.control['shutdown'], 4, 0, 1, 1)
         else:
