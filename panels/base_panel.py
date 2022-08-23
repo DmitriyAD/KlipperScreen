@@ -20,7 +20,7 @@ class BasePanel(ScreenPanel):
         self.title_spacing = self._gtk.font_size * 2
         self.time_update = None
         self.titlebar_name_type = None
-        self.icon = "s"
+        self.icon = "лоы1"
         self.buttons_showing = {
             'back': False if back else True,
             'macros_shortcut': False,
@@ -129,12 +129,9 @@ class BasePanel(ScreenPanel):
 
         self.control['vac_set'] = Gtk.Box()
         self.control['vac_set'].set_halign(Gtk.Align.END)
-        if self.vacuum_img() == True:
-            self.control['vacuum'] = Gtk.Label("sos") 
-        elif self.vacuum_img() == False:
-            self.control['vacuum'] = Gtk.Label("sosiska") 
-        else:
-            self.control['vacuum'] = Gtk.Label("enot")
+        
+        self.control['vacuum'] = Gtk.Label(self.icon) 
+      
         self.control['vac_set'].pack_end(self.control['vacuum'], True, True, self.hmargin)
 
         self.control['temp_box'] = Gtk.Box()
@@ -162,12 +159,13 @@ class BasePanel(ScreenPanel):
         self.update_time()
         return
     def vacuum_img(self):
-        if VacuumPanel.chek_n == True:
-            self.icon = "sosiskaON"
-        elif VacuumPanel.chek_n == False:
-            self.icon = "sosiskaOFF"
-        else:
-            self.icon = "sosiskaNothing"
+        while True:
+            if VacuumPanel.chek_n == True:
+                self.icon = "sosiskaON"
+            elif VacuumPanel.chek_n == False:
+                self.icon = "sosiskaOFF"
+            else:
+                self.icon = "sosiskaNothing"
 
 
 
