@@ -8,6 +8,7 @@ from gi.repository import GLib, Gtk, Pango
 from jinja2 import Environment
 
 from ks_includes.screen_panel import ScreenPanel
+from panels.vacuum import VacuumPanel
 
 
 class BasePanel(ScreenPanel):
@@ -128,7 +129,7 @@ class BasePanel(ScreenPanel):
         self.control['vac_set'] = Gtk.Box()
         self.control['vac_set'].set_halign(Gtk.Align.END)
        
-        self.control['vacuum'] =  Gtk.Label("sosiska3") 
+        self.control['vacuum'] =  self.vacuum_img()
         self.control['vac_set'].pack_end(self.control['vacuum'], True, True, self.hmargin)
 
         self.control['temp_box'] = Gtk.Box()
@@ -156,9 +157,9 @@ class BasePanel(ScreenPanel):
         self.update_time()
         return
     def vacuum_img(self,widget):
-        if self._vacuum.chek_n == True:
+        if VacuumPanel.chek_n == True:
             self.control['vacuum'] = Gtk.Label("sosiska")
-        elif self._vacuum.chek_n == False:
+        elif VacuumPanel.chek_n == False:
             self.control['vacuum'] = Gtk.Label("sosiska2")
         else:
             self.control['vacuum'] = Gtk.Label("sosiska3")
