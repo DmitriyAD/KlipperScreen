@@ -160,12 +160,15 @@ class BasePanel(ScreenPanel):
     def vacuum_img(self):
         if VacuumPanel.vac_on == True:
             self.icon ="sos3"
+            return self.icon
             # self.control['vacuum'] = Gtk.Label("sos3") 
         elif VacuumPanel.vac_off == False:
             self.icon ="sos2"
+            return self.icon
             # self.control['vacuum'] = Gtk.Label("sos1")
         else:
             self.icon ="sos1"
+            return self.icon
             # self.control['vacuum'] = Gtk.Label("sos2")
 
 
