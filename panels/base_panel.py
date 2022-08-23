@@ -128,7 +128,7 @@ class BasePanel(ScreenPanel):
         self.control['vac_set'] = Gtk.Box()
         self.control['vac_set'].set_halign(Gtk.Align.END)
        
-        self.control['vacuum'] =  self.vacuum_img() 
+        self.control['vacuum'] =  Gtk.Label("sosiska3") 
         self.control['vac_set'].pack_end(self.control['vacuum'], True, True, self.hmargin)
 
         self.control['temp_box'] = Gtk.Box()
