@@ -15,7 +15,6 @@ def create_panel(*args):
 class VacuumPanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
-        vacuum_status =0
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(True)
 
@@ -34,10 +33,10 @@ class VacuumPanel(ScreenPanel):
 
 
     def vac_on(self):
-       self._ws.klippy.gcode_script("vac_on")
+        self._screen._ws.klippy.gcode_script("vac_on")
        
 
     def vac_off(self):
-        self._ws.klippy.gcode_script("vac_off")  
+         self._screen._ws.klippy.gcode_script("vac_off")  
 
         
