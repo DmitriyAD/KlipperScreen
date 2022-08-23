@@ -65,7 +65,7 @@ class BasePanel(ScreenPanel):
             'macro_shortcut': 2,
             'printer_select': 2
         }
-        button_range = 3
+        button_range = 6
         if len(self._config.get_printers()) > 1:
             self.locations['macro_shortcut'] = 3
             if self._config.get_main_config_option('side_macro_shortcut') == "True":
