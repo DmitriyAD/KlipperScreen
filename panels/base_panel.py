@@ -78,13 +78,13 @@ class BasePanel(ScreenPanel):
             else:
                 self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
         if self._screen.vertical_mode:
-            self.control_grid.attach(self.control['estop'], 6, 0, 1, 1)
+            self.control_grid.attach(self.control['estop'], 5, 0, 1, 1)
         else:
-            self.control_grid.attach(self.control['estop'], 0, 6, 1, 1)
+            self.control_grid.attach(self.control['estop'], 0, 5, 1, 1)
         if self._screen.vertical_mode:
-            self.control_grid.attach(self.control['shutdown'], 5, 0, 1, 1)
+            self.control_grid.attach(self.control['shutdown'], 4, 0, 1, 1)
         else:
-            self.control_grid.attach(self.control['shutdown'], 0, 5, 1, 1)    
+            self.control_grid.attach(self.control['shutdown'], 0, 4, 1, 1)    
         if self._screen.vertical_mode:
             self.control_grid.attach(self.control['wifi'], 3, 0, 1, 1)
         else:
@@ -134,7 +134,7 @@ class BasePanel(ScreenPanel):
         elif self._config.get_menu_name("vac_on") :   
             self.control['vacuum'] = Gtk.Label("sosiska2")
         else :
-            self.control['vacuum'] = self._gtk.Image("fan")    
+            self.control['vacuum'] = Gtk.Image("sosiska3")  #self._gtk.Image("fan")  
         self.control['vac_set'].pack_end(self.control['vacuum'], True, True, self.hmargin)
 
         self.control['temp_box'] = Gtk.Box()
