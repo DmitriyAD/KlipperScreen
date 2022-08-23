@@ -18,10 +18,10 @@ class VacuumPanel(ScreenPanel):
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(True)
 
-        vacumon = self._gtk.ButtonImage('fan', None, None, 1)
+        vacumon = self._gtk.ButtonImage('fan',_('Vacuum ON'), 'color1')
         vacumon.connect("clicked", self.vac_on)
         vacumon.set_vexpand(False)
-        vacumoff = self._gtk.ButtonImage('refresh', None, None, 1)
+        vacumoff = self._gtk.ButtonImage('refresh', _('Vacuum OFF'), 'color2')
         vacumoff.connect("clicked", self.vac_off)
         vacumoff.set_vexpand(False)
 
