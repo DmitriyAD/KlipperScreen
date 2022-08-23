@@ -134,7 +134,7 @@ class BasePanel(ScreenPanel):
         elif self._config.get_menu_name("vac_on") :   
             self.control['vacuum'] = Gtk.Label("sosiska2")
         else :
-            self.control['vacuum'] = Gtk.Image("sosiska3")  #self._gtk.Image("fan")  
+            self.control['vacuum'] = Gtk.Label("sosiska3")    
         self.control['vac_set'].pack_end(self.control['vacuum'], True, True, self.hmargin)
 
         self.control['temp_box'] = Gtk.Box()
