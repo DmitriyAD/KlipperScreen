@@ -45,6 +45,8 @@ class ExtrudePanel(ScreenPanel):
         self.labels['retract'].connect("clicked", self.extrude, "-")
         self.labels['nozzle'] = self._gtk.ButtonImage("clean-nozzle", _("Очистка"), "color3")
         self.labels['nozzle'].connect("clicked", self.clean_nozzle)
+        self.labels['vacuumon'] = self._gtk.ButtonImage("fan", _("asd"), "color3")
+        self.labels['nozzle'].connect("clicked", self.vac_on)
         self.labels['temperature'] = self._gtk.ButtonImage("heat-up", _("Temperature"), "color4")
         self.labels['temperature'].connect("clicked", self.menu_item_clicked, "temperature", {
             "name":  _('Temperature'),
@@ -185,7 +187,9 @@ class ExtrudePanel(ScreenPanel):
             self._screen._ws.klippy.gcode_script("LOAD_FILAMENT")
             
     def clean_nozzle(self, widget):
-        self._screen._ws.klippy.gcode_script("CLEAN_NOZZLE")        
+        self._screen._ws.klippy.gcode_script("CLEAN_NOZZLE") 
+    def vac_on(self, widget):
+        self._screen._ws.klippy.gcode_script("vac_on")            
 
     def find_gcode_macros(self):
         macros = self._screen.printer.get_gcode_macros()
