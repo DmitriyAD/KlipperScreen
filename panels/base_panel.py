@@ -129,7 +129,7 @@ class BasePanel(ScreenPanel):
         self.control['vac_set'] = Gtk.Box()
         self.control['vac_set'].set_halign(Gtk.Align.END)
        
-        self.control['vacuum'] =  self.vacuum_img()
+        self.control['vacuum'] = Gtk.Label(self.vacuum_img()) 
         self.control['vac_set'].pack_end(self.control['vacuum'], True, True, self.hmargin)
 
         self.control['temp_box'] = Gtk.Box()
@@ -156,13 +156,16 @@ class BasePanel(ScreenPanel):
     def initialize(self, panel_name):
         self.update_time()
         return
-    def vacuum_img(self,widget):
+    def vacuum_img(self):
         if VacuumPanel.chek_n == True:
-            self.control['vacuum'] = Gtk.Label("sosiska")
+            a = "sosiska"
+            return a
         elif VacuumPanel.chek_n == False:
-            self.control['vacuum'] = Gtk.Label("sosiska2")
+            a = "sosiska2"
+            return a
         else:
-            self.control['vacuum'] = Gtk.Label("sosiska3")
+            a = "sosiska3"
+            return a
 
 
 
