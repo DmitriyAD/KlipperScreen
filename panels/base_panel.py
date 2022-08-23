@@ -155,7 +155,7 @@ class BasePanel(ScreenPanel):
     def initialize(self, panel_name):
         self.update_time()
         return
-    def vacuum_img(self):
+    def vacuum_img(self,widget):
         if self._vacuum.chek_n == True:
             self.control['vacuum'] = Gtk.Label("sosiska")
         elif self._vacuum.chek_n == False:
