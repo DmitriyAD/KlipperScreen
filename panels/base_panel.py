@@ -160,11 +160,10 @@ class BasePanel(ScreenPanel):
         if VacuumPanel.chek_n == True:
             self.control['vacuum'] = Gtk.Label('sosiska') 
         elif VacuumPanel.chek_n == False:
-            a = "sosiska2"
-            return a
+            self.control['vacuum'] = Gtk.Label('sosiska2') 
         else:
-            a = "sosiska3"
-            return a
+            self.control['vacuum'] = Gtk.Label('sosiskaxx') 
+            return 
 
 
 
