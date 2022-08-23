@@ -921,7 +921,7 @@ class KlipperScreen(Gtk.Window):
             os.system("sudo shutdown -P now")
         widget.destroy()
     def vac(self):
-         self._ws.klippy.gcode_script("vac_on")
+        self._ws.klippy.gcode_script("vac_on")
               
 
            
