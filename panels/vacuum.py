@@ -23,7 +23,7 @@ class VacuumPanel(ScreenPanel):
         vacumon.connect("clicked", self.vac_on)
         vacumon.set_vexpand(False)
         vacumoff = self._gtk.ButtonImage('vac-off', None, None, 1)
-        vacumoff.connect("clicked", self.vac_ff)
+        vacumoff.connect("clicked", self.vac_off)
         vacumoff.set_vexpand(False)
 
 
