@@ -131,8 +131,10 @@ class BasePanel(ScreenPanel):
         self.control['vac_set'].set_halign(Gtk.Align.END)
         if VacuumPanel.vac_on == True:
             self.control['vacuum'] = Gtk.Label("sos") 
-        if VacuumPanel.vac_off == False:
-            self.control['vacuum'] = Gtk.Label("sos1")   
+        elif VacuumPanel.vac_off == False:
+            self.control['vacuum'] = Gtk.Label("sos1")
+        else:
+            self.control['vacuum'] = Gtk.Label("sos2")     
       
         self.control['vac_set'].pack_end(self.control['vacuum'], True, True, self.hmargin)
 
