@@ -20,7 +20,7 @@ class BasePanel(ScreenPanel):
         self.title_spacing = self._gtk.font_size * 2
         self.time_update = None
         self.titlebar_name_type = None
-        self.icon = "лоы1"
+        self.icon = 'sos'
         self.buttons_showing = {
             'back': False if back else True,
             'macros_shortcut': False,
@@ -159,7 +159,6 @@ class BasePanel(ScreenPanel):
         self.update_time()
         return
     def vacuum_img(self):
-        while True:
             if VacuumPanel.chek_n == True:
                 self.icon = "sosiskaON"
             elif VacuumPanel.chek_n == False:
@@ -303,7 +302,10 @@ class BasePanel(ScreenPanel):
                 self.control['temp_box'].pack_start(self.labels["%s_box" % self.current_extruder], True, True, 3)
                 self.control['temp_box'].reorder_child(self.labels["%s_box" % self.current_extruder], 0)
                 self.control['temp_box'].show_all()
-
+        if VacuumPanel.chek_n == True:
+            self.icon = "sos1"
+        if VacuumPanel.chek_n == False:
+            self.icon = "sos2"    
     def remove(self, widget):
         self.content.remove(widget)
 
