@@ -272,7 +272,8 @@ class Printer:
                 },
                 "probe": self.config_section_exists("probe"),
                 "firmware_retraction": self.config_section_exists("firmware_retraction"),
-                "input_shaper": self.config_section_exists("input_shaper")
+                "input_shaper": self.config_section_exists("input_shaper"),
+                "vacuum":{True if self.state == "vac_on" else False}
             }
         }
 
