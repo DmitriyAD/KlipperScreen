@@ -19,6 +19,7 @@ class BasePanel(ScreenPanel):
         self.time_format = self._config.get_main_config_option("24htime")
         self.title_spacing = self._gtk.font_size * 2
         self.time_update = None
+        self.vac_image = None
         self.titlebar_name_type = None
         self.icon = 'sos'
         self.buttons_showing = {
@@ -129,7 +130,7 @@ class BasePanel(ScreenPanel):
 
         self.control['vac_set'] = Gtk.Box()
         self.control['vac_set'].set_halign(Gtk.Align.END)
-        self.control['vacuum'] = self.update_imgVacuum()  
+        self.control['vacuum'] = self._gtk.ButtonImage('vac_off', None, None , 1)  
       
         self.control['vac_set'].pack_end(self.control['vacuum'], True, True, self.hmargin)
 
@@ -158,17 +159,6 @@ class BasePanel(ScreenPanel):
         self.update_time()
         self.update_imgVacuum()
         return
-        
-    def update_imgVacuum(self):
-        if VacuumPanel.vac_on == True:
-            # self.control['vacuum'] = 
-            self._gtk.ButtonImage('vac_on', None, None , 1) 
-        elif VacuumPanel.vac_off == False:
-            # self.control['vacuum'] = 
-            self._gtk.ButtonImage('vac_off', None, None , 1) 
-        else:
-            # self.control['vacuum'] = 
-            self._gtk.ButtonImage('fan', None, None , 1) 
 
     def show_heaters(self, show=True):
         for child in self.control['temp_box'].get_children():
@@ -257,6 +247,8 @@ class BasePanel(ScreenPanel):
     def activate(self):
         if self.time_update is None:
             self.time_update = GLib.timeout_add_seconds(1, self.update_time)
+        if self.vac_image is None:
+            self.vac_image = self.update_imgVacuum()    
 
     def add_content(self, panel):
         self.current_panel = panel
@@ -421,7 +413,14 @@ class BasePanel(ScreenPanel):
             self.control_grid.attach(self.control['home'], 1, 0, 1, 1)
         else:
             self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
-
+            
+    def update_imgVacuum(self):
+        if VacuumPanel.vac_on == True:
+            self.control['vacuum'] = self._gtk.ButtonImage('vac_on', None, None , 1) 
+        elif VacuumPanel.vac_off == False:
+            self.control['vacuum'] = self._gtk.ButtonImage('vac_off', None, None , 1) 
+        else:
+           self.control['vacuum'] = self._gtk.ButtonImage('fan', None, None , 1) 
     def update_time(self):
         now = datetime.datetime.now()
         confopt = self._config.get_main_config_option("24htime")
