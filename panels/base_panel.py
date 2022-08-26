@@ -130,7 +130,7 @@ class BasePanel(ScreenPanel):
 
         self.control['vac_set'] = Gtk.Box()
         self.control['vac_set'].set_halign(Gtk.Align.END)
-        self.control['vacuum'] = self._gtk.Image('fan', None, None , 1)  
+        self.control['vacuum'] = self._gtk.Image('fan', .5)  
       
         self.control['vac_set'].pack_end(self.control['vacuum'], True, True, self.hmargin)
 
@@ -416,9 +416,9 @@ class BasePanel(ScreenPanel):
             
     def update_imgVacuum(self):
         if VacuumPanel.vac_on == True:
-            self.control['vacuum'].set._gtk.Image('vac_on', None, None , 1) 
+            self.control['vacuum'].set._gtk.Image('vac_on', .5) 
         elif VacuumPanel.vac_off == False:
-            self.control['vacuum'].set.Image('vac_off', None, None , 1)  
+            self.control['vacuum'].set.Image('vac_off',  .5)  
 
         # if VacuumPanel.vac_on == True:
         #     self.control['vacuum'] = self._gtk.ButtonImage('vac_on', None, None , 1) 
