@@ -129,7 +129,7 @@ class BasePanel(ScreenPanel):
 
         self.control['vac_set'] = Gtk.Box()
         self.control['vac_set'].set_halign(Gtk.Align.END)
-        self.control['vacuum'] = Gtk.Label(self.vacuum_img())  
+        self.control['vacuum'] = self._gtk.ButtonImage('vac_off', None, None , 1)  
       
         self.control['vac_set'].pack_end(self.control['vacuum'], True, True, self.hmargin)
 
