@@ -157,7 +157,7 @@ class BasePanel(ScreenPanel):
     def initialize(self, panel_name):
         self.update_time()
         return
-    def vacuum_img(self, widget):
+    def vacuum_img(self):
         if VacuumPanel.vac_on == True:
             a = "sos1"
             return a
