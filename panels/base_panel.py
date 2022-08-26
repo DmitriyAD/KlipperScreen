@@ -424,9 +424,9 @@ class BasePanel(ScreenPanel):
 
 
         if VacuumPanel.vac_on == True:
-            self.control['vacuum'].set_text("sos2") 
+            self.control['vacuum'].set_text('sos2') 
         elif VacuumPanel.vac_off == False:
-            self.control['vacuum'].set_text("sos3")     
+            self.control['vacuum'].set_text('sos3')     
 
         # if VacuumPanel.vac_on == True:
         #     self.control['vacuum'] = self._gtk.ButtonImage('vac_on', None, None , 1) 
