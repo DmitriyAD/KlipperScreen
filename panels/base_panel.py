@@ -421,7 +421,7 @@ class BasePanel(ScreenPanel):
         #     self.control['vacuum'].set._gtk.Image('vac_on', .5) 
         # elif VacuumPanel.vac_off == False:
         #     self.control['vacuum'].set_image('vac_off',  .5)  
-        convac = VacuumPanel.vac_on
+        convac = VacuumPanel.vac_on()
         if convac == True:
             self.control['vacuum'].set_text('sos2')
         else:   
