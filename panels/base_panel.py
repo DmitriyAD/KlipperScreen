@@ -156,22 +156,16 @@ class BasePanel(ScreenPanel):
 
     def initialize(self, panel_name):
         self.update_time()
+        self.update_imgVacuum()
         return
-    def vacuum_img(self):
+        
+    def update_imgVacuum(self):
         if VacuumPanel.vac_on == True:
-            a = "sos1"
-            return a
-            # self.control['vacuum'] = Gtk.Label("sos3") 
+            self.control['vacuum'] = self._gtk.ButtonImage('vac_on', None, None , 1) 
         elif VacuumPanel.vac_off == False:
-            a = "sos2"
-            return a
-            # self.control['vacuum'] = Gtk.Label("sos1")
+            self.control['vacuum'] = self._gtk.ButtonImage('vac_off', None, None , 1) 
         else:
-            a = "sos3"
-            return a
-            # self.control['vacuum'] = Gtk.Label("sos2")
-
-
+            self.control['vacuum'] = self._gtk.ButtonImage('fan', None, None , 1) 
 
     def show_heaters(self, show=True):
         for child in self.control['temp_box'].get_children():
