@@ -440,8 +440,8 @@ class BasePanel(ScreenPanel):
         if now.minute != self.time_min or self.time_format != confopt:
             if confopt == "True":
                 self.control['time'].set_text(now.strftime("%H:%M"))
-                self.control['vacuum'].set._gtk.Image('vac_on', .5) 
+                self.control['vacuum'].set.Image('vac_on', .5) 
             else:
                 self.control['time'].set_text(now.strftime("%I:%M %p"))
-                self.control['vacuum'].set._gtk.Image('vac_on', .5) 
+                self.control['vacuum'].set.Image('vac_off', .5) 
         return True
