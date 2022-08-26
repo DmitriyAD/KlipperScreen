@@ -421,12 +421,17 @@ class BasePanel(ScreenPanel):
         #     self.control['vacuum'].set._gtk.Image('vac_on', .5) 
         # elif VacuumPanel.vac_off == False:
         #     self.control['vacuum'].set_image('vac_off',  .5)  
+        convac = self._config.get_main_config_option("vac_off")
+        if convac == "True":
+            self.control['vacuum'].set_text('sos2')
+        else:   
+            self.control['vacuum'].set_text('sos3') 
 
 
-        if VacuumPanel.chek_n == 1:
-            self.control['vacuum'].set_text('sos2') 
-        elif VacuumPanel.vac_off == False:
-            self.control['vacuum'].set_text('sos3')     
+        # if VacuumPanel.chek_n == 1:
+        #     self.control['vacuum'].set_text('sos2') 
+        # elif VacuumPanel.vac_off == False:
+        #     self.control['vacuum'].set_text('sos3')     
 
         # if VacuumPanel.vac_on == True:
         #     self.control['vacuum'] = self._gtk.ButtonImage('vac_on', None, None , 1) 
