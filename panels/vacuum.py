@@ -14,7 +14,7 @@ def create_panel(*args):
 class VacuumPanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
-        self.vaccheck = 0
+        self.vaccheck = 1
         grid = Gtk.Grid()
 
         self.labels['vacumon'] = self._gtk.ButtonImage('fan',_('Vacuum ON'), 'color1')
@@ -27,15 +27,18 @@ class VacuumPanel(ScreenPanel):
         grid.attach(self.labels['vacumon'], 1, 2, 1, 1)
        
         self.content.add(grid)
+
+
+
     def vac_on(self, widget):
         self.vaccheck = 1
         self._screen._ws.klippy.gcode_script("vac_on")
-        self.chek_n()
+        self.chek_n
         
     def vac_off(self, widget):
         self.vaccheck =2
         self._screen._ws.klippy.gcode_script("vac_off") 
-        self.chek_n()
+        self.chek_n
            
         
     def chek_n(self):
