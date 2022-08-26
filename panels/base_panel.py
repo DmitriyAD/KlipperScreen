@@ -131,8 +131,8 @@ class BasePanel(ScreenPanel):
 
         self.control['vac_set'] = Gtk.Box()
         self.control['vac_set'].set_halign(Gtk.Align.END)
-        self.control['vacuum'] = Gtk.Label("00:00 AM")  
-        #self._gtk.Image('fan', .5) 
+        self.control['vacuum'] = self._gtk.Image('fan', .5)  
+        #self._gtk.Image('fan', .5) Gtk.Label("00:00 AM") 
       
         self.control['vac_set'].pack_end(self.control['vacuum'], True, True, self.hmargin)
 
