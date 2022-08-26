@@ -2,6 +2,7 @@
 import datetime
 import gi
 import logging
+import svglue
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk, Pango
