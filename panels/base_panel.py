@@ -440,6 +440,7 @@ class BasePanel(ScreenPanel):
         if now.minute != self.time_min or self.time_format != confopt:
             if confopt == "True":
                 self.control['time'].set_text(now.strftime("%H:%M"))
+                self.control['vacuum'].set_text(now.strftime("%I:%M %p"))
             else:
                 self.control['time'].set_text(now.strftime("%I:%M %p"))
                 self.control['vacuum'].set_text(now.strftime("%I:%M %p"))
