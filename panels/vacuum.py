@@ -41,5 +41,6 @@ class VacuumPanel(ScreenPanel):
         if self.vaccheck == 1:
             return True
         elif self.vaccheck == 2:   
-            return False     
+            return False  
+           
         
