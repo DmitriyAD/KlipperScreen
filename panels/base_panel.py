@@ -418,7 +418,8 @@ class BasePanel(ScreenPanel):
         if VacuumPanel.vac_on == True:
             self.control['vacuum'].set._gtk.ButtonImage('vac_on', None, None , 1) 
         elif VacuumPanel.vac_off == False:
-            self.control['vacuum'].set._gtk.ButtonImage('vac_off', None, None , 1)
+            self.control['vacuum'].set.ButtonImage('vac_off', None, None , 1)
+        return True    
         # if VacuumPanel.vac_on == True:
         #     self.control['vacuum'] = self._gtk.ButtonImage('vac_on', None, None , 1) 
         # elif VacuumPanel.vac_off == False:
