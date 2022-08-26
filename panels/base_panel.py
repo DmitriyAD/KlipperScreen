@@ -415,12 +415,16 @@ class BasePanel(ScreenPanel):
             self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
             
     def update_imgVacuum(self):
-        if VacuumPanel.vac_on == True:
+        if VacuumPanel.chek_n == 1:
             self.control['vacuum'] = self._gtk.ButtonImage('vac_on', None, None , 1) 
-        elif VacuumPanel.vac_off == False:
-            self.control['vacuum'] = self._gtk.ButtonImage('vac_off', None, None , 1) 
-        else:
-           self.control['vacuum'] = self._gtk.ButtonImage('fan', None, None , 1) 
+        elif VacuumPanel.chek_n == 2:
+            self.control['vacuum'] = self._gtk.ButtonImage('vac_off', None, None , 1)
+        # if VacuumPanel.vac_on == True:
+        #     self.control['vacuum'] = self._gtk.ButtonImage('vac_on', None, None , 1) 
+        # elif VacuumPanel.vac_off == False:
+        #     self.control['vacuum'] = self._gtk.ButtonImage('vac_off', None, None , 1) 
+        # else:
+        #    self.control['vacuum'] = self._gtk.ButtonImage('fan', None, None , 1) 
     def update_time(self):
         now = datetime.datetime.now()
         confopt = self._config.get_main_config_option("24htime")
