@@ -416,7 +416,7 @@ class BasePanel(ScreenPanel):
             
     def update_imgVacuum(self):
         if VacuumPanel.chek_n == 1:
-            self.control['vacuum'] = self._gtk.ButtonImage('vac_on', None, None , 1) 
+            self.control['vacuum'].set._gtk.ButtonImage('vac_on', None, None , 1) 
         elif VacuumPanel.chek_n == 2:
             self.control['vacuum'] = self._gtk.ButtonImage('vac_off', None, None , 1)
         # if VacuumPanel.vac_on == True:
