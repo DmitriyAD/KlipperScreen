@@ -422,7 +422,7 @@ class BasePanel(ScreenPanel):
         # elif VacuumPanel.vac_off == False:
         #     self.control['vacuum'].set_image('vac_off',  .5)  
         convac = VacuumPanel.vac_on
-        if convac == "True":
+        if convac == True:
             self.control['vacuum'].set_text('sos2')
         else:   
             self.control['vacuum'].set_text('sos3') 
