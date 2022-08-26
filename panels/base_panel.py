@@ -131,8 +131,8 @@ class BasePanel(ScreenPanel):
 
         self.control['vac_set'] = Gtk.Box()
         self.control['vac_set'].set_halign(Gtk.Align.END)
-        self.control['vacuum'] = self._gtk.Image('fan', .5)  
-        #self._gtk.Image('fan', .5) Gtk.Label("00:00 AM") 
+        self.control['vacuum'] = Gtk.Label("00:00 AM") 
+        #self._gtk.Image('fan', .5)  Gtk.Label("00:00 AM") 
       
         self.control['vac_set'].pack_end(self.control['vacuum'], True, True, self.hmargin)
 
@@ -417,16 +417,16 @@ class BasePanel(ScreenPanel):
             self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
             
     def update_imgVacuum(self):
-        if VacuumPanel.vac_on == True:
-            self.control['vacuum'].set._gtk.Image('vac_on', .5) 
-        elif VacuumPanel.vac_off == False:
-            self.control['vacuum'].set_image('vac_off',  .5)  
-
-
         # if VacuumPanel.vac_on == True:
-        #     self.control['vacuum'].set_text("sos2") 
+        #     self.control['vacuum'].set._gtk.Image('vac_on', .5) 
         # elif VacuumPanel.vac_off == False:
-        #     self.control['vacuum'].set_text("sos3")     
+        #     self.control['vacuum'].set_image('vac_off',  .5)  
+
+
+        if VacuumPanel.vac_on == True:
+            self.control['vacuum'].set_text("sos2") 
+        elif VacuumPanel.vac_off == False:
+            self.control['vacuum'].set_text("sos3")     
 
         # if VacuumPanel.vac_on == True:
         #     self.control['vacuum'] = self._gtk.ButtonImage('vac_on', None, None , 1) 
@@ -440,8 +440,6 @@ class BasePanel(ScreenPanel):
         if now.minute != self.time_min or self.time_format != confopt:
             if confopt == "True":
                 self.control['time'].set_text(now.strftime("%H:%M"))
-                self.control['vacuum'].set.image('vac_on', .5) 
             else:
-                self.control['time'].set_text(now.strftime("%I:%M %p"))
-                self.control['vacuum'].set.image('vac_off', .5) 
+                self.control['time'].set_text(now.strftime("%I:%M %p")) 
         return True
