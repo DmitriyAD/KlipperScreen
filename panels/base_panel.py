@@ -422,8 +422,6 @@ class BasePanel(ScreenPanel):
     def update_imgVacuum(self):
         chekstatusoff = VacuumPanel.vac_off
         chekstatuson = VacuumPanel.vac_on
-
-        obj = VacuumPanel()
         
         # if VacuumPanel.chek_n == 2:
         #     self.control['vacuum'].set_text('ON')
@@ -451,6 +449,8 @@ class BasePanel(ScreenPanel):
 
         # if self._vacuum.vac_on ==1:
         #      self.control['vacuum'].set_text('sos2')
+
+        obj = VacuumPanel
         if obj.vaccheck == 1:
             self.control['vacuum'].set_text('sos2')
         elif obj.vaccheck == 2:
