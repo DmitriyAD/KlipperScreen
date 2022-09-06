@@ -23,7 +23,7 @@ class BasePanel(ScreenPanel):
         self.time_update = None
         self.vac_image = None
         self.titlebar_name_type = None
-        # self.icon = 1
+        self.icon = None
         self.buttons_showing = {
             'back': False if back else True,
             'macros_shortcut': False,
@@ -436,9 +436,9 @@ class BasePanel(ScreenPanel):
         # elif self.icon == 3:
         #     self.control['vacuum'].set_text('part3')        
 
-        if VacuumPanel.vac_on == "True":
+        if VacuumPanel.vac_on == True:
             self.control['vacuum'].set_text('sos2') 
-        elif VacuumPanel.vac_off == "False":
+        elif VacuumPanel.vac_off == False:
             self.control['vacuum'].set_text('sos3') 
         else:
             self.control['vacuum'].set_text('sos4')     
