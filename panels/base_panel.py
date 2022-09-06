@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 import datetime
+from time import time
 import gi
 import logging
+import time
 
 
 gi.require_version("Gtk", "3.0")
@@ -433,7 +435,9 @@ class BasePanel(ScreenPanel):
         elif VacuumPanel.vac_off == False:
             self.control['vacuum'].set_text('sos3') 
         else:
-            self.control['vacuum'].set_text('sos4')        
+            self.control['vacuum'].set_text('sos4')
+            time.sleep(2)
+            self.control['vacuum'].set_text('sos5')     
 
         # if VacuumPanel.vac_on == True:
         #     self.control['vacuum'] = self._gtk.ButtonImage('vac_on', None, None , 1) 
