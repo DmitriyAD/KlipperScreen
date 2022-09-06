@@ -436,10 +436,10 @@ class BasePanel(ScreenPanel):
         # elif self.icon == 3:
         #     self.control['vacuum'].set_text('part3')        
 
-        if VacuumPanel.vaccheck == 1:
+        if VacuumPanel.vac_on == 1:
             self.control['vacuum'].set_text('sos2') 
-        elif VacuumPanel.vaccheck == 2:
-            self.control['vacuum'].set_text('sos3')    
+        elif VacuumPanel.vac_off == 2:
+            self.control['vacuum'].set_text('sos3')   
         else:
             self.control['vacuum'].set_text('sos4')     
 
