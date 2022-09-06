@@ -424,8 +424,10 @@ class BasePanel(ScreenPanel):
         chekstatusdiss = VacuumPanel.chek_n
         if chekstatusoff == 2:
             self.control['vacuum'].set_text('ON')
+            return True
         if chekstatuson == 1:
             self.control['vacuum'].set_text('OFF')   
+            return True
         # if VacuumPanel.vac_on == True:
         #     self.control['vacuum'].set._gtk.Image('vac_on', .5) 
         # elif VacuumPanel.vac_off == False:
