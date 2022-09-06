@@ -1,16 +1,5 @@
 import gi
 import logging
-import configparser
-import gettext
-import os
-import json
-import re
-import copy
-import pathlib
-
-from io import StringIO
-
-from os import path
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
@@ -49,7 +38,7 @@ class VacuumPanel(ScreenPanel):
 
         
     def vac_off(self, widget):
-        self.vaccheck = 2
+        self.vaccheck =2
         self._screen._ws.klippy.gcode_script("vac_off") 
         logging.info("self vac_off return %d" % self.vaccheck)
         return self.vaccheck

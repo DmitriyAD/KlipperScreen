@@ -6,17 +6,8 @@ from time import time
 import gi
 import logging
 
-import configparser
-import gettext
-import os
-import json
-import re
-import copy
-import pathlib
 
-from io import StringIO
 
-from os import path
 
 
 gi.require_version("Gtk", "3.0")
@@ -432,6 +423,7 @@ class BasePanel(ScreenPanel):
             self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
             
     def update_imgVacuum(self):
+        
         chekstatusoff = VacuumPanel.vac_off
         chekstatuson = VacuumPanel.vac_on
         
