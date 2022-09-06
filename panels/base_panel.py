@@ -435,9 +435,7 @@ class BasePanel(ScreenPanel):
         elif VacuumPanel.vac_off == "False":
             self.control['vacuum'].set_text('sos3') 
         else:
-            while True:
-                self.control['vacuum'].set_text('sos4')
-                self.control['vacuum'].set_text('sos5')      
+            self.control['vacuum'].set_text('sos4')     
     def update_time(self):
         now = datetime.datetime.now()
         confopt = self._config.get_main_config_option("24htime")
