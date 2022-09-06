@@ -451,13 +451,18 @@ class BasePanel(ScreenPanel):
 
         # if self._vacuum.vac_on ==1:
         #      self.control['vacuum'].set_text('sos2')
-
-        if obj.vac_on() == 1:
-            self.control['vacuum'].set_text('sos2') 
-        elif obj.vac_off() == 2:
+        if obj.vaccheck == 1:
+            self.control['vacuum'].set_text('sos2')
+        elif obj.vaccheck == 2:
             self.control['vacuum'].set_text('sos3')   
         else:
-            self.control['vacuum'].set_text('sos4')     
+            self.control['vacuum'].set_text('sos4') 
+        # if obj.vac_on() == 1:
+        #     self.control['vacuum'].set_text('sos2') 
+        # elif obj.vac_off() == 2:
+        #     self.control['vacuum'].set_text('sos3')   
+        # else:
+        #     self.control['vacuum'].set_text('sos4')     
 
     def update_time(self):
         now = datetime.datetime.now()
