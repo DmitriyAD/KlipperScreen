@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from calendar import c
 import datetime
+from distutils.command.config import config
 from time import time
 import gi
 import logging
@@ -421,8 +422,7 @@ class BasePanel(ScreenPanel):
     def update_imgVacuum(self):
         chekstatusoff = VacuumPanel.vac_off
         chekstatuson = VacuumPanel.vac_on
-        chekstatusdiss = VacuumPanel.chek_n
-        if chekstatusoff == 2:
+        if self._Vacuumpanel.vaccheck == 1:
             self.control['vacuum'].set_text('ON')
             return True
         if chekstatuson == 1:
