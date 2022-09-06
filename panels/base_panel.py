@@ -430,21 +430,14 @@ class BasePanel(ScreenPanel):
         #     self.control['vacuum'].set_text('sos3') 
 
 
-        if VacuumPanel.vac_on == True:
+        if VacuumPanel.vac_on == "True":
             self.control['vacuum'].set_text('sos2') 
-        elif VacuumPanel.vac_off == False:
+        elif VacuumPanel.vac_off == "False":
             self.control['vacuum'].set_text('sos3') 
         else:
             self.control['vacuum'].set_text('sos4')
-            time.sleep(2)
-            self.control['vacuum'].set_text('sos5')     
-
-        # if VacuumPanel.vac_on == True:
-        #     self.control['vacuum'] = self._gtk.ButtonImage('vac_on', None, None , 1) 
-        # elif VacuumPanel.vac_off == False:
-        #     self.control['vacuum'] = self._gtk.ButtonImage('vac_off', None, None , 1) 
-        # else:
-        #    self.control['vacuum'] = self._gtk.ButtonImage('fan', None, None , 1) 
+            time.sleep(10)
+            self.control['vacuum'].set_text('sos5')      
     def update_time(self):
         now = datetime.datetime.now()
         confopt = self._config.get_main_config_option("24htime")
