@@ -23,7 +23,7 @@ class BasePanel(ScreenPanel):
         self.time_update = None
         self.vac_image = None
         self.titlebar_name_type = None
-        self.icon = None
+        self.icon = 1
         self.buttons_showing = {
             'back': False if back else True,
             'macros_shortcut': False,
