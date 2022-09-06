@@ -507,7 +507,6 @@ class KlipperScreen(Gtk.Window):
         return self.printer.get_state() == "printing"
 
     def is_updating(self):
-
         return self.updating
         
 
