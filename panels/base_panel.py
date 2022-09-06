@@ -3,7 +3,6 @@ import datetime
 from time import time
 import gi
 import logging
-import time
 
 
 gi.require_version("Gtk", "3.0")
@@ -24,7 +23,7 @@ class BasePanel(ScreenPanel):
         self.time_update = None
         self.vac_image = None
         self.titlebar_name_type = None
-        self.icon = 'sos'
+        self.icon = 1
         self.buttons_showing = {
             'back': False if back else True,
             'macros_shortcut': False,
@@ -428,14 +427,19 @@ class BasePanel(ScreenPanel):
         #     self.control['vacuum'].set_text('sos2')
         # else:   
         #     self.control['vacuum'].set_text('sos3') 
+        if self.icon == 1:
+            self.control['vacuum'].set_text('part1')
+        elif self.icon == 2:
+            self.control['vacuum'].set_text('part2')
+        elif self.icon == 3:
+            self.control['vacuum'].set_text('part3')        
 
-
-        if VacuumPanel.vac_on == "True":
-            self.control['vacuum'].set_text('sos2') 
-        elif VacuumPanel.vac_off == "False":
-            self.control['vacuum'].set_text('sos3') 
-        else:
-            self.control['vacuum'].set_text('sos4')     
+        # if VacuumPanel.vac_on == "True":
+        #     self.control['vacuum'].set_text('sos2') 
+        # elif VacuumPanel.vac_off == "False":
+        #     self.control['vacuum'].set_text('sos3') 
+        # else:
+        #     self.control['vacuum'].set_text('sos4')     
     def update_time(self):
         now = datetime.datetime.now()
         confopt = self._config.get_main_config_option("24htime")
