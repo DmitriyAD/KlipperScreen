@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from calendar import c
 import datetime
 from time import time
 import gi
@@ -418,6 +419,13 @@ class BasePanel(ScreenPanel):
             self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
             
     def update_imgVacuum(self):
+        chekstatusoff = VacuumPanel.vac_off
+        chekstatuson = VacuumPanel.vac_on
+        chekstatusdiss = VacuumPanel.chek_n
+        if chekstatusoff == 2:
+            self.control['vacuum'].set_text('ON')
+        if chekstatuson == 1:
+            self.control['vacuum'].set_text('OFF')   
         # if VacuumPanel.vac_on == True:
         #     self.control['vacuum'].set._gtk.Image('vac_on', .5) 
         # elif VacuumPanel.vac_off == False:
@@ -436,12 +444,12 @@ class BasePanel(ScreenPanel):
         # elif self.icon == 3:
         #     self.control['vacuum'].set_text('part3')        
 
-        if VacuumPanel.vac_on == 1:
-            self.control['vacuum'].set_text('sos2') 
-        elif VacuumPanel.vac_off == 2:
-            self.control['vacuum'].set_text('sos3')   
-        else:
-            self.control['vacuum'].set_text('sos4')     
+        # if VacuumPanel.vac_on == 1:
+        #     self.control['vacuum'].set_text('sos2') 
+        # elif VacuumPanel.vac_off == 2:
+        #     self.control['vacuum'].set_text('sos3')   
+        # else:
+        #     self.control['vacuum'].set_text('sos4')     
 
     def update_time(self):
         now = datetime.datetime.now()

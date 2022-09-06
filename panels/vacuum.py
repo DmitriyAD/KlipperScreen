@@ -31,10 +31,9 @@ class VacuumPanel(ScreenPanel):
         self.content.add(grid)
 
     def vac_on(self, widget):
-        self.labels['vacuumon'].set_text('sosiska')
+        self.vaccheck = 1
         self._screen._ws.klippy.gcode_script("vac_on")
-        
-        
+        return self.vaccheck
 
         
     def vac_off(self, widget):
