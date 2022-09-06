@@ -33,22 +33,20 @@ class VacuumPanel(ScreenPanel):
     def vac_on(self, widget):
         self.vaccheck = 1
         self._screen._ws.klippy.gcode_script("vac_on")
-        logging.info("self vac_on return %d" % self.vaccheck)
         return self.vaccheck
 
         
     def vac_off(self, widget):
         self.vaccheck =2
         self._screen._ws.klippy.gcode_script("vac_off") 
-        logging.info("self vac_off return %d" % self.vaccheck)
         return self.vaccheck
 
            
         
     def chek_n(self):
         if self.vaccheck == 1:
-            return True
+            return self.vaccheck
         elif self.vaccheck == 2:   
-            return False  
+            return self.vaccheck
            
         
