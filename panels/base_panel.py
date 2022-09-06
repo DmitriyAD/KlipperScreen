@@ -23,7 +23,7 @@ class BasePanel(ScreenPanel):
         self.time_update = None
         self.vac_image = None
         self.titlebar_name_type = None
-        self.icon = 1
+        # self.icon = 1
         self.buttons_showing = {
             'back': False if back else True,
             'macros_shortcut': False,
@@ -442,7 +442,7 @@ class BasePanel(ScreenPanel):
             self.control['vacuum'].set_text('sos3') 
         else:
             self.control['vacuum'].set_text('sos4')     
-            
+
     def update_time(self):
         now = datetime.datetime.now()
         confopt = self._config.get_main_config_option("24htime")
