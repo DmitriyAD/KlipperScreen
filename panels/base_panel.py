@@ -423,12 +423,12 @@ class BasePanel(ScreenPanel):
         chekstatusoff = VacuumPanel.vac_off
         chekstatuson = VacuumPanel.vac_on
         
-        if VacuumPanel.chek_n == 2:
-            self.control['vacuum'].set_text('ON')
-            return True
-        if chekstatuson == 1:
-            self.control['vacuum'].set_text('OFF')   
-            return True
+        # if VacuumPanel.chek_n == 2:
+        #     self.control['vacuum'].set_text('ON')
+        #     return True
+        # if chekstatuson == 1:
+        #     self.control['vacuum'].set_text('OFF')   
+        #     return True
         # if VacuumPanel.vac_on == True:
         #     self.control['vacuum'].set._gtk.Image('vac_on', .5) 
         # elif VacuumPanel.vac_off == False:
@@ -447,12 +447,12 @@ class BasePanel(ScreenPanel):
         # elif self.icon == 3:
         #     self.control['vacuum'].set_text('part3')        
 
-        # if VacuumPanel.vac_on == 1:
-        #     self.control['vacuum'].set_text('sos2') 
-        # elif VacuumPanel.vac_off == 2:
-        #     self.control['vacuum'].set_text('sos3')   
-        # else:
-        #     self.control['vacuum'].set_text('sos4')     
+        if VacuumPanel.vac_on == 1:
+            self.control['vacuum'].set_text('sos2') 
+        elif VacuumPanel.vac_off == 2:
+            self.control['vacuum'].set_text('sos3')   
+        else:
+            self.control['vacuum'].set_text('sos4')     
 
     def update_time(self):
         now = datetime.datetime.now()
