@@ -35,13 +35,13 @@ class ExtrudePanel(ScreenPanel):
                 grid.attach(self.labels[extruder], i, 0, 1, 1)
             i += 1
 
-        self.labels['extrude'] = self._gtk.ButtonImage("extrude", _("Выдавить"), "color4")
+        self.labels['extrude'] = self._gtk.ButtonImage("extrude", _("Extrude"), "color4")
         self.labels['extrude'].connect("clicked", self.extrude, "+")
-        self.labels['load'] = self._gtk.ButtonImage("arrow-down", _("Загрузить\nфиламент"), "color3")
+        self.labels['load'] = self._gtk.ButtonImage("arrow-down", _("Load"), "color3")
         self.labels['load'].connect("clicked", self.load_unload, "+")
-        self.labels['unload'] = self._gtk.ButtonImage("arrow-up", _("Выгрузить\nфиламент"), "color2")
+        self.labels['unload'] = self._gtk.ButtonImage("arrow-up", _("Unload"), "color2")
         self.labels['unload'].connect("clicked", self.load_unload, "-")
-        self.labels['retract'] = self._gtk.ButtonImage("retract", _("Втянуть"), "color1")
+        self.labels['retract'] = self._gtk.ButtonImage("retract", _("Retract"), "color1")
         self.labels['retract'].connect("clicked", self.extrude, "-")
         self.labels['temperature'] = self._gtk.ButtonImage("heat-up", _("Temperature"), "color4")
         self.labels['temperature'].connect("clicked", self.menu_item_clicked, "temperature", {
