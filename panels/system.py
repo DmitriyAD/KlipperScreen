@@ -21,14 +21,14 @@ class SystemPanel(ScreenPanel):
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(True)
 
-        restart = self._gtk.ButtonImage('refresh', "\n".join(_('Klipper Restart').split(' ')), 'color1')
+        restart = self._gtk.ButtonImage('refresh', "\n".join(_('Klipper\nRestart').split(' ')), 'color1')
         restart.connect("clicked", self.restart_klippy)
         restart.set_vexpand(False)
-        firmrestart = self._gtk.ButtonImage('refresh', "\n".join(_('Firmware Restart').split(' ')), 'color2')
+        firmrestart = self._gtk.ButtonImage('refresh', "\n".join(_('Firmware\nRestart').split(' ')), 'color2')
         firmrestart.connect("clicked", self.restart_klippy, "firmware")
         firmrestart.set_vexpand(False)
 
-        reboot = self._gtk.ButtonImage('refresh', _('System Restart'), 'color3')
+        reboot = self._gtk.ButtonImage('refresh', _('System\nRestart'), 'color3')
         reboot.connect("clicked", self._screen._confirm_send_action,
                        _("Are you sure you wish to reboot the system?"), "machine.reboot")
         reboot.set_vexpand(False)

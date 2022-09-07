@@ -38,9 +38,9 @@ class SplashScreenPanel(ScreenPanel):
         # self.labels['restart'].connect("clicked", self.restart)
         self.labels['firmware_restart'] = self._gtk.ButtonImage("refresh", _("Restart"), "color2")
         self.labels['firmware_restart'].connect("clicked", self.firmware_restart)
-        self.labels['restart_system'] = self._gtk.ButtonImage("refresh", _("System Restart"), "color1")
+        self.labels['restart_system'] = self._gtk.ButtonImage("refresh", _("System\nRestart"), "color1")
         self.labels['restart_system'].connect("clicked", self.restart_system)
-        self.labels['shutdown'] = self._gtk.ButtonImage("shutdown", _('System Shutdown'), "color2")
+        self.labels['shutdown'] = self._gtk.ButtonImage("shutdown", _('System\nShutdown'), "color2")
         self.labels['shutdown'].connect("clicked", self.shutdown)
 
         self.labels['actions'] = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
