@@ -35,7 +35,7 @@ class ExtrudePanel(ScreenPanel):
                 grid.attach(self.labels[extruder], i, 0, 1, 1)
             i += 1
 
-        self.labels['extrude'] = self._gtk.ButtonImage("extrude", _("Extrude"), "color4")
+        self.labels['extrude'] = self._gtk.ButtonImage("extrude", _("Unretract"), "color4")
         self.labels['extrude'].connect("clicked", self.extrude, "+")
         self.labels['load'] = self._gtk.ButtonImage("arrow-down", _("Load"), "color3")
         self.labels['load'].connect("clicked", self.load_unload, "+")
