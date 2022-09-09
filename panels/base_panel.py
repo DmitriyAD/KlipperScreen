@@ -436,9 +436,11 @@ class BasePanel(ScreenPanel):
     def update_imgVacuum(self):
         self.control['vacuum'].set_text('DIS')
     def update_imgVacuumON(self):
-        self.control['vacuum'].set_text('on')
+        confopt = self._config.get_main_config_option("24htime")
+        if confopt == "True":
+            self.control['vacuum'].set_text('on')
     def update_imgVacuumOFF(self):  
-        self.control['time'].set_text('off')
+        self.control['vacuum'].set_text('off')
           
 
 
