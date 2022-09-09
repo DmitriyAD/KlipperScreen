@@ -466,7 +466,13 @@ class BasePanel(ScreenPanel):
         # elif obj.vac_off() == 2:
         #     self.control['vacuum'].set_text('sos3')   
         # else:
-        #     self.control['vacuum'].set_text('sos4')     
+        #     self.control['vacuum'].set_text('sos4')  
+        # 
+    def update_imgVacuumON(self):
+        self.control['vacuum'].set_text('on')
+    def update_imgVacuumOFF(self):  
+        self.control['vacuum'].set_text('off')  
+
 
     def update_time(self):
         now = datetime.datetime.now()
