@@ -14,11 +14,7 @@ def create_panel(*args):
     return VacuumPanel(*args)
 
 
-class VacuumPanel(BasePanel):
-
-    def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
-        super().__init__(screen, title, back, action_bar, printer_name)
-        self.vaccheck = 0
+class VacuumPanel(ScreenPanel):
     
 
     def initialize(self, panel_name):
@@ -26,9 +22,9 @@ class VacuumPanel(BasePanel):
         
         grid = Gtk.Grid()
 
-        self.labels['vacumon'] = self._gtk.ButtonImage('fan',_('Vacuum ON'), 'color1')
+        self.labels['vacumon'] = self._gtk.ButtonImage('vac-on',_('Vacuum ON'), 'color1')
         self.labels['vacumon'].connect("clicked", self.vac_on)
-        self.labels['vacumoff'] = self._gtk.ButtonImage('fan',_('Vacuum OFF'), 'color3')
+        self.labels['vacumoff'] = self._gtk.ButtonImage('vac-off',_('Vacuum OFF'), 'color3')
         self.labels['vacumoff'].connect("clicked", self.vac_off)
     
 
@@ -39,19 +35,7 @@ class VacuumPanel(BasePanel):
 
     def vac_on(self, widget):
         self._screen._ws.klippy.gcode_script("vac_on")
-        
-        # BasePanel.update_imgVacuumON()
-        
+         
     def vac_off(self, widget):
         self._screen._ws.klippy.gcode_script("vac_off") 
-        # BasePanel.update_imgVacuumOFF()
-
-           
-        
-    def chek_n(self):
-        if self.vaccheck == 1:
-            return self.vaccheck
-        elif self.vaccheck == 2:   
-            return self.vaccheck
-           
         

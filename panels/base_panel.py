@@ -15,8 +15,6 @@ from gi.repository import GLib, Gtk, Pango
 from jinja2 import Environment
 
 from ks_includes.screen_panel import ScreenPanel
-from panels.vacuum import VacuumPanel
-
 
 class BasePanel(ScreenPanel):
     def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
