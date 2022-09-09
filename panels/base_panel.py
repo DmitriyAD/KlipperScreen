@@ -256,7 +256,7 @@ class BasePanel(ScreenPanel):
         if self.time_update is None:
             self.time_update = GLib.timeout_add_seconds(1, self.update_time)
         if self.vac_image is None:
-            self.vac_image = self.update_imgVacuum()    
+            self.update_imgVacuum() 
 
     def add_content(self, panel):
         self.current_panel = panel
@@ -423,20 +423,16 @@ class BasePanel(ScreenPanel):
             self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
             
     def update_imgVacuum(self):
-        
-        chekstatusoff = VacuumPanel.vac_off
-        chekstatuson = VacuumPanel.vac_on
-        
         # if VacuumPanel.chek_n == 2:
         #     self.control['vacuum'].set_text('ON')
         #     return True
         # if chekstatuson == 1:
         #     self.control['vacuum'].set_text('OFF')   
         #     return True
-        # if VacuumPanel.vac_on == True:
-        #     self.control['vacuum'].set._gtk.Image('vac_on', .5) 
-        # elif VacuumPanel.vac_off == False:
-        #     self.control['vacuum'].set_image('vac_off',  .5)  
+        if VacuumPanel.vac_on == 1:
+            self.control['vacuum'].set._gtk.Image('vac_on', .5) 
+        elif VacuumPanel.vac_off == 2:
+            self.control['vacuum'].set_image('vac_off',  .5)  
         # convac = VacuumPanel.vac_on
         # if convac == True:
         #     self.control['vacuum'].set_text('sos2')
@@ -454,13 +450,6 @@ class BasePanel(ScreenPanel):
         # if self._vacuum.vac_on ==1:
         #      self.control['vacuum'].set_text('sos2')
 
-
-        if VacuumPanel.chek_n == 1:
-            self.control['vacuum'].set_text('sos2')
-        elif VacuumPanel.chek_n == 2:
-            self.control['vacuum'].set_text('sos3')   
-        else:
-            self.control['vacuum'].set_text('sos4') 
         # if obj.vac_on() == 1:
         #     self.control['vacuum'].set_text('sos2') 
         # elif obj.vac_off() == 2:
