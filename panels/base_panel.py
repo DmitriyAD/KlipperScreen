@@ -15,6 +15,8 @@ from gi.repository import GLib, Gtk, Pango
 from jinja2 import Environment
 
 from ks_includes.screen_panel import ScreenPanel
+from panels.vacuum import VacuumPanel
+
 
 class BasePanel(ScreenPanel):
     def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
@@ -420,7 +422,10 @@ class BasePanel(ScreenPanel):
         else:
             self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
             
-    # def update_imgVacuum(self):
+    def update_imgVacuum(self):
+        
+        chekstatusoff = VacuumPanel.vac_off
+        chekstatuson = VacuumPanel.vac_on
         
         # if VacuumPanel.chek_n == 2:
         #     self.control['vacuum'].set_text('ON')
@@ -450,12 +455,12 @@ class BasePanel(ScreenPanel):
         #      self.control['vacuum'].set_text('sos2')
 
 
-        # if VacuumPanel.vac_off == 1:
-        #     self.control['vacuum'].set_text('sos2')
-        # elif VacuumPanel.vac_on == 2:
-        #     self.control['vacuum'].set_text('sos3')   
-        # else:
-        #     self.control['vacuum'].set_text('sos4') 
+        if VacuumPanel.chek_n == 1:
+            self.control['vacuum'].set_text('sos2')
+        elif VacuumPanel.chek_n == 2:
+            self.control['vacuum'].set_text('sos3')   
+        else:
+            self.control['vacuum'].set_text('sos4') 
         # if obj.vac_on() == 1:
         #     self.control['vacuum'].set_text('sos2') 
         # elif obj.vac_off() == 2:
