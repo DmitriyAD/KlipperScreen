@@ -179,7 +179,6 @@ class BasePanel(ScreenPanel):
 
     def initialize(self, panel_name):
         self.update_time()
-        self.update_imgVacuum()
         return
 
     def show_heaters(self, show=True):
@@ -268,9 +267,7 @@ class BasePanel(ScreenPanel):
 
     def activate(self):
         if self.time_update is None:
-            self.time_update = GLib.timeout_add_seconds(1, self.update_time)
-        if self.vac_image is None:
-            self.update_imgVacuum()    
+            self.time_update = GLib.timeout_add_seconds(1, self.update_time)    
 
     def add_content(self, panel):
         self.current_panel = panel
