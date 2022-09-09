@@ -18,7 +18,7 @@ class ScreenPanel:
         self._files = screen.files
         self.lang = self._screen.lang
         self._printer = screen.printer
-        self._base = panels.BasePanel
+        self._base = panels.base_panel
         self.labels = {}
         self._gtk = screen.gtk
         self.control = {}
