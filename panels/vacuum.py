@@ -12,8 +12,6 @@ def create_panel(*args):
 
 
 class VacuumPanel(ScreenPanel):
-    
-
     def initialize(self, panel_name):
         _ = self.lang.gettext
         
