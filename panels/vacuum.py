@@ -32,7 +32,7 @@ class VacuumPanel(ScreenPanel):
 
     def vac_on(self, widget):
         self._screen._ws.klippy.gcode_script("vac_on")
-        self._base1.update_imgVacuumON
+        self._base.update_imgVacuumON
 
     def vac_off(self, widget):
         self._screen._ws.klippy.gcode_script("vac_off") 
