@@ -1,12 +1,12 @@
 import gi
 import logging
-from panels.base_panel import BasePanel
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
 
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
+from panels.base_panel import BasePanel
 
 
 
@@ -15,12 +15,8 @@ def create_panel(*args):
 
 
 class VacuumPanel(ScreenPanel):
-
-    def __init__(self, printer_name=True):
-        self._base = BasePanel
-
     def initialize(self, panel_name):
-       
+
         _ = self.lang.gettext
         grid = Gtk.Grid()
 
