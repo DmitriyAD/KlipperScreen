@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-31 11:25-0300\n"
+"POT-Creation-Date: 2022-08-18 23:05-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,13 @@ msgstr ""
 msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr ""
 
+msgid "ADXL Not Configured"
+msgstr ""
+
 msgid "Abort"
+msgstr ""
+
+msgid "Acceleration:"
 msgstr ""
 
 msgid "Accept"
@@ -43,7 +49,18 @@ msgstr ""
 msgid "Add Printer"
 msgstr ""
 
-msgid "Add bed mesh profile"
+msgid "Add profile"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+#, python-format
+msgid "Apply %.2f offset to Endstop?"
+msgstr ""
+
+#, python-format
+msgid "Apply %s%.2f offset to Probe?"
 msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
@@ -64,7 +81,16 @@ msgstr ""
 msgid "Auto"
 msgstr ""
 
+msgid "Auto-calibrate"
+msgstr ""
+
+msgid "Auto-close notifications"
+msgstr ""
+
 msgid "Auto-scroll"
+msgstr ""
+
+msgid "Bed Down"
 msgstr ""
 
 msgid "Bed Level"
@@ -73,13 +99,25 @@ msgstr ""
 msgid "Bed Mesh"
 msgstr ""
 
-msgid "Bltouch found applied offset"
+msgid "Bed screw configuration:"
+msgstr ""
+
+msgid "Bed Up"
 msgstr ""
 
 msgid "Calibrate"
 msgstr ""
 
+msgid "Calibrated"
+msgstr ""
+
 msgid "Calibrated, save configuration to make it permanent"
+msgstr ""
+
+msgid "Calibrating"
+msgstr ""
+
+msgid "Calibrating..."
 msgstr ""
 
 msgid "Can't set above the maximum:"
@@ -103,9 +141,13 @@ msgstr ""
 msgid "Channel"
 msgstr ""
 
-msgid ""
-"Check /tmp/KlipperScreen.log for more information.\n"
-"Please submit an issue on GitHub for help."
+msgid "Check ADXL Wiring"
+msgstr ""
+
+msgid "Checking for updates, please wait..."
+msgstr ""
+
+msgid "Clear"
 msgstr ""
 
 msgid "Close"
@@ -145,6 +187,9 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+msgid "Delete File?"
+msgstr ""
+
 msgid "Deselect"
 msgstr ""
 
@@ -152,9 +197,6 @@ msgid "Disable Motors"
 msgstr ""
 
 msgid "Disable XY"
-msgstr ""
-
-msgid "Displayed Macros"
 msgstr ""
 
 msgid "Distance (mm)"
@@ -171,6 +213,9 @@ msgid "Error"
 msgstr ""
 
 msgid "Estimated Time Method"
+msgstr ""
+
+msgid "Exclude Object"
 msgstr ""
 
 msgid "Extrude"
@@ -191,7 +236,22 @@ msgstr ""
 msgid "Filament Used"
 msgstr ""
 
+msgid "Filament total:"
+msgstr ""
+
+msgid "Filament used:"
+msgstr ""
+
+msgid "Filament:"
+msgstr ""
+
 msgid "File"
+msgstr ""
+
+msgid "File:"
+msgstr ""
+
+msgid "Finding ADXL"
 msgstr ""
 
 msgid "Fine Tuning"
@@ -200,20 +260,31 @@ msgstr ""
 msgid "Finish"
 msgstr ""
 
-msgid ""
-"Firmware\n"
-"Restart"
+msgid "Firmware Restart"
+msgstr ""
+
+msgid "Flow:"
+msgstr ""
+
+msgid "Flowrate:"
 msgstr ""
 
 msgid "Font Size"
 msgstr ""
 
-msgid ""
-"Full\n"
-"Update"
+msgid "Firmware Restart"
+msgstr ""
+
+msgid "Firmware\nRestart"
+msgstr ""
+
+msgid "Full Update"
 msgstr ""
 
 msgid "Go Back"
+msgstr ""
+
+msgid "Height:"
 msgstr ""
 
 msgid "Hidden"
@@ -223,6 +294,9 @@ msgid "Hide"
 msgstr ""
 
 msgid "Hide sensors in Temp."
+msgstr ""
+
+msgid "Hide temp."
 msgstr ""
 
 msgid "Home"
@@ -246,6 +320,9 @@ msgstr ""
 msgid "Homing"
 msgstr ""
 
+msgid "Host"
+msgstr ""
+
 msgid "Hostname"
 msgstr ""
 
@@ -259,6 +336,9 @@ msgid "Initializing"
 msgstr ""
 
 msgid "Initializing printer..."
+msgstr ""
+
+msgid "Input Shaper"
 msgstr ""
 
 msgid "Interface"
@@ -276,13 +356,12 @@ msgstr ""
 msgid "Invert Z"
 msgstr ""
 
-msgid ""
-"Klipper\n"
-"Restart"
+msgid "Klipper Restart"
 msgstr ""
 
-msgid "Klipper: disconnected"
+msgid "Klipper\nRestart"
 msgstr ""
+
 
 msgid "Klipper has disconnected"
 msgstr ""
@@ -305,19 +384,22 @@ msgstr ""
 msgid "Large"
 msgstr ""
 
+msgid "Layer:"
+msgstr ""
+
 msgid "Left:"
 msgstr ""
 
 msgid "Limits"
 msgstr ""
 
-msgid "Load"
+msgid "Load filament"
 msgstr ""
 
 msgid "Lower Nozzle"
 msgstr ""
 
-msgid "Lost Connection to Moonraker"
+msgid "Machine"
 msgstr ""
 
 msgid "Macro shortcut on sidebar"
@@ -329,6 +411,9 @@ msgstr ""
 msgid "Main Menu"
 msgstr ""
 
+msgid "Max"
+msgstr ""
+
 msgid "Max Acceleration"
 msgstr ""
 
@@ -336,6 +421,15 @@ msgid "Max Acceleration to Deceleration"
 msgstr ""
 
 msgid "Max Velocity"
+msgstr ""
+
+msgid "Measure Both"
+msgstr ""
+
+msgid "Measure X"
+msgstr ""
+
+msgid "Measure Y"
 msgstr ""
 
 msgid "Medium"
@@ -362,7 +456,18 @@ msgstr ""
 msgid "Network"
 msgstr ""
 
+msgid "New"
+msgstr ""
+
+msgid ""
+"Not supported for auto-detection, it needs to be configured in klipperscreen."
+"conf"
+msgstr ""
+
 msgid "Nothing selected"
+msgstr ""
+
+msgid "Clean Nozzle"
 msgstr ""
 
 msgid "Number Pad"
@@ -383,6 +488,9 @@ msgid_plural "Packages will be updated"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "Part Fan"
+msgstr ""
+
 msgid "Password saved"
 msgstr ""
 
@@ -395,6 +503,9 @@ msgstr ""
 msgid "Perform a full upgrade?"
 msgstr ""
 
+msgid "Pins"
+msgstr ""
+
 msgid "Please recompile and flash the micro-controller."
 msgstr ""
 
@@ -402,6 +513,12 @@ msgid "Power"
 msgstr ""
 
 msgid "Power On Printer"
+msgstr ""
+
+msgid "Pressure Advance:"
+msgstr ""
+
+msgid "Preheat"
 msgstr ""
 
 msgid "Print"
@@ -416,16 +533,16 @@ msgstr ""
 msgid "Printer Connections"
 msgstr ""
 
+msgid "Printer is cooled"
+msgstr ""
+
 msgid "Printing"
 msgstr ""
 
-msgid "Probe found applied offset"
+msgid "Probe Offset"
 msgstr ""
 
 msgid "Profile Name:"
-msgstr ""
-
-msgid "Preheat"
 msgstr ""
 
 msgid "Quad Gantry Level"
@@ -443,6 +560,9 @@ msgstr ""
 msgid "Reference"
 msgstr ""
 
+msgid "Refresh"
+msgstr ""
+
 msgid "Restart"
 msgstr ""
 
@@ -452,8 +572,20 @@ msgstr ""
 msgid "Retract"
 msgstr ""
 
+msgid "Retraction"
+msgstr ""
+
+msgid "Retraction Length"
+msgstr ""
+
+msgid "Retraction Speed"
+msgstr ""
+
 #, python-format
 msgid "Retry #%s"
+msgstr ""
+
+msgid "Retrying"
 msgstr ""
 
 msgid "Save"
@@ -462,7 +594,17 @@ msgstr ""
 msgid "Save Config"
 msgstr ""
 
-msgid "Save configuration"
+msgid "Save Z"
+msgstr ""
+
+msgid "Save configuration?"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
+
+#, python-format
+msgid "Saved offset: %s"
 msgstr ""
 
 msgid "Screen DPMS"
@@ -476,6 +618,7 @@ msgstr ""
 
 msgid "Select"
 msgstr ""
+
 
 msgid "Send"
 msgstr ""
@@ -502,10 +645,16 @@ msgstr ""
 msgid "Slicer Time correction (%)"
 msgstr ""
 
+msgid "Slicer:"
+msgstr ""
+
 msgid "Small"
 msgstr ""
 
 msgid "Sort by: "
+msgstr ""
+
+msgid "Sort:"
 msgstr ""
 
 msgid "Speed (mm/s)"
@@ -515,6 +664,9 @@ msgid "Speed +"
 msgstr ""
 
 msgid "Speed -"
+msgstr ""
+
+msgid "Speed:"
 msgstr ""
 
 msgid "Square Corner Velocity"
@@ -535,14 +687,16 @@ msgstr ""
 msgid "System"
 msgstr ""
 
-msgid ""
-"System\n"
-"Restart"
+msgid "System Restart"
 msgstr ""
 
-msgid ""
-"System\n"
-"Shutdown"
+msgid "System\nRestart"
+msgstr ""
+
+msgid "System Shutdown"
+msgstr ""
+
+msgid "System\nShutdown"
 msgstr ""
 
 msgid "Temp (°C)"
@@ -555,16 +709,25 @@ msgstr ""
 msgid "To apply %s KlipperScreen needs to be restarted"
 msgstr ""
 
-msgid "Tool"
-msgstr ""
-
 msgid "Total:"
 msgstr ""
 
 msgid "Unknown Heater"
 msgstr ""
 
-msgid "Unload"
+msgid "Unknown screw position"
+msgstr ""
+
+msgid "Unload filament"
+msgstr ""
+
+msgid "Unretract"
+msgstr ""
+
+msgid "Unretract Extra Length"
+msgstr ""
+
+msgid "Unretract Speed"
 msgstr ""
 
 msgid "Up To Date"
@@ -591,6 +754,9 @@ msgstr ""
 msgid "XY Move Speed (mm/s)"
 msgstr ""
 
+msgid "XY Speed (mm/s)"
+msgstr ""
+
 msgid "Y+"
 msgstr ""
 
@@ -603,10 +769,13 @@ msgstr ""
 msgid "Z Move Speed (mm/s)"
 msgstr ""
 
-msgid "Z Position"
+msgid "Z Speed (mm/s)"
 msgstr ""
 
 msgid "Z Tilt"
+msgstr ""
+
+msgid "Z offset:"
 msgstr ""
 
 msgid "Z+"
@@ -637,5 +806,5 @@ msgstr ""
 msgid "mm/s"
 msgstr ""
 
-msgid "mm/s^2"
+msgid "mm/s²"
 msgstr ""
