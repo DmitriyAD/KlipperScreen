@@ -38,7 +38,7 @@ class VacuumPanel(ScreenPanel):
         self.content.add(grid)
 
     def vac_on(self, widget):
-        BasePanel.update_imgVacuum
+        BasePanel.update_imgVacuum()
         self._screen._ws.klippy.gcode_script("vac_on")
 
         
