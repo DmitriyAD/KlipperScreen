@@ -65,6 +65,10 @@ class BasePanel(ScreenPanel):
         self.control['estop'] = self._gtk.ButtonImage('emergency', None, None, 1)
         self.control['estop'].connect("clicked", self.emergency_stop)
         _ = self.lang.gettext
+        self.control['off'] = self._gtk.ButtonImage('vac-off', None, None, 1)
+        self.control['off'].connect("clicked", self.update_imgVacuumOFF)
+        self.control['on'] = self._gtk.ButtonImage('vac-on', None, None, 1)
+        self.control['on'].connect("clicked", self.update_imgVacuumON)
         self.control['shutdown'] = self._gtk.ButtonImage('shutdown', None, None, 1)
         self.control['shutdown'].connect ( "clicked", self._screen._confirm_test, _("Are you sure you wish to shutdown the system?"))
         self.control['wifi'] = self._gtk.ButtonImage('network', None, None, 1)
@@ -100,7 +104,15 @@ class BasePanel(ScreenPanel):
         if self._screen.vertical_mode:
             self.control_grid.attach(self.control['wifi'], 3, 0, 1, 1)
         else:
-            self.control_grid.attach(self.control['wifi'], 0, 3, 1, 1)          
+            self.control_grid.attach(self.control['wifi'], 0, 3, 1, 1) 
+        if self._screen.vertical_mode:
+            self.control_grid.attach(self.control['off'], 6, 0, 1, 1)
+        else:
+            self.control_grid.attach(self.control['off'], 0, 6, 1, 1)
+        if self._screen.vertical_mode:
+            self.control_grid.attach(self.control['on'], 7, 0, 1, 1)
+        else:
+            self.control_grid.attach(self.control['on'], 0, 7, 1, 1)                 
 
         try:
             env = Environment(extensions=["jinja2.ext.i18n"])
@@ -427,12 +439,9 @@ class BasePanel(ScreenPanel):
     def update_imgVacuum(self):
         self.control['vacuum'].set_text('DIS')
     def update_imgVacuumON(self):
-        self._screen.show_popup_message(_("Printer is cooled"), time=10,level=1)
-        # if self.vac_image == None:
-        #     self.control['vacuum'].set_text('on')
+        self.control['vacuum'].set_text('on')
     def update_imgVacuumOFF(self):  
-        if self.vac_image == None:
-            self.control['vacuum'].set_text('off')
+        self.control['vacuum'].set_text('off')
           
 
 
