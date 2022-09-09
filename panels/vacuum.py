@@ -33,7 +33,7 @@ class VacuumPanel(ScreenPanel):
     def vac_on(self, widget):
         _ = self.lang.gettext
         self._screen._ws.klippy.gcode_script("vac_on")
-        self._screen.show_popup_message(_("Printer is cooled"), time=2,level=1)
+        self._base.control['vacuum'].set_text('on')
 
 
         
