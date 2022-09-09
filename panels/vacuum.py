@@ -19,9 +19,9 @@ class VacuumPanel(ScreenPanel):
         _ = self.lang.gettext
         grid = Gtk.Grid()
 
-        self.labels['vacumon'] = self._gtk.ButtonImage('fan',_('Vacuum ON'), 'color1')
+        self.labels['vacumon'] = self._gtk.ButtonImage('vac-on',_('Vacuum ON'), 'color1')
         self.labels['vacumon'].connect("clicked", self.vac_on)
-        self.labels['vacumoff'] = self._gtk.ButtonImage('fan',_('Vacuum OFF'), 'color3')
+        self.labels['vacumoff'] = self._gtk.ButtonImage('vac-off',_('Vacuum OFF'), 'color3')
         self.labels['vacumoff'].connect("clicked", self.vac_off)
     
 
@@ -36,5 +36,6 @@ class VacuumPanel(ScreenPanel):
 
     def vac_off(self, widget):
         self._screen._ws.klippy.gcode_script("vac_off") 
+        self._base.update_imgVacuumOFF
            
         
