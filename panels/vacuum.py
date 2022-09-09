@@ -15,8 +15,12 @@ def create_panel(*args):
 
 
 class VacuumPanel(ScreenPanel):
-    def initialize(self, panel_name):
+
+    def __init__(self, printer_name=True):
         self._base = BasePanel
+
+    def initialize(self, panel_name):
+       
         _ = self.lang.gettext
         grid = Gtk.Grid()
 
