@@ -438,7 +438,7 @@ class BasePanel(ScreenPanel):
     def update_imgVacuumON(self):
         self.control['vacuum'].set_text('on')
     def update_imgVacuumOFF(self):  
-        self.control['vacuum'].set_text('off')
+        self.control['time'].set_text('off')
           
 
 
