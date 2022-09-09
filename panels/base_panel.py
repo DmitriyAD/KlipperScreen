@@ -15,7 +15,7 @@ from gi.repository import GLib, Gtk, Pango
 from jinja2 import Environment
 
 from ks_includes.screen_panel import ScreenPanel
-from panels.vacuum import VacuumPanel
+# from panels.vacuum import VacuumPanel
 
 
 class BasePanel(ScreenPanel):
