@@ -104,6 +104,7 @@ class PreheatPanel(ScreenPanel):
 
     def set_temperature(self, widget, setting):
         if setting == "cooldown":
+            self._screen.show_popup_message(_("Printer is cooled"), time=10,level=1)
             for heater in self.active_heaters:
                 logging.info("Setting %s to %d" % (heater, 0))
                 if heater.startswith('heater_generic '):
