@@ -6,6 +6,7 @@ from gi.repository import Gtk, Gdk, GLib, Pango
 
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
+from base_panel import BasePanel
 
 
 
@@ -37,9 +38,8 @@ class VacuumPanel(ScreenPanel):
         self.content.add(grid)
 
     def vac_on(self, widget):
-        self.vaccheck = 1
+        BasePanel.update_imgVacuum
         self._screen._ws.klippy.gcode_script("vac_on")
-        return self.vaccheck
 
         
     def vac_off(self, widget):
