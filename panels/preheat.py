@@ -103,6 +103,7 @@ class PreheatPanel(ScreenPanel):
         self.labels[heater].get_style_context().add_class('button_active')
 
     def set_temperature(self, widget, setting):
+        _ = self.lang.gettext
         if setting == "cooldown":
             self._screen.show_popup_message(_("Printer is cooled"), time=10,level=1)
             for heater in self.active_heaters:
