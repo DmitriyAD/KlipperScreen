@@ -14,7 +14,7 @@ def create_panel(*args):
     return VacuumPanel(*args)
 
 
-class VacuumPanel(ScreenPanel):
+class VacuumPanel(BasePanel):
 
     def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
         super().__init__(screen, title, back, action_bar, printer_name)
