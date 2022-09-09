@@ -1,5 +1,6 @@
 import gi
 import logging
+import panels
 
 from panels.base_panel import BasePanel
 
