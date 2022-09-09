@@ -1,6 +1,8 @@
 import gi
 import logging
 
+import panels
+
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
@@ -16,7 +18,7 @@ class ScreenPanel:
         self._files = screen.files
         self.lang = self._screen.lang
         self._printer = screen.printer
-        self._base = BasePanel
+        self._base = panels.BasePanel
         self.labels = {}
         self._gtk = screen.gtk
         self.control = {}
