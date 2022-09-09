@@ -429,23 +429,23 @@ class BasePanel(ScreenPanel):
         # if chekstatuson == 1:
         #     self.control['vacuum'].set_text('OFF')   
         #     return True
-        if VacuumPanel.vac_on == 1:
-            self.control['vacuum'].set._gtk.Image('vac_on', .5) 
-        elif VacuumPanel.vac_off == 2:
-            self.control['vacuum'].set_image('vac_off',  .5)  
-        # convac = VacuumPanel.vac_on
+        # if VacuumPanel.vac_on == 1:
+        #     self.control['vacuum'].set._gtk.Image('vac_on', .5) 
+        # elif VacuumPanel.vac_off == 2:
+        #     self.control['vacuum'].set_image('vac_off',  .5)  
+        # # convac = VacuumPanel.vac_on
         # if convac == True:
         #     self.control['vacuum'].set_text('sos2')
         # else:   
         #     self.control['vacuum'].set_text('sos3') 
 
 
-        # if self.icon == 1:
-        #     self.control['vacuum'].set_text('part1')
-        # elif self.icon == 2:
-        #     self.control['vacuum'].set_text('part2')
-        # elif self.icon == 3:
-        #     self.control['vacuum'].set_text('part3')   
+        if VacuumPanel.vac_on == 1:
+            self.control['vacuum'].set_text('part1')
+        elif VacuumPanel.vac_off == 2:
+            self.control['vacuum'].set_text('part2')
+        else:
+            self.control['vacuum'].set_text('part3')   
 
         # if self._vacuum.vac_on ==1:
         #      self.control['vacuum'].set_text('sos2')
