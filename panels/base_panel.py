@@ -179,6 +179,7 @@ class BasePanel(ScreenPanel):
 
     def initialize(self, panel_name):
         self.update_time()
+        self.update_imgVacuum()
         return
 
     def show_heaters(self, show=True):
@@ -267,7 +268,9 @@ class BasePanel(ScreenPanel):
 
     def activate(self):
         if self.time_update is None:
-            self.time_update = GLib.timeout_add_seconds(1, self.update_time)    
+            self.time_update = GLib.timeout_add_seconds(1, self.update_time)
+        if self.vac_image is None:
+            self.update_imgVacuum()    
 
     def add_content(self, panel):
         self.current_panel = panel
@@ -436,14 +439,11 @@ class BasePanel(ScreenPanel):
     def update_imgVacuum(self):
         self.control['vacuum'].set_text('DIS')
     def update_imgVacuumON(self):
-        now = datetime.datetime.now()
-        confopt = self._config.get_main_config_option("24htime")
-        if now.minute != self.time_min or self.time_format != confopt:
-            if confopt == "True":
-                self.control['vacuum'].set_text('on')
+        self._screen.show_popup_message(_("Printer is cooled"), time=10,level=1)
+        # if self.vac_image == None:
+        #     self.control['vacuum'].set_text('on')
     def update_imgVacuumOFF(self):  
         self.control['vacuum'].set_text('off')
-        return True
           
 
 
