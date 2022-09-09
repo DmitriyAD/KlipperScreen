@@ -422,8 +422,10 @@ class BasePanel(ScreenPanel):
         else:
             self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
             
-    def update_imgVacuum(self):
+    def update_imgVacuumON(self):
         self.control['vacuum'].set_text('ON')
+    def update_imgVacuumOFF(self):
+        self.control['vacuum'].set_text('OFF')    
         
         # chekstatusoff = VacuumPanel.vac_off
         # chekstatuson = VacuumPanel.vac_on
