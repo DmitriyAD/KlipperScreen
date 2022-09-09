@@ -5,6 +5,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
 from ks_includes.KlippyGcodes import KlippyGcodes
+from panels.base_panel import BasePanel
 
 
 class ScreenPanel:
@@ -15,8 +16,6 @@ class ScreenPanel:
         self._files = screen.files
         self.lang = self._screen.lang
         self._printer = screen.printer
-        # self._vacuum = screen.vacuum
-        # self._base_panel = screen.base_panel
         self.labels = {}
         self._gtk = screen.gtk
         self.control = {}
