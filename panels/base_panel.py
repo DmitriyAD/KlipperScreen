@@ -439,11 +439,9 @@ class BasePanel(ScreenPanel):
     def update_imgVacuum(self):
         self.control['vacuum'].set_text('DIS')
     def update_imgVacuumON(self):
-        self._screen.show_popup_message(_("Printer is cooled"), time=10,level=1)
-        # if self.vac_image == None:
-        #     self.control['vacuum'].set_text('on')
+       self.control['vacuum'].set_text('on')
     def update_imgVacuumOFF(self):  
-        self.control['vacuum'].set_text('off')
+        self.control['vacuum'].set_text('on')
           
 
 
