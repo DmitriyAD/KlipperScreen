@@ -6,12 +6,6 @@ from time import time
 import gi
 import logging
 
-from panels import vacuum
-
-
-
-
-
 gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk, Pango
 from jinja2 import Environment
