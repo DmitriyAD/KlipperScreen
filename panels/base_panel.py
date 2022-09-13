@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-from calendar import c
 import datetime
-from distutils.command.config import config
-from time import time
 import gi
 import logging
 
@@ -11,7 +8,6 @@ from gi.repository import GLib, Gtk, Pango
 from jinja2 import Environment
 
 from ks_includes.screen_panel import ScreenPanel
-from panels.vacuum import VacuumPanel
 
 
 class BasePanel(ScreenPanel):
