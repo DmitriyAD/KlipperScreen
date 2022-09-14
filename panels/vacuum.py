@@ -37,11 +37,6 @@ class VacuumPanel(ScreenPanel):
         self._base.update_imgVacuumON
 
     def vac_off(self, widget):
-        self._screen._ws.klippy.gcode_script("vac_off") 
-        self._base.update_imgVacuumOFF
-        # logging.info(dir(base_panel))
-        # logging.info(dir(panels))
-
-        # self._base.update_imgVacuumOFF()
+        self._screen._ws.klippy.gcode_script("vac_off") and self._base.update_imgVacuumOFF
            
         
