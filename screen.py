@@ -908,7 +908,7 @@ class KlipperScreen(Gtk.Window):
         label.set_markup(text)
         label.set_hexpand(True)
         label.set_halign(Gtk.Align.CENTER)
-        label.set_vexpand(True)
+        label.set_vexpand(True) 
         label.set_valign(Gtk.Align.CENTER)
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
@@ -919,9 +919,6 @@ class KlipperScreen(Gtk.Window):
         if response_id == Gtk.ResponseType.OK:
             self._ws.klippy.gcode_script("M81")
         widget.destroy()
-        
-
-
            
 
     def printer_initializing(self, text=None, disconnect=False):

@@ -398,6 +398,19 @@ class KlipperScreenConfig:
     def set(self, section, name, value):
         self.config.set(section, name, value)
 
+    def infomasg(self):
+        configfile_name1 = "info.txt"
+        self.config = configparser.ConfigParser()
+        self.config_path = self.get_config_file_location(configfile_name1)
+        logging.debug("Config path location: %s" % self.config_path)
+
+        try: 
+            self.config.read(configfile_name1)   
+            logging.exception("Unknown")             
+        except Exception:
+            logging.exception("Unknown error with config")    
+
+
     def log_config(self, config):
         lines = [
             " "
