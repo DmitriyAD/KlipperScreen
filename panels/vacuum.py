@@ -20,7 +20,7 @@ class VacuumPanel(ScreenPanel):
         grid = Gtk.Grid()
 
         self.labels['vacumon'] = self._gtk.ButtonImage('vac-on',_('Vacuum ON'), 'color1')
-        self.labels['vacumon'].connect("clicked", self.vac_on)
+        self.labels['vacumon'].connect("clicked", self._config.infomasg)
         self.labels['vacumoff'] = self._gtk.ButtonImage('vac-off',_('Vacuum OFF'), 'color3')
         self.labels['vacumoff'].connect("clicked", self.vac_off)
     
