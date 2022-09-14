@@ -399,14 +399,19 @@ class KlipperScreenConfig:
         self.config.set(section, name, value)
 
     def infomasg(self):
+        a = []
         # klipper_config = os.path.join(os.path.expanduser("~/"), "klipper_config")
         path = os.path.expanduser("~/")
         klipper_config = os.path.join(path, "klipper_config")
         if os.path.exists(klipper_config):
             path = os.path.join(klipper_config, "info.txt")
         try:
-            file = open(path)         
+            file = open(path)
+            with file  as fileher :   
+                a = fileher.readlines()
             file.close()
+            return a    
+            
         except Exception:
             logging.error("Error writing configuration file in %s" % path)
     
