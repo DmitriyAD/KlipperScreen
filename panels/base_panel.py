@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from dataclasses import replace
 import datetime
 import gi
 import logging
@@ -142,7 +141,7 @@ class BasePanel(ScreenPanel):
 
         self.control['vac_set'] = Gtk.Box()
         self.control['vac_set'].set_halign(Gtk.Align.END)
-        self.control['vacuum'] = Gtk.Label("Disable vacuum") 
+        self.control['vacuum'] = Gtk.Label("Disable") 
         #self._gtk.Image('fan', .5)  Gtk.Label("00:00 AM") 
       
         self.control['vac_set'].pack_end(self.control['vacuum'], True, True, self.hmargin)
@@ -424,13 +423,12 @@ class BasePanel(ScreenPanel):
         else:
             self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
             
-    # def update_imgVacuum(self):
-    #     self.control['vacuum'].set_text('DIS')
+    def update_imgVacuum(self):
+        self.control['vacuum'].set_text('DIS')
     def update_imgVacuumON(self):
-       self.control['vacuum'].replace("Disable vacuum", "ON")
-    #    set_text(str("ON"))
+       self.control['vacuum'].set_text('on')
     def update_imgVacuumOFF(self):  
-        self.control['vacuum'].set_text(str("OFF"))
+        self.control['vacuum'].set_text('off')
           
 
 
