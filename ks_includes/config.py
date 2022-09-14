@@ -165,8 +165,8 @@ class KlipperScreenConfig:
         for lang in langs:
             lang_opt.append({"name": lang, "value": lang})
 
-        klipper_config = os.path.join(path, "klipper_config")    
-        i_path = os.path.join(klipper_config, "info.txt") 
+        # klipper_config = os.path.join(path, "klipper_config")    
+        i_path = os.path.join(klipperscreendir,  "ks_includes", "locales") 
         infos = [d for d in os.listdir(i_path) if (not os.path.isfile(os.path.join(i_path,d)))] 
         infos.sort()  
         info_opt = self.configurable_options[3]['Icon']['options']
