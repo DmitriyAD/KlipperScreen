@@ -141,7 +141,7 @@ class BasePanel(ScreenPanel):
 
         self.control['vac_set'] = Gtk.Box()
         self.control['vac_set'].set_halign(Gtk.Align.END)
-        self.control['vacuum'] = Gtk.Label("00:00 AM") 
+        self.control['vacuum'] = Gtk.Label("Disable vacuum") 
         #self._gtk.Image('fan', .5)  Gtk.Label("00:00 AM") 
       
         self.control['vac_set'].pack_end(self.control['vacuum'], True, True, self.hmargin)
@@ -169,7 +169,6 @@ class BasePanel(ScreenPanel):
 
     def initialize(self, panel_name):
         self.update_time()
-        self.update_imgVacuum()
         return
 
     def show_heaters(self, show=True):
@@ -258,9 +257,7 @@ class BasePanel(ScreenPanel):
 
     def activate(self):
         if self.time_update is None:
-            self.time_update = GLib.timeout_add_seconds(1, self.update_time)
-        if self.vac_image is None:
-            self.update_imgVacuum()    
+            self.time_update = GLib.timeout_add_seconds(1, self.update_time)   
 
     def add_content(self, panel):
         self.current_panel = panel
