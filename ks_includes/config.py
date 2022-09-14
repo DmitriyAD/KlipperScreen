@@ -134,8 +134,8 @@ class KlipperScreenConfig:
                 "value": "z-bolt", "callback": screen.restart_warning, "options": [
                     {"name": "Z-bolt" + " " + _("(default)"), "value": "z-bolt"}]}},
             {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary", "value": "True"}},
-            {"Icon": {"section": "main", "name": _("Icon"), "type": "dropdown", "value": "True","callback": screen.restart_warning,"options": [
-                    {"name": "?" + " " + _("(default)"), "value": "?"}]}},
+            {"info": {"section": "main", "name": _("Info"), "type": "dropdown", "value": "z-123","callback": screen.restart_warning,"options": [
+                    {"name": "z-123" + " " + _("(default)"), "value": "z-123"}]}},
             {"side_macro_shortcut": {
                 "section": "main", "name": _("Macro shortcut on sidebar"), "type": "binary",
                 "value": "False", "callback": screen.toggle_macro_shortcut}},
@@ -169,7 +169,7 @@ class KlipperScreenConfig:
         i_path = os.path.join(klipperscreendir,  "ks_includes", "locales") 
         infos = [d for d in os.listdir(i_path) if (not os.path.isfile(os.path.join(i_path,d)))] 
         infos.sort()  
-        info_opt = self.configurable_options[3]['Icon']['options']
+        info_opt = self.configurable_options[3]['info']['options']
         for info in infos:
             info_opt.append({"name":info, "value": info})
 
