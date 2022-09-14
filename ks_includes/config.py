@@ -403,13 +403,18 @@ class KlipperScreenConfig:
         # klipper_config = os.path.join(os.path.expanduser("~/"), "klipper_config")
         path = os.path.expanduser("~/")
         klipper_config = os.path.join(path, "klipper_config")
+        logging.error("step z") 
         if os.path.exists(klipper_config):
             path = os.path.join(klipper_config, "info.txt")
+            logging.error("step y") 
         try:
             file = open(path)
+            logging.error("step x") 
             with file  as fileher :   
                 a = fileher.readlines()
+            logging.error("step 1")   
             file.close()
+            logging.error("step 2") 
             return a    
             
         except Exception:
