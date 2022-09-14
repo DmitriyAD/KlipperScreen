@@ -27,7 +27,6 @@ class VacuumPanel(ScreenPanel):
 
         grid.attach(self.labels['vacumoff'], 2, 2, 1, 1)
         grid.attach(self.labels['vacumon'], 1, 2, 1, 1)
-       
         self.content.add(grid)
 
     def vac_on(self, widget):
@@ -36,6 +35,6 @@ class VacuumPanel(ScreenPanel):
 
     def vac_off(self, widget):
         self._screen._ws.klippy.gcode_script("vac_off") 
-        self._base.update_imgVacuumOFF
+        self._base.update_imgVacuumOFF()
            
         
