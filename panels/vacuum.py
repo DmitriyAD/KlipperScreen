@@ -1,13 +1,10 @@
 import gi
 import logging
-import sys
 
-import panels
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
 
 from ks_includes.KlippyGcodes import KlippyGcodes
-from panels import base_panel
 from ks_includes.screen_panel import ScreenPanel
 
 
@@ -34,10 +31,10 @@ class VacuumPanel(ScreenPanel):
 
     def vac_on(self, widget):
         self._screen._ws.klippy.gcode_script("vac_on")
-        self._base.update_imgVacuumON
+        self._base.update_imgVacuum(1)
 
     def vac_off(self, widget):
         self._screen._ws.klippy.gcode_script("vac_off") 
-        self._base.update_imgVacuumOFF
+        self._base.update_imgVacuum(2)
            
         
