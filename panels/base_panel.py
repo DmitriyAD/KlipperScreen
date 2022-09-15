@@ -430,7 +430,7 @@ class BasePanel(ScreenPanel):
         if text == "1":
             self.control['vacuum'].set_text('ON')
         elif text == "2":
-            self.control['vacuum'].set_text('OFF')
+            self.control['vacuum'].set_text("OFF")
         elif text == "0":
             self.control['vacuum'].set_text('NOT')
 
