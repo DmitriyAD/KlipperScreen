@@ -429,9 +429,7 @@ class BasePanel(ScreenPanel):
     def update_imgVacuum(self):
         self.control['vacuum'].set_text('off')
     def update_imgVacuumON(self):
-        self._printer.get_config_section_list("output_pin _vacuum")
-        logging.info("sosi")
-    #    self.control['vacuum'].set_text('on')
+        logging.info("spicok", self._printer.get_gcode_macros() )
     def update_imgVacuumOFF(self):  
         self.control['vacuum'].set_text('off')
           
