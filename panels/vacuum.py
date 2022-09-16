@@ -33,11 +33,10 @@ class VacuumPanel(ScreenPanel):
         self._screen._ws.klippy.gcode_script("vac_on")
         ln = self._printer.get_config_section_list('output_pin _vacuum ')
         return ln
-        # self._base.update_imgVacuum(self,"1")
 
 
     def vac_off(self, widget):
         self._screen._ws.klippy.gcode_script("vac_off") 
-        self._base.update_imgVacuum(self,)
-        # self._base.update_imgVacuumOFF
+        # self._base.update_imgVacuum(self,)
+        # # self._base.update_imgVacuumOFF
         
