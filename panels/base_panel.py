@@ -56,9 +56,9 @@ class BasePanel(ScreenPanel):
         self.control['estop'].connect("clicked", self.emergency_stop)
         _ = self.lang.gettext
         self.control['off'] = self._gtk.ButtonImage('vac-off', None, None, 1)
-        self.control['off'].connect("clicked", self.update_imgVacuumOFF)
+        self.control['off'].connect("clicked", self.update_imgVacuum("output_pin _vacuum"))
         self.control['on'] = self._gtk.ButtonImage('vac-on', None, None, 1)
-        self.control['on'].connect("clicked", self.update_imgVacuumON)
+        self.control['on'].connect("clicked", self.update_imgVacuum("output_pin _vacuum"))
         self.control['shutdown'] = self._gtk.ButtonImage('shutdown', None, None, 1)
         self.control['shutdown'].connect ( "clicked", self._screen._confirm_test, _("Are you sure you wish to shutdown the system?"))
         self.control['wifi'] = self._gtk.ButtonImage('network', None, None, 1)
@@ -169,7 +169,7 @@ class BasePanel(ScreenPanel):
 
     def initialize(self, panel_name):
         self.update_time()
-        self.update_imgVacuum("0")
+        self.update_imgVacuum("output_pin _vacuum")
         return
 
     def show_heaters(self, show=True):
@@ -260,7 +260,7 @@ class BasePanel(ScreenPanel):
         if self.time_update is None:
             self.time_update = GLib.timeout_add_seconds(1, self.update_time) 
         if self.vac_image is None:
-            self.update_imgVacuum("0")
+            self.update_imgVacuum("output_pin _vacuum")
 
     def add_content(self, panel):
         self.current_panel = panel
@@ -426,13 +426,38 @@ class BasePanel(ScreenPanel):
         else:
             self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
             
-    def update_imgVacuum(self, text):
-        if text == "1":
-            self.control['vacuum'].set_text('ON')
-        elif text == "2":
-            self.control['vacuum'].set_text("OFF")
-        elif text == "0":
-            self.control['vacuum'].set_text('NOT')
+    def update_imgVacuum(self, method):
+        if method == "output_pin _vacuum":
+            status = 4
+            # Get position from config
+            printer = self._screen.connected_printer
+            printer_cfg = self._config.get_printer_config(printer)
+            logging.info(printer_cfg)
+            klipper_cfg = self._screen.printer.get_config_section_list()
+            if "output_pin _vacuum" in klipper_cfg:
+                logging.info("imeetsa")
+                logging.info(status)
+                
+                value = self._screen.printer.get_config_section("output_pin _vacuum")
+                logging.info("dalshe")
+                logging.info(status)
+                if "value" in value:
+                    status = int(value['value'])
+                    logging.info(status)
+            if status == 1:
+                logging.info(status)
+                self.control['vacuum'].set_text('ON')
+            elif status ==0:
+                logging.info(status)
+                self.control['vacuum'].set_text("OFF")
+
+
+        # if text == "1":
+        #     self.control['vacuum'].set_text('ON')
+        # elif text == "2":
+        #     self.control['vacuum'].set_text("OFF")
+        # elif text == "0":
+        #     self.control['vacuum'].set_text('NOT')
 
 
     def update_imgVacuumON(self):
