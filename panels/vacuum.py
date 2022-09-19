@@ -31,7 +31,7 @@ class VacuumPanel(ScreenPanel):
 
     def vac_on(self, widget):
         ln = {}
-        ln = self._printer.get_vac_state
+        ln = self._printer.get_vac_state()
         logging.info("Error parsing jinja for title: %s" % ln)
         return ln
 
