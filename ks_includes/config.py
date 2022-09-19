@@ -396,43 +396,7 @@ class KlipperScreenConfig:
             logging.error("Error writing configuration file in %s" % path)
 
     def set(self, section, name, value):
-        self.config.set(section, name, value)
-
-    def infomasg(self):
-        a = []
-        # klipper_config = os.path.join(os.path.expanduser("~/"), "klipper_config")
-        path = os.path.expanduser("~/")
-        klipper_config = os.path.join(path, "klipper_config")
-        logging.error("step z") 
-        if os.path.exists(klipper_config):
-            path = os.path.join(klipper_config, "info.txt")
-            logging.error("step y") 
-        try:
-            file = open(path)
-            logging.error("step x") 
-            with file  as fileher :   
-                a = fileher.readlines()
-            logging.error("step 1")   
-            file.close()
-            logging.error("step 2") 
-            return a    
-            
-        except Exception:
-            logging.error("Error writing configuration file in %s" % path)
-    
-
-
-        # configfile_name1 = "info.txt"
-        # self.config = configparser.ConfigParser()
-        # self.config_path = self.get_config_file_location(configfile_name1)
-        # logging.debug("Config path location: %s" % self.config_path)
-
-        # try: 
-        #     self.config.read(configfile_name1)   
-        #     logging.exception("Unknown")             
-        # except Exception:
-        #     logging.exception("Unknown error with config")    
-
+        self.config.set(section, name, value) 
 
     def log_config(self, config):
         lines = [

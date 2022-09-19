@@ -429,7 +429,8 @@ class BasePanel(ScreenPanel):
     def update_imgVacuum(self):
         self.control['vacuum'].set_text('off')
     def update_imgVacuumON(self):
-        self._printer.get_vac_state()
+        ln = self._printer.vac
+        return ln
     def update_imgVacuumOFF(self):  
         self.control['vacuum'].set_text('off')
           

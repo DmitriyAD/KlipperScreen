@@ -7,6 +7,7 @@ from gi.repository import Gdk, GLib
 
 class Printer:
     data = {}
+    vac = {}
     devices = {}
     power_devices = {}
     state_callbacks = {
@@ -339,7 +340,7 @@ class Printer:
                 speed = 0
         return speed
     def get_vac_state(self):
-        data = {
+        vac = {
             "printer": {
                 "output_pin _vacuum": self.config_section_exists("output_pin _vacuum"),
                 "output_pin": self.config_section_exists("output_pin")
@@ -348,8 +349,8 @@ class Printer:
         sections = ["output_pin _vacuum", "output_pin"]
         for section in sections:
             if self.config_section_exists(section):
-                data["printer"][section] = self.get_config_section(section).copy()
-        return data
+                vac["printer"][section] = self.get_config_section(section).copy()
+        return vac
 
     def get_extruder_count(self):
         return self.extrudercount
