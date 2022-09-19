@@ -31,18 +31,19 @@ class VacuumPanel(ScreenPanel):
         self.content.add(grid)
 
     def vac_on(self, widget):
+        self._screen._ws.klippy.gcode_script("vac_on")
+    def vac_off(self, widget):
         vac= self._screen.printer.get_config_section("output_pin _vacuum")
         if "value" in vac:
             a = int(vac['value'])
             logging.info("a =: %s" % a)
         return a
-    def vac_off(self, widget):
         # self._screen._ws.klippy.gcode_script("vac_off") 
-        ln = {}
-        a = 45
-        ln = self._printer.get_vac_state()
-        logging.info("123: %s" % ln)
-        if "value" in ln:
-            a = int(ln['value'])
-            logging.info("a =: %s" % a)
-        return ln
+        # ln = {}
+        # a = 45
+        # ln = self._printer.get_vac_state()
+        # logging.info("123: %s" % ln)
+        # if "value" in ln:
+        #     a = int(ln['value'])
+        #     logging.info("a =: %s" % a)
+        # return ln
