@@ -32,8 +32,8 @@ class VacuumPanel(ScreenPanel):
     def vac_on(self, widget):
         ln = {}
         ln = self._printer.get_vac_state
+        logging.info("Error parsing jinja for title: %s" % ln)
         return ln
-
 
     def vac_off(self, widget):
         self._screen._ws.klippy.gcode_script("vac_off") 
