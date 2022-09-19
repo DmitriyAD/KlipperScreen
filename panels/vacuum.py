@@ -33,12 +33,12 @@ class VacuumPanel(ScreenPanel):
     def vac_on(self, widget):
         self._screen._ws.klippy.gcode_script("vac_on")
     def vac_off(self, widget):
-        self._screen._ws.klippy.gcode_script("vac_off")
-        # value = self._screen._ws.klippy.gcode_script(" SEARCH_VARS s='output_pin _vacuum'")
-        # if value == 1:
-        #     logging.info("value1 =: %s" % value)
-        # if value == 0: 
-        #     logging.info("value0 =: %s" % value)
+        # self._screen._ws.klippy.gcode_script("vac_off")
+        value = self._screen._ws.klippy.gcode_script(" SEARCH_VARS s='output_pin _vacuum'")
+        if value == 1:
+            logging.info("value1 =: %s" % value)
+        if value == 0: 
+            logging.info("value0 =: %s" % value)
 
         # vac= self._screen.printer.get_config_section("output_pin _vacuum")
         # if "value" in vac:

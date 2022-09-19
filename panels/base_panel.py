@@ -427,12 +427,12 @@ class BasePanel(ScreenPanel):
             self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
             
     def update_imgVacuum(self):
-        value = self._screen._ws.klippy.gcode_script(" SEARCH_VARS s='output_pin _vacuum'")
-        if value == 1:
-            logging.info("value1 =: %s" % value)
-            self.control['vacuum'].set_text('ON')
-        elif value == 0:  
-            logging.info("value2 =: %s" % value)
+        # value = self._screen._ws.klippy.gcode_script(" SEARCH_VARS s='output_pin _vacuum'")
+        # if value == 1:
+        #     logging.info("value1 =: %s" % value)
+        #     self.control['vacuum'].set_text('ON')
+        # elif value == 0:  
+        #     logging.info("value2 =: %s" % value)
             self.control['vacuum'].set_text('OFF')  
     def update_imgVacuumON(self):
         self._screen._ws.klippy.gcode_script("vac_on")
