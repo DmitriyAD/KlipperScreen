@@ -432,8 +432,12 @@ class BasePanel(ScreenPanel):
             logging.info("value1 =: %s" % value)
             self.control['vacuum'].set_text('ON')
         elif value == 0:  
-            logging.info("value1 =: %s" % value)
+            logging.info("value2 =: %s" % value)
             self.control['vacuum'].set_text('OFF')  
+    def update_imgVacuumON(self):
+        self._screen._ws.klippy.gcode_script("vac_on")
+    def update_imgVacuumOFF(self):
+        self._screen._ws.klippy.gcode_script("vac_off")
           
 
 
