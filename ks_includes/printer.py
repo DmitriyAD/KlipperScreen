@@ -342,7 +342,7 @@ class Printer:
     def get_vac_state(self):
         vac = {
             "printer": {
-                "output_pin _vacuum ": self.config_section_exists("output_pin _vacuum "),
+                "output_pin _vacuum": self.config_section_exists("output_pin _vacuum"),
             }
         }
         sections = ["output_pin _vacuum "]
