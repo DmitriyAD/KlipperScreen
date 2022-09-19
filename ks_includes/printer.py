@@ -338,6 +338,18 @@ class Printer:
             if speed < off_below:
                 speed = 0
         return speed
+    def get_vac_state(self):
+        data = {
+            "printer": {
+                "output_pin _vacuum": self.config_section_exists("output_pin _vacuum"),
+                "output_pin": self.config_section_exists("output_pin")
+            }
+        }
+        sections = ["output_pin _vacuum", "output_pin"]
+        for section in sections:
+            if self.config_section_exists(section):
+                data["printer"][section] = self.get_config_section(section).copy()
+        return data
 
     def get_extruder_count(self):
         return self.extrudercount
