@@ -284,7 +284,13 @@ class Printer:
                 data["printer"][section] = self.get_config_section(section).copy()
 
         return data
+    def get_variable_status_data(self):
+        data1 = {
+            "variables":{
 
+            }
+        }
+        return data1
     def get_klipper_version(self):
         return self.klipper['version']
 
