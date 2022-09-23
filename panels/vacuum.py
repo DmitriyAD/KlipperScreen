@@ -24,12 +24,15 @@ class VacuumPanel(ScreenPanel):
         self.labels['vacumon'].connect("clicked", self.vac_on)
         self.labels['vacumoff'] = self._gtk.ButtonImage('vac-off',_('Vacuum OFF'), 'color3')
         self.labels['vacumoff'].connect("clicked", self.vac_off)
+        self.labels['vacuminfo'] = self._gtk.ButtonImage('vac-off',_('Vacuum INFO'), 'color3')
+        self.labels['vacuminfo'].connect("clicked", self.vac_info)
     
 
         grid.attach(self.labels['vacumoff'], 2, 2, 1, 1)
         grid.attach(self.labels['vacumon'], 1, 2, 1, 1)
         self.content.add(grid)
-
+    def vac_info(self,widget):
+        self._screen._ws.klippy.gcode_script("z_info")
     def vac_on(self, widget):
         self._screen._ws.klippy.gcode_script("vac_on")
     def vac_off(self, widget):
