@@ -33,7 +33,7 @@ class VacuumPanel(ScreenPanel):
         grid.attach(self.labels['vacuminfo'], 0, 2, 1, 1)
         self.content.add(grid)
     def vac_info(self,widget):
-        self._screen._ws.klippy.gcode_script("z-info")
+        self._screen._ws.klippy.gcode_script("z_info")
         # ln = self._printer.get_variable_status_data()
         # logging.info("123: %s" % ln)
         
