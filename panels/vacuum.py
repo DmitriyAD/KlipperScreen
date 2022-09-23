@@ -33,8 +33,10 @@ class VacuumPanel(ScreenPanel):
         grid.attach(self.labels['vacuminfo'], 0, 2, 1, 1)
         self.content.add(grid)
     def vac_info(self,widget):
-        a = self._screen._ws.klippy.gcode_script("z_info")
-        logging.info("123: %s" % a)
+        vac= self._screen.printer.get_config_section("output_pin _vacuum")
+        # self._screen._ws.klippy.gcode_script("z_info")
+        logging.info("value1 =: %s" % vac)
+        
     def vac_on(self, widget):
         self._screen._ws.klippy.gcode_script("vac_on")
     def vac_off(self, widget):

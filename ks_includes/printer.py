@@ -342,10 +342,10 @@ class Printer:
     def get_vac_state(self):
         vac = {
             "printer": {
-                "output_pin _vacuum": self.config_section_exists("output_pin _vacuum"),
+                "z_info": self.config_section_exists("z_info"),
             }
         }
-        sections = ["output_pin _vacuum "]
+        sections = ["z_info "]
         for section in sections:
             if self.config_section_exists(section):
                 vac["printer"][section] = self.get_config_section(section).copy()
