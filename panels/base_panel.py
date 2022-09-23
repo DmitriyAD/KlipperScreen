@@ -426,7 +426,7 @@ class BasePanel(ScreenPanel):
         else:
             self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
             
-    def update_imgVacuum(self,widget):
+    def update_imgVacuum(self):
         # if self._screen._ws.klippy.gcode_script("z_info") == 0:
         #     self.control['vacuum'].set_text('OFF')  
         # elif self._screen._ws.klippy.gcode_script("z_info") == 1:
