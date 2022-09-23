@@ -16,7 +16,7 @@ def create_panel(*args):
 
 class VacuumPanel(ScreenPanel):
     def initialize(self, panel_name):
-
+        self.config = None
         _ = self.lang.gettext
         grid = Gtk.Grid()
 
