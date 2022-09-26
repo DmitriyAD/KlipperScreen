@@ -43,13 +43,21 @@ class BasePanel(ScreenPanel):
 
         self.control['estop'] = self._gtk.ButtonImage('emergency', scale=1)
         self.control['estop'].connect("clicked", self.emergency_stop)
+        _ = self.lang.gettext
+        self.control['shutdown'] = self._gtk.ButtonImage('shutdown', None, None, 1)
+        self.control['shutdown'].connect ( "clicked", self._screen._confirm_send_action_shutdown, _("Are you sure you wish to shutdown the system?"))
+        self.control['wifi'] = self._gtk.ButtonImage('network', None, None, 1)
+        self.control['wifi'].connect("clicked", self.menu_item_clicked, "network",{
+                "name": _('Network'),
+                "panel": "network"
+                })
 
         # Any action bar button should close the keyboard
         for item in self.control:
             self.control[item].connect("clicked", self._screen.remove_keyboard)
 
         # Action bar
-        self.action_bar = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+        self.action_bar = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         if self._screen.vertical_mode:
             self.action_bar.set_hexpand(True)
             self.action_bar.set_vexpand(False)
@@ -65,6 +73,8 @@ class BasePanel(ScreenPanel):
         if len(self._config.get_printers()) > 1:
             self.action_bar.add(self.control['printer_select'])
         self.action_bar.add(self.control['macros_shortcut'])
+        self.action_bar.add(self.control['wifi'])
+        self.action_bar.add(self.control['shutdown'])
         self.action_bar.add(self.control['estop'])
 
         # Titlebar
