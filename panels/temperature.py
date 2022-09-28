@@ -341,7 +341,7 @@ class TemperaturePanel(ScreenPanel):
         rgb = self._gtk.get_temp_color(dev_type)
 
         name = self._gtk.ButtonImage(image, None, None, 1.5, Gtk.PositionType.LEFT, 1)
-        name.set_alignment(1, .5)
+        name.set_alignment( .5, .5)
         # visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}", device, fallback=True)
         # if visible:
         #     name.get_style_context().add_class(class_name)
