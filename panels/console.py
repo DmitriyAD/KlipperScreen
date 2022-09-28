@@ -99,7 +99,7 @@ class ConsolePanel(ScreenPanel):
             "tv": tv
         })
 
-        content_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        content_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         content_box.pack_start(options, False, False, 5)
         content_box.add(sw)
         content_box.pack_end(ebox, False, False, 0)
