@@ -51,13 +51,13 @@ class MenuPanel(ScreenPanel):
             if not self.evaluate_enable(item[key]['enable']):
                 continue
 
-            if columns == 4:
-                if length <= 4:
-                    # Arrange 2 x 2
-                    columns = 2
-                elif 4 < length <= 6:
-                    # Arrange 3 x 2
-                    columns = 3
+            # if columns == 4:
+            #     if length <= 4:
+            #         # Arrange 2 x 2
+            #         columns = 2
+            #     elif 4 < length <= 6:
+            #         # Arrange 3 x 2
+            #         columns = 3
 
             col = i % columns
             row = int(i / columns)
@@ -76,7 +76,7 @@ class MenuPanel(ScreenPanel):
             key = list(self.items[i])[0]
             item = self.items[i][key]
 
-            env = Environment(extensions=["jinja2.ext.i18n"])
+            env = Environment(extensions=["jinja2.ext.i18n"], autoescape=True)
             env.install_gettext_translations(self.lang)
             j2_temp = env.from_string(item['name'])
             parsed_name = j2_temp.render()
