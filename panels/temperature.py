@@ -349,9 +349,9 @@ class TemperaturePanel(ScreenPanel):
         #     name.get_style_context().add_class("graph_label_hidden")
 
         can_target = self._printer.get_temp_store_device_has_target(device)
-        self.labels['da'].add_object(device, "temperatures", rgb, False, True)
+        # self.labels['da'].add_object(device, "temperatures", rgb, False, True)
         if can_target:
-            self.labels['da'].add_object(device, "targets", rgb, True, False)
+            # self.labels['da'].add_object(device, "targets", rgb, True, False)
             name.connect('button-press-event', self.name_pressed, device)
             name.connect('button-release-event', self.name_released, device)
         # else:
