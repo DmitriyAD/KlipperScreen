@@ -1060,7 +1060,7 @@ class KlipperScreen(Gtk.Window):
         if self.keyboard is not None:
             return
 
-        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         box.set_size_request(self.gtk.get_content_width(), self.gtk.get_keyboard_height())
 
         if self._config.get_main_config().getboolean("use-matchbox-keyboard", False):
