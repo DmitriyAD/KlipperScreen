@@ -444,7 +444,7 @@ class TemperaturePanel(ScreenPanel):
         self.labels['devices'].attach(name, 0, 0, 1, 1)
         self.labels['devices'].attach(temp, 1, 0, 1, 1)
 
-        self.labels['da'] = HeaterGraph(self._printer, self._gtk.get_font_size())
+        # self.labels['da'] = HeaterGraph(self._printer, self._gtk.get_font_size())
         self.labels['da'].set_vexpand(True)
 
         scroll = self._gtk.ScrolledWindow()
