@@ -15,7 +15,7 @@ def create_panel(*args):
 class ExcludeObjectPanel(ScreenPanel):
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, back)
-        self.object_list = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
+        self.object_list = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         self.object_list.set_valign(Gtk.Align.CENTER)
         self.object_list.set_halign(Gtk.Align.CENTER)
         self.buttons = {}
