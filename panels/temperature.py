@@ -187,37 +187,38 @@ class TemperaturePanel(ScreenPanel):
                 self._printer.set_dev_stat(heater, "target", int(target))
                 logging.info(f"Setting {heater} to {target}")
 
-    def update_graph_visibility(self):
-        count = 0
-        for device in self.devices:
-            visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}",
-                                                           device, fallback=True)
-            self.devices[device]['visible'] = visible
-            self.labels['da'].set_showing(device, visible)
-            if visible:
-                count += 1
-                self.devices[device]['name'].get_style_context().add_class(self.devices[device]['class'])
-                self.devices[device]['name'].get_style_context().remove_class("graph_label_hidden")
-            else:
-                self.devices[device]['name'].get_style_context().add_class("graph_label_hidden")
-                self.devices[device]['name'].get_style_context().remove_class(self.devices[device]['class'])
-        if count > 0:
-            self.left_panel.add(self.labels['da'])
-            self.labels['da'].queue_draw()
-            self.labels['da'].show()
-        else:
-            self.left_panel.remove(self.labels['da'])
+    # def update_graph_visibility(self):
+    #     count = 0
+    #     for device in self.devices:
+    #         visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}",
+    #                                                        device, fallback=True)
+    #         self.devices[device]['visible'] = visible
+    #         self.labels['da'].set_showing(device, visible)
+    #         if visible:
+    #             count += 1
+    #             self.devices[device]['name'].get_style_context().add_class(self.devices[device]['class'])
+    #             self.devices[device]['name'].get_style_context().remove_class("graph_label_hidden")
+    #         else:
+    #             self.devices[device]['name'].get_style_context().add_class("graph_label_hidden")
+    #             self.devices[device]['name'].get_style_context().remove_class(self.devices[device]['class'])
+    #     if count > 0:
+    #         self.left_panel.add(self.labels['da'])
+    #         self.labels['da'].queue_draw()
+    #         self.labels['da'].show()
+    #     else:
+    #         self.left_panel.remove(self.labels['da'])
 
     def activate(self):
-        if self.graph_update is None:
-            # This has a high impact on load
-            self.graph_update = GLib.timeout_add_seconds(5, self.update_graph)
-        self.update_graph_visibility()
+        return
+        # if self.graph_update is None:
+        #     # This has a high impact on load
+        #     self.graph_update = GLib.timeout_add_seconds(5, self.update_graph)
+        # self.update_graph_visibility()
 
     def deactivate(self):
-        if self.graph_update is not None:
-            GLib.source_remove(self.graph_update)
-            self.graph_update = None
+        # if self.graph_update is not None:
+        #     GLib.source_remove(self.graph_update)
+        #     self.graph_update = None
         if self.active_heater is not None:
             self.hide_numpad()
 
@@ -353,8 +354,8 @@ class TemperaturePanel(ScreenPanel):
             self.labels['da'].add_object(device, "targets", rgb, True, False)
             name.connect('button-press-event', self.name_pressed, device)
             name.connect('button-release-event', self.name_released, device)
-        else:
-            name.connect("clicked", self.toggle_visibility, device)
+        # else:
+        #     name.connect("clicked", self.toggle_visibility, device)
         self.labels['da'].set_showing(device, visible)
 
         temp = self._gtk.Button("")
@@ -392,11 +393,11 @@ class TemperaturePanel(ScreenPanel):
         if not self.popover_device:
             self.select_heater(None, device)
 
-    def toggle_visibility(self, widget, device=None):
-        if device is None:
-            device = self.popover_device
-        self.devices[device]['visible'] ^= True
-        logging.info(f"Graph show {self.devices[device]['visible']}: {device}")
+    # def toggle_visibility(self, widget, device=None):
+    #     if device is None:
+    #         device = self.popover_device
+    #     self.devices[device]['visible'] ^= True
+    #     logging.info(f"Graph show {self.devices[device]['visible']}: {device}")
 
         section = f"graph {self._screen.connected_printer}"
         if section not in self._config.get_config().sections():
@@ -456,10 +457,10 @@ class TemperaturePanel(ScreenPanel):
 
         self.labels['graph_settemp'] = self._gtk.Button(label=_("Set Temp"))
         self.labels['graph_settemp'].connect("clicked", self.show_numpad)
-        self.labels['graph_hide'] = self._gtk.Button(label=_("Hide"))
-        self.labels['graph_hide'].connect("clicked", self.toggle_visibility)
-        self.labels['graph_show'] = self._gtk.Button(label=_("Show"))
-        self.labels['graph_show'].connect("clicked", self.toggle_visibility)
+        # self.labels['graph_hide'] = self._gtk.Button(label=_("Hide"))
+        # self.labels['graph_hide'].connect("clicked", self.toggle_visibility)
+        # self.labels['graph_show'] = self._gtk.Button(label=_("Show"))
+        # self.labels['graph_show'].connect("clicked", self.toggle_visibility)
 
         popover = Gtk.Popover()
         self.labels['popover_vbox'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
