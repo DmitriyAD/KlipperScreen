@@ -70,12 +70,12 @@ class TemperaturePanel(ScreenPanel):
         adjust = self._gtk.ButtonImage('fine-tune', '', "color3", 1, Gtk.PositionType.LEFT, 1)
 
         right = self._gtk.HomogeneousGrid()
-        right.attach(cooldown, 0, 2, 2, 1)
-        right.attach(adjust, 2, 2, 1, 1)
+        right.attach(cooldown, 0, 0, 2, 1)
+        right.attach(adjust, 2, 0, 1, 1)
         if self.show_preheat:
-            right.attach(self.preheat(), 0, 0, 3, 4)
+            right.attach(self.preheat(), 0, 1, 3, 4)
         else:
-            right.attach(self.delta_adjust(), 0, 0, 3, 4)
+            right.attach(self.delta_adjust(), 0, 1, 3, 4)
 
         cooldown.connect("clicked", self.set_temperature, "cooldown")
         adjust.connect("clicked", self.switch_preheat_adjust)
