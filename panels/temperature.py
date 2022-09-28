@@ -6,7 +6,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib
 
 from ks_includes.screen_panel import ScreenPanel
-from ks_includes.widgets.graph import HeaterGraph
+# from ks_includes.widgets.graph import HeaterGraph
 from ks_includes.widgets.keypad import Keypad
 
 
@@ -15,7 +15,7 @@ def create_panel(*args):
 
 
 class TemperaturePanel(ScreenPanel):
-    graph_update = None
+    # graph_update = None
     active_heater = None
 
     def __init__(self, screen, title, back=True):
@@ -399,11 +399,11 @@ class TemperaturePanel(ScreenPanel):
     #     self.devices[device]['visible'] ^= True
     #     logging.info(f"Graph show {self.devices[device]['visible']}: {device}")
 
-        section = f"graph {self._screen.connected_printer}"
-        if section not in self._config.get_config().sections():
-            self._config.get_config().add_section(section)
-        self._config.set(section, f"{device}", f"{self.devices[device]['visible']}")
-        self._config.save_user_config_options()
+        # section = f"graph {self._screen.connected_printer}"
+        # if section not in self._config.get_config().sections():
+        #     self._config.get_config().add_section(section)
+        # self._config.set(section, f"{device}", f"{self.devices[device]['visible']}")
+        # self._config.save_user_config_options()
 
         # self.update_graph_visibility()
         # if self.devices[device]['can_target']:
