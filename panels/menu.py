@@ -17,13 +17,12 @@ class MenuPanel(ScreenPanel):
     j2_data = None
 
     def initialize(self, panel_name, display_name, items):
-        _ = self.lang.gettext
 
         self.items = items
         self.create_menu_items()
 
         self.grid = self._gtk.HomogeneousGrid()
-            
+
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(self.grid)
@@ -40,7 +39,7 @@ class MenuPanel(ScreenPanel):
         else:
             self.arrangeMenuItems(self.items, 4)
 
-    def arrangeMenuItems(self, items, columns, expandLast=False):
+    def arrangeMenuItems(self, items, columns, expand_last=False):
         for child in self.grid.get_children():
             self.grid.remove(child)
 
@@ -48,19 +47,28 @@ class MenuPanel(ScreenPanel):
         i = 0
         for item in items:
             key = list(item)[0]
-            logging.debug("Evaluating item: %s" % key)
+            logging.debug(f"Evaluating item: {key}")
             if not self.evaluate_enable(item[key]['enable']):
                 continue
 
-            col = i % columns
-            row = int(i/columns)
-            width = 1
+            if columns == 4:
+                if length <= 4:
+                    # Arrange 2 x 2
+                    columns = 2
+                elif 4 < length <= 6:
+                    # Arrange 3 x 2
+                    columns = 3
 
-            if expandLast is True and i+1 == length and length % 2 == 1:
+            col = i % columns
+            row = int(i / columns)
+
+            width = height = 1
+            if expand_last is True and i + 1 == length and length % 2 == 1:
                 width = 2
 
-            self.grid.attach(self.labels[key], col, row, width, 1)
+            self.grid.attach(self.labels[key], col, row, width, height)
             i += 1
+
         return self.grid
 
     def create_menu_items(self):
@@ -73,9 +81,7 @@ class MenuPanel(ScreenPanel):
             j2_temp = env.from_string(item['name'])
             parsed_name = j2_temp.render()
 
-            b = self._gtk.ButtonImage(
-                item['icon'], parsed_name, "color" + str((i % 4) + 1)
-            )
+            b = self._gtk.ButtonImage(item['icon'], parsed_name, f"color{(i % 4) + 1}")
             if item['panel'] is not False:
                 b.connect("clicked", self.menu_item_clicked, item['panel'], item)
             elif item['method'] is not False:
@@ -100,13 +106,12 @@ class MenuPanel(ScreenPanel):
 
         self.j2_data = self._printer.get_printer_status_data()
         try:
-            logging.debug("Template: '%s'" % enable)
-            logging.debug("Data: %s" % self.j2_data)
-            j2_temp = Template(enable)
+            logging.debug(f"Template: '{enable}'")
+            j2_temp = Template(enable, autoescape=True)
             result = j2_temp.render(self.j2_data)
             if result == 'True':
                 return True
             return False
-        except Exception:
-            logging.debug("Error evaluating enable statement: %s", enable)
+        except Exception as e:
+            logging.debug(f"Error evaluating enable statement: {enable}\n{e}")
             return False
