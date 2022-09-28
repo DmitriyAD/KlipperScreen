@@ -445,7 +445,7 @@ class TemperaturePanel(ScreenPanel):
         self.labels['devices'].attach(temp, 1, 0, 1, 1)
 
         # self.labels['da'] = HeaterGraph(self._printer, self._gtk.get_font_size())
-        self.labels['da'].set_vexpand(True)
+        # self.labels['da'].set_vexpand(True)
 
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
@@ -453,7 +453,7 @@ class TemperaturePanel(ScreenPanel):
 
         self.left_panel = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         self.left_panel.add(scroll)
-        self.left_panel.add(self.labels['da'])
+        # self.left_panel.add(self.labels['da'])
 
         # self.labels['graph_settemp'] = self._gtk.Button(label=_("Set Temp"))
         # self.labels['graph_settemp'].connect("clicked", self.show_numpad)
