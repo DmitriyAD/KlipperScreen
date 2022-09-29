@@ -151,7 +151,7 @@ class MainPanel(MenuPanel):
         self.grid.set_hexpand(True)
         self.grid.set_vexpand(True)
         self.devices = {}
-        self.graph_update = None
+        # self.graph_update = None
         self.active_heater = None
         self.h = 1
 
@@ -262,7 +262,7 @@ class MainPanel(MenuPanel):
         #     self.labels['da'].add_object(device, "targets", rgb, True, False)
 
         name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "), None, 1.5, Gtk.PositionType.LEFT, 1)
-        name.connect("clicked", self.toggle_visibility, device)
+        # name.connect("clicked", self.toggle_visibility, device)
         name.set_alignment(.5, .5)
         # visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}", device, fallback=True)
         # if visible:
