@@ -54,7 +54,7 @@ class MainPanel(MenuPanel):
         i = 0
         for x in self._printer.get_tools():
             self.labels[x] = self._gtk.ButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(0, 0))
-            self.labels[x].connect("clicked", self.show_numpad,x) 
+            self.labels[x].connect("clicked", self.show_numpad) 
 
             self.heaters.append(x)
             i += 1
