@@ -278,7 +278,8 @@ class MainPanel(MenuPanel):
         # self.labels['da'].set_showing(device, visible)
 
         temp = self._gtk.Label("")
-        
+        # if can_target:
+        #     temp.connect("clicked", self.show_numpad, device)
         
          
 
@@ -291,7 +292,7 @@ class MainPanel(MenuPanel):
         }
 
         devices = sorted(self.devices)
-        pos = devices.index(device) 
+        pos = devices.index(device) + 1
 
         # self.labels['devices'].insert_row(pos)
         self.labels['devices'].attach(name, 0, pos, 1, 1)
