@@ -395,5 +395,5 @@ class Printer:
                 temp = self.get_dev_stat(device, x[:-1])
                 if temp is None:
                     temp = 0
-                self.tempstore[device][x].append(round(temp, 2) + "°C") 
+                self.tempstore[device][x].append(round(temp, 2))
         return True
