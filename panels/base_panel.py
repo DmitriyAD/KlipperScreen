@@ -93,6 +93,10 @@ class BasePanel(ScreenPanel):
         self.control['time_box'] = Gtk.Box()
         self.control['time_box'].set_halign(Gtk.Align.END)
         self.control['time_box'].pack_end(self.control['time'], True, True, 5)
+        self.control['txt'] = Gtk.Label("TEST VERSION!!!")
+        self.control['txt_box'] = Gtk.Box()
+        self.control['txt_box'].set_halign(Gtk.Align.END)
+        self.control['txt_box'].pack_end(self.control['txt'], True, True, 5)
 
         self.titlebar = Gtk.Box(spacing=5)
         self.titlebar.set_size_request(0, self._gtk.get_titlebar_height())
@@ -100,6 +104,7 @@ class BasePanel(ScreenPanel):
         self.titlebar.add(self.control['temp_box'])
         self.titlebar.add(self.titlelbl)
         self.titlebar.add(self.control['time_box'])
+        self.titlebar.add(self.control['txt_box'])
 
         # Main layout
         self.main_grid = Gtk.Grid()
