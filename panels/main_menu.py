@@ -262,6 +262,12 @@ class MainPanel(MenuPanel):
         #     self.labels['da'].add_object(device, "targets", rgb, True, False)
 
         name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "), None, 1.5, Gtk.PositionType.LEFT, 1)
+        if can_target:
+            name.connect("clicked", self.menu_item_clicked, "temperature", {
+                 "name":  _('Temperature'),
+                 "panel": "temperature"
+            
+                 })  
         # name.connect("clicked", self.toggle_visibility, device)
         name.set_alignment(.5, .5)
         # visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}", device, fallback=True)
@@ -274,13 +280,8 @@ class MainPanel(MenuPanel):
         temp = self._gtk.Button("")
         if can_target:
             temp.connect("clicked", self.show_numpad, device)
-        name = self._gtk.Button("")
-        if can_target:
-            name.connect("clicked", self.menu_item_clicked, "temperature", {
-                 "name":  _('Temperature'),
-                 "panel": "temperature"
-            
-                 })   
+        
+         
 
         self.devices[device] = {
             # "class": class_name,
