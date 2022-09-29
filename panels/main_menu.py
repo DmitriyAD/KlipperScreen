@@ -294,7 +294,7 @@ class MainPanel(MenuPanel):
         pos = devices.index(device) + 1
 
         self.labels['devices'].insert_row(pos)
-        self.labels['devices'].attach(name, temp, pos, 1, 1)
+        self.labels['devices'].attach(name, 0, temp, 1, 1)
         # self.labels['devices'].attach(temp, 1, pos, 2, 1)
         self.labels['devices'].show_all()
         return True
