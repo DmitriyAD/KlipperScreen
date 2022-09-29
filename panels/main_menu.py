@@ -349,7 +349,7 @@ class MainPanel(MenuPanel):
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(self.labels['devices'])
 
-        self.left_panel = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        self.left_panel = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         self.left_panel.add(scroll)
 
         for d in self._printer.get_temp_store_devices():
