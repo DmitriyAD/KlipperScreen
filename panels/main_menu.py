@@ -291,7 +291,7 @@ class MainPanel(MenuPanel):
         }
 
         devices = sorted(self.devices)
-        pos = devices.index(device) + "\n"
+        pos = devices.index(device) 
 
         # self.labels['devices'].insert_row(pos)
         self.labels['devices'].attach(name, 0, pos, 1, 1)
