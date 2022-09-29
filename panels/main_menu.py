@@ -276,7 +276,7 @@ class MainPanel(MenuPanel):
         #     name.get_style_context().add_class("graph_label_hidden")
         # self.labels['da'].set_showing(device, visible)
 
-        temp = self._gtk.Button("")
+        temp = self._gtk.Label("")
         # if can_target:
         #     temp.connect("clicked", self.show_numpad, device)
         
