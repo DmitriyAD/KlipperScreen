@@ -233,7 +233,7 @@ class MainPanel(MenuPanel):
             # dev_type = "extruder"
         elif device == "heater_bed":
             image = "bed"
-            devname = "Heater Bed"
+            devname = " Heater Bed"
             # class_name = "graph_label_heater_bed"
             # dev_type = "bed"
         elif device.startswith("heater_generic"):
@@ -274,6 +274,13 @@ class MainPanel(MenuPanel):
         temp = self._gtk.Button("")
         if can_target:
             temp.connect("clicked", self.show_numpad, device)
+        name = self._gtk.Button("")
+        if can_target:
+            name.connect("clicked", self.menu_item_clicked, "temperature", {
+                 "name":  _('Temperature'),
+                 "panel": "temperature"
+            
+                 })   
 
         self.devices[device] = {
             # "class": class_name,
@@ -339,8 +346,8 @@ class MainPanel(MenuPanel):
         self.labels['devices'].attach(name, 0, 0, 1, 1)
         self.labels['devices'].attach(temp, 1, 0, 1, 1)
 
-        self.labels['da'] = HeaterGraph(self._printer, self._gtk.get_font_size())
-        self.labels['da'].set_vexpand(True)
+        # self.labels['da'] = HeaterGraph(self._printer, self._gtk.get_font_size())
+        # self.labels['da'].set_vexpand(True)
 
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
