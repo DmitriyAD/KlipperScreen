@@ -371,7 +371,7 @@ class TemperaturePanel(ScreenPanel):
         temp.set_size_request(round(self._gtk.get_font_size() * 7.7), -1)
 
         self.labels['devices'].attach(name, 0, 0, 1, 1)
-        self.labels['devices'].attach(self._gtk.formatTemperatureString(0, 0), 1, 0, 1, 1)
+        self.labels['devices'].attach(('temp' + 'C'), 1, 0, 1, 1)
 
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
