@@ -350,7 +350,7 @@ class MainPanel(MenuPanel):
 
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        for i in self.devices:
+        for i in self.labels['devices']:
             scroll.add(i)
         # scroll.add(self.labels['devices'])
 
