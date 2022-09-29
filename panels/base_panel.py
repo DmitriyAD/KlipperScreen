@@ -141,7 +141,7 @@ class BasePanel(ScreenPanel):
 
         for device in self._screen.printer.get_temp_store_devices():
             if device.startswith("extruder"):
-                if self._screen.printer.extrudercount > 1:
+                if self._screen.printer.extrudercount > 0:
                     if device == "extruder":
                         icon = self._gtk.Image("extruder-0", .5)
                     else:
