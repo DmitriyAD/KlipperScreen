@@ -282,7 +282,7 @@ class TemperaturePanel(ScreenPanel):
 
         if device.startswith("extruder"):
             i = sum(d.startswith('extruder') for d in self.devices)
-            image = f"extruder-{i}" if self._printer.extrudercount > 1 else "extruder"
+            image = f"extruder-{i}" if self._printer.extrudercount > 0 else "extruder"
         elif device == "heater_bed":
             image = "bed"
             devname = "Heater Bed"
