@@ -277,9 +277,8 @@ class MainPanel(MenuPanel):
         #     name.get_style_context().add_class("graph_label_hidden")
         # self.labels['da'].set_showing(device, visible)
 
-        temp = self._gtk.Button("")
-        if can_target:
-            temp.connect("clicked", self.show_numpad, device)
+        temp = self._gtk.Label("")
+        
         
          
 
@@ -292,9 +291,9 @@ class MainPanel(MenuPanel):
         }
 
         devices = sorted(self.devices)
-        pos = devices.index(device) + 1
+        pos = devices.index(device) + "\n"
 
-        self.labels['devices'].insert_row(pos)
+        # self.labels['devices'].insert_row(pos)
         self.labels['devices'].attach(name, 0, pos, 1, 1)
         self.labels['devices'].attach(temp, 1, pos, 2, 1)
         self.labels['devices'].show_all()
