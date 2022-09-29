@@ -312,7 +312,7 @@ class TemperaturePanel(ScreenPanel):
 
         self.devices[device] = {
             "name": name,
-            "temp": temp + "°C",
+            "temp": temp *("°C"),
             "can_target": can_target
         }
 
