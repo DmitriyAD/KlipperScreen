@@ -290,12 +290,11 @@ class MainPanel(MenuPanel):
             # "visible": visible
         }
 
-        devices = sorted(self.devices)
-        pos = devices.index(device) + 1
+        # devices = sorted(self.devices)
+        # pos = devices.index(device) + 1
 
-        self.labels['devices'].insert_row(pos)
-        self.labels['devices'].attach(name, 0, pos, 1, 1)
-        self.labels['devices'].attach(temp, 1, pos, 2, 1)
+        self.labels['devices'].attach(name, 0, Gtk.PositionType.TOP, 1, 1)
+        self.labels['devices'].attach(temp, 1, Gtk.PositionType.BOTTOM,  2, 1)
         self.labels['devices'].show_all()
         return True
 
