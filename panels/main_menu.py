@@ -261,7 +261,7 @@ class MainPanel(MenuPanel):
         # if can_target:
         #     self.labels['da'].add_object(device, "targets", rgb, True, False)
 
-        name = self._gtk.ButtonImage(image, None, None, .5, Gtk.PositionType.LEFT, 1)
+        name = self._gtk.ButtonImage(image, None, None, 1.5, Gtk.PositionType.LEFT, 1)
         if can_target:
             name.connect("clicked", self.show_numpad, device)
 
@@ -290,11 +290,12 @@ class MainPanel(MenuPanel):
             # "visible": visible
         }
 
-        # devices = sorted(self.devices)
-        # pos = devices.index(device) + 1
+        devices = sorted(self.devices)
+        pos = devices.index(device) + 1
 
-        self.labels['devices'].attach(name, 0, Gtk.PositionType.TOP, 1, 1)
-        self.labels['devices'].attach(temp, 0, Gtk.PositionType.BOTTOM,  1, 1)
+        self.labels['devices'].insert_row(pos)
+        self.labels['devices'].attach(name, temp, pos, 1, 1)
+        # self.labels['devices'].attach(temp, 1, pos, 2, 1)
         self.labels['devices'].show_all()
         return True
 
