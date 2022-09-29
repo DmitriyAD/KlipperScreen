@@ -95,7 +95,7 @@ class TemperaturePanel(ScreenPanel):
         i = 0
         for option in self.preheat_options:
             if option != "cooldown":
-                self.labels[option] = self._gtk.Button(option, f"color{(i % 4) + 1} °C")
+                self.labels[option] = self._gtk.Button(option, f"color{(i % 4) + 1}")
                 self.labels[option].connect("clicked", self.set_temperature, option)
                 self.labels['preheat_grid'].attach(self.labels[option], (i % 2), int(i / 2), 1, 1)
                 i += 1
