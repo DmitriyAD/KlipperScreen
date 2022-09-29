@@ -261,7 +261,7 @@ class MainPanel(MenuPanel):
         # if can_target:
         #     self.labels['da'].add_object(device, "targets", rgb, True, False)
 
-        name = self._gtk.ButtonImage(image, None, None, 1.5, Gtk.PositionType.LEFT, 1)
+        name = self._gtk.ButtonImage(image,  self._gtk.formatTemperatureString(0, 0))
         if can_target:
             name.connect("clicked", self.menu_item_clicked, "temperature", {
                  "name":  _('Temperature'),
@@ -277,7 +277,7 @@ class MainPanel(MenuPanel):
         #     name.get_style_context().add_class("graph_label_hidden")
         # self.labels['da'].set_showing(device, visible)
 
-        temp = self._gtk.Label("")
+        # temp = self._gtk.Label("")
         # if can_target:
         #     temp.connect("clicked", self.show_numpad, device)
         
@@ -286,7 +286,7 @@ class MainPanel(MenuPanel):
         self.devices[device] = {
             # "class": class_name,
             "name": name,
-            "temp": temp,
+            # "temp": temp,
             "can_target": can_target,
             # "visible": visible
         }
@@ -296,7 +296,7 @@ class MainPanel(MenuPanel):
 
         # self.labels['devices'].insert_row(pos)
         self.labels['devices'].attach(name, 0, pos, 1, 1)
-        self.labels['devices'].attach(temp, 1, pos, 2, 1)
+        # self.labels['devices'].attach(temp, 1, pos, 2, 1)
         self.labels['devices'].show_all()
         return True
 
