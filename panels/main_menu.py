@@ -263,7 +263,7 @@ class MainPanel(MenuPanel):
 
 #         if device.startswith("extruder"):
 #             i = sum(d.startswith('extruder') for d in self.devices)
-#             image = f"extruder-{i}" if self._printer.extrudercount > 1 else "extruder"
+#             image = f"extruder-{i}" if self._printer.extrudercount > 0 else "extruder"
             
 #         elif device == "heater_bed":
 #             image = "bed"
@@ -293,7 +293,7 @@ class MainPanel(MenuPanel):
 #         name.set_alignment(0, .5)
         
 
-#         temp = self._gtk.Button("")
+#         temp = self._gtk.formatTemperatureString(0, 0)
 #         if can_target:
 #             temp.connect("clicked", self.show_numpad, device)
 
@@ -342,11 +342,8 @@ class MainPanel(MenuPanel):
 #         self.labels['devices'].set_vexpand(False)
 
 #         name = Gtk.Label("")
-#         temp = Gtk.Label(_("Temp (°C)"))
-#         temp.set_size_request(round(self._gtk.get_font_size() * 7.7), -1)
 
 #         self.labels['devices'].attach(name, 0, 0, 1, 1)
-#         self.labels['devices'].attach(temp, 1, 0, 1, 1)
 
 #         scroll = self._gtk.ScrolledWindow()
 #         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
