@@ -261,7 +261,7 @@ class MainPanel(MenuPanel):
         # if can_target:
         #     self.labels['da'].add_object(device, "targets", rgb, True, False)
 
-        name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "), None, 1.5, Gtk.PositionType.LEFT, 1)
+        name = self._gtk.ButtonImage(image,  None, 1.5, Gtk.PositionType.LEFT, 1)
         if can_target:
             name.connect("clicked", self.menu_item_clicked, "temperature", {
                  "name":  _('Temperature'),
