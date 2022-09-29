@@ -54,7 +54,7 @@ class MainPanel(MenuPanel):
         i = 0
         for x in self._printer.get_tools():
             self.labels[x] = self._gtk.ButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(0, 0))
-            self.labels[x].connect("clicked", self.show_numpad) 
+            self.labels[x].connect("clicked", self.show_numpad, x) 
 
             self.heaters.append(x)
             i += 1
@@ -124,36 +124,61 @@ class MainPanel(MenuPanel):
         return
 
 
-    def hide_numpad(self, widget=None):
-        self.devices[self.active_heater]['name'].get_style_context().remove_class("button_active")
-        self.active_heater = None
+    def show_numpad(self, widget):
+        _ = self.lang.gettext
 
-        if self._screen.vertical_mode:
-            self.grid.remove_row(1)
-            self.grid.attach(self.labels['menu'], 0, 1, 1, 1)
-        else:
-            self.grid.remove_column(1)
-            self.grid.attach(self.labels['menu'], 1, 0, 1, 1)
+        numpad = self._gtk.HomogeneousGrid()
+        numpad.set_direction(Gtk.TextDirection.LTR)
+
+        keys = [
+            ['1', 'numpad_tleft'],
+            ['2', 'numpad_top'],
+            ['3', 'numpad_tright'],
+            ['4', 'numpad_left'],
+            ['5', 'numpad_button'],
+            ['6', 'numpad_right'],
+            ['7', 'numpad_left'],
+            ['8', 'numpad_button'],
+            ['9', 'numpad_right'],
+            ['B', 'numpad_bleft'],
+            ['0', 'numpad_bottom'],
+            ['E', 'numpad_bright']
+        ]
+        for i in range(len(keys)):
+            id = 'button_' + str(keys[i][0])
+            if keys[i][0] == "B":
+                self.labels[id] = self._gtk.ButtonImage("backspace", None, None, 1, 1)
+            elif keys[i][0] == "E":
+                self.labels[id] = self._gtk.ButtonImage("complete", None, None, 1, 1)
+            else:
+                self.labels[id] = Gtk.Button(keys[i][0])
+            self.labels[id].connect('clicked', self.update_entry, keys[i][0])
+            ctx = self.labels[id].get_style_context()
+            ctx.add_class(keys[i][1])
+            numpad.attach(self.labels[id], i % 3, i/3, 1, 1)
+
+        self.labels["keypad"] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self.labels['entry'] = Gtk.Entry()
+        self.labels['entry'].props.xalign = 0.5
+        ctx = self.labels['entry'].get_style_context()
+
+        b = self._gtk.ButtonImage('cancel', _('Close'), None, 1, 1)
+        b.connect("clicked", self.hide_numpad)
+
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        box.add(self.labels['entry'])
+        box.add(numpad)
+        box.add(b)
+
+        self.labels["keypad"] = numpad
+
+        self.grid.remove_column(1)
+        self.grid.attach(box, 1, 0, 1, 1)
         self.grid.show_all()
 
-
-    def show_numpad(self, widget, device):
-
-        if self.active_heater is not None:
-            self.devices[self.active_heater]['name'].get_style_context().remove_class("button_active")
-        self.active_heater = device
-        self.devices[self.active_heater]['name'].get_style_context().add_class("button_active")
-
-        if "keypad" not in self.labels:
-            self.labels["keypad"] = Keypad(self._screen, self.change_target_temp, self.hide_numpad)
-        self.labels["keypad"].clear()
-
-        if self._screen.vertical_mode:
-            self.grid.remove_row(1)
-            self.grid.attach(self.labels["keypad"], 0, 1, 1, 1)
-        else:
-            self.grid.remove_column(1)
-            self.grid.attach(self.labels["keypad"], 1, 0, 1, 1)
+    def hide_numpad(self, widget):
+        self.grid.remove_column(1)
+        self.grid.attach(self.labels["control_grid"], 1, 0, 1, 1)
         self.grid.show_all()
 
    
