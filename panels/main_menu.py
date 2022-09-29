@@ -261,7 +261,7 @@ class MainPanel(MenuPanel):
         # if can_target:
         #     self.labels['da'].add_object(device, "targets", rgb, True, False)
 
-        name = self._gtk.ButtonImage(image,  self._gtk.formatTemperatureString(0, 0))
+        name = self._gtk.ButtonImage(image,  self._gtk.formatTemperatureString(temperature))
         if can_target:
             name.connect("clicked", self.menu_item_clicked, "temperature", {
                  "name":  _('Temperature'),
