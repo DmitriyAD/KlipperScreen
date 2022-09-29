@@ -172,7 +172,7 @@ class MainPanel(MenuPanel):
 
         self.labels["keypad"] = numpad
 
-        self.grid.remove_column(1)
+        self.grid.remove_row(1)
         self.grid.attach(box, 1, 0, 1, 1)
         self.grid.show_all()
 
