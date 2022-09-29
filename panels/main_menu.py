@@ -345,7 +345,7 @@ class MainPanel(MenuPanel):
         # self.labels['da'] = HeaterGraph(self._printer, self._gtk.get_font_size())
         # self.labels['da'].set_vexpand(True)
 
-        scroll = self._gtk.HomogeneousGrid()
+        scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(self.labels['devices'])
 
