@@ -271,7 +271,7 @@ class TemperaturePanel(ScreenPanel):
 
         logging.info(f"Adding device: {device}")
 
-        temperature = self._printer.get_dev_stat(device, "temperature" + "C")
+        temperature = self._printer.get_dev_stat(device, "temperature")
         if temperature is None:
             return False
 
