@@ -1,4 +1,3 @@
-from cProfile import label
 import gi
 import logging
 import contextlib
@@ -307,7 +306,7 @@ class TemperaturePanel(ScreenPanel):
             name.connect('button-press-event', self.name_pressed, device)
             name.connect('button-release-event', self.name_released, device)
 
-        temp = self._gtk.Button(label = "123")
+        temp = self._gtk.Button("")
         if can_target:
             temp.connect("clicked", self.show_numpad, device)
 
@@ -326,7 +325,7 @@ class TemperaturePanel(ScreenPanel):
 
         self.labels['devices'].insert_row(pos)
         self.labels['devices'].attach(name, 0, pos, 1, 1)
-        self.labels['devices'].attach(temp, 1, pos, 2, 1)
+        self.labels['devices'].attach(temp +"C", 1, pos, 2, 1)
         self.labels['devices'].show_all()
         return True
 
