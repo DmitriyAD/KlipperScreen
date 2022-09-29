@@ -90,19 +90,19 @@ class TemperaturePanel(ScreenPanel):
             self.grid.attach(self.create_right_panel(), 1, 0, 1, 1)
         self.grid.show_all()
 
-    # def preheat(self):
-    #     self.labels["preheat_grid"] = self._gtk.HomogeneousGrid()
-    #     i = 0
-    #     for option in self.preheat_options:
-    #         if option != "cooldown":
-    #             self.labels[option] = self._gtk.Button(option, f"color{(i % 4) + 1}")
-    #             self.labels[option].connect("clicked", self.set_temperature, option)
-    #             self.labels['preheat_grid'].attach(self.labels[option], (i % 2), int(i / 2), 1, 1)
-    #             i += 1
-    #     scroll = Gtk.ScrolledWindow()
-    #     scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-    #     scroll.add(self.labels["preheat_grid"])
-    #     return scroll
+    def preheat(self):
+        self.labels["preheat_grid"] = self._gtk.HomogeneousGrid()
+        i = 0
+        for option in self.preheat_options:
+            if option != "cooldown":
+                self.labels[option] = self._gtk.Button(option, f"color{(i % 4) + 1} °C")
+                self.labels[option].connect("clicked", self.set_temperature, option)
+                self.labels['preheat_grid'].attach(self.labels[option], (i % 2), int(i / 2), 1, 1)
+                i += 1
+        scroll = Gtk.ScrolledWindow()
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add(self.labels["preheat_grid"])
+        return scroll
 
     def delta_adjust(self):
         deltagrid = self._gtk.HomogeneousGrid()
