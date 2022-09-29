@@ -350,7 +350,9 @@ class MainPanel(MenuPanel):
 
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        scroll.add(self.labels['devices'])
+        for i in self.devices:
+            scroll.add(i)
+        # scroll.add(self.labels['devices'])
 
         self.left_panel = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         self.left_panel.add(scroll)
