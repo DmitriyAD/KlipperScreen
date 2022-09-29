@@ -263,8 +263,7 @@ class MainPanel(MenuPanel):
 
         name = self._gtk.ButtonImage(image, None, None, 1.5, Gtk.PositionType.LEFT, 1)
         if can_target:
-            name.connect("clicked", self.show_numpad, device)
-
+            name.connect("clicked", self.show_numpad, device)  
 
 
         # name.connect("clicked", self.toggle_visibility, device)
@@ -276,7 +275,7 @@ class MainPanel(MenuPanel):
         #     name.get_style_context().add_class("graph_label_hidden")
         # self.labels['da'].set_showing(device, visible)
 
-        temp = self._gtk.Label("")
+        # temp = self._gtk.Button("")
         # if can_target:
         #     temp.connect("clicked", self.show_numpad, device)
         
@@ -285,7 +284,7 @@ class MainPanel(MenuPanel):
         self.devices[device] = {
             # "class": class_name,
             "name": name,
-            "temp": temp,
+            # "temp": temp,
             "can_target": can_target,
             # "visible": visible
         }
@@ -294,7 +293,7 @@ class MainPanel(MenuPanel):
         pos = devices.index(device) + 1
 
         self.labels['devices'].insert_row(pos)
-        self.labels['devices'].attach(name, 0, temp, 1, 1)
+        self.labels['devices'].attach(name, 0, pos, 1, 1)
         # self.labels['devices'].attach(temp, 1, pos, 2, 1)
         self.labels['devices'].show_all()
         return True
@@ -340,16 +339,20 @@ class MainPanel(MenuPanel):
         self.labels['devices'].set_vexpand(False)
 
         name = Gtk.Label("")
+        # temp = Gtk.Label(_("Temp (°C)"))
+        # temp.set_size_request(round(self._gtk.get_font_size() * 7.7), -1)
+
         self.labels['devices'].attach(name, 0, 0, 1, 1)
-        
+        # self.labels['devices'].attach(temp, 1, 0, 1, 1)
+
         # self.labels['da'] = HeaterGraph(self._printer, self._gtk.get_font_size())
         # self.labels['da'].set_vexpand(True)
 
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        scroll.add(self.labels['devices'])
+        scroll.add(self.labels['devices']['temperature'])
 
-        self.left_panel = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
+        self.left_panel = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         self.left_panel.add(scroll)
 
         for d in self._printer.get_temp_store_devices():
