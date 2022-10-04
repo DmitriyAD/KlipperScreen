@@ -43,8 +43,8 @@ class JobStatusPanel(ScreenPanel):
     def initialize(self, panel_name):
 
         data = ['pos_x', 'pos_y', 'pos_z', 'time_left', 'duration', 'slicer_time', 'file_time',
-                'filament_time', 'est_time', 'speed_factor', 'req_speed', 'max_accel', 'extrude_factor', 'zoffset',
-                'zoffset', 'filament_used', 'filament_total', 'advance', 'fan', 'layer', 'total_layers', 'height',
+                'filament_time', 'est_time', 'speed_factor', 'req_speed', 'max_accel', 'extrude_factor',
+                'filament_used', 'filament_total', 'advance', 'fan', 'layer', 'total_layers', 'height',
                 'flowrate']
 
         for item in data:
