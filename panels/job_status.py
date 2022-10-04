@@ -36,15 +36,15 @@ class JobStatusPanel(ScreenPanel):
         self.file_metadata = self.fans = {}
         self.state = "standby"
         self.timeleft_type = "auto"
-        self.progress = self.zoffset = self.flowrate = self.vel = 0
+        self.progress = self.flowrate = self.vel = 0
         self.main_status_displayed = True
         self.velstore = self.flowstore = []
 
     def initialize(self, panel_name):
 
         data = ['pos_x', 'pos_y', 'pos_z', 'time_left', 'duration', 'slicer_time', 'file_time',
-                'filament_time', 'est_time', 'speed_factor', 'req_speed', 'max_accel', 'extrude_factor', 'zoffset',
-                'zoffset', 'filament_used', 'filament_total', 'advance', 'fan', 'layer', 'total_layers', 'height',
+                'filament_time', 'est_time', 'speed_factor', 'req_speed', 'max_accel', 'extrude_factor', 
+                'filament_used', 'filament_total', 'advance', 'fan', 'layer', 'total_layers', 'height',
                 'flowrate']
 
         for item in data:
@@ -61,7 +61,6 @@ class JobStatusPanel(ScreenPanel):
         self.labels['speed_lbl'] = Gtk.Label(_("Speed:"))
         self.labels['accel_lbl'] = Gtk.Label(_("Acceleration:"))
         self.labels['flow'] = Gtk.Label(_("Flow:"))
-        self.labels['zoffset_lbl'] = Gtk.Label(_("Z offset:"))
         self.labels['fila_used_lbl'] = Gtk.Label(_("Filament used:"))
         self.labels['fila_total_lbl'] = Gtk.Label(_("Filament total:"))
         self.labels['pa_lbl'] = Gtk.Label(_("Pressure Advance:"))
@@ -308,8 +307,6 @@ class JobStatusPanel(ScreenPanel):
         info.attach(self.labels['accel_lbl'], 1, 1, 1, 1)
         info.attach(self.labels['max_accel'], 2, 1, 1, 1)
         info.attach(pos_box, 1, 2, 2, 1)
-        info.attach(self.labels['zoffset_lbl'], 1, 3, 1, 1)
-        info.attach(self.labels['zoffset'], 2, 3, 1, 1)
         info.attach(self.labels['height_lbl'], 1, 4, 1, 1)
         info.attach(self.labels['height'], 2, 4, 1, 1)
         info.attach(self.labels['layer_lbl'], 1, 5, 1, 1)
@@ -400,45 +397,6 @@ class JobStatusPanel(ScreenPanel):
         self.buttons['save_offset_probe'].connect("clicked", self.save_offset, "probe")
         self.buttons['save_offset_endstop'].connect("clicked", self.save_offset, "endstop")
 
-    def save_offset(self, widget, device):
-
-        saved_z_offset = 0
-        if self._printer.config_section_exists("probe"):
-            saved_z_offset = float(self._screen.printer.get_config_section("probe")['z_offset'])
-        elif self._printer.config_section_exists("bltouch"):
-            saved_z_offset = float(self._screen.printer.get_config_section("bltouch")['z_offset'])
-
-        sign = "+" if self.zoffset > 0 else "-"
-        label = Gtk.Label()
-        if device == "probe":
-            label.set_text(_("Apply %s%.2f offset to Probe?") % (sign, abs(self.zoffset))
-                           + "\n\n"
-                           + _("Saved offset: %s") % saved_z_offset)
-        elif device == "endstop":
-            label.set_text(_("Apply %.2f offset to Endstop?") % self.zoffset)
-        label.set_hexpand(True)
-        label.set_halign(Gtk.Align.CENTER)
-        label.set_vexpand(True)
-        label.set_valign(Gtk.Align.CENTER)
-        label.set_line_wrap(True)
-        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-
-        grid = self._gtk.HomogeneousGrid()
-        grid.attach(label, 0, 0, 1, 1)
-        buttons = [
-            {"name": _("Apply"), "response": Gtk.ResponseType.APPLY},
-            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
-        ]
-        self._gtk.Dialog(self._screen, buttons, grid, self.save_confirm, device)
-
-    def save_confirm(self, widget, response_id, device):
-        if response_id == Gtk.ResponseType.APPLY:
-            if device == "probe":
-                self._screen._ws.klippy.gcode_script("Z_OFFSET_APPLY_PROBE")
-            if device == "endstop":
-                self._screen._ws.klippy.gcode_script("Z_OFFSET_APPLY_ENDSTOP")
-            self._screen._ws.klippy.gcode_script("SAVE_CONFIG")
-        widget.destroy()
 
     def restart(self, widget):
         if self.filename != "none":
@@ -601,9 +559,6 @@ class JobStatusPanel(ScreenPanel):
                 self.labels['speed_factor'].set_text(f"{self.speed:3}%")
             with contextlib.suppress(KeyError):
                 self.req_speed = int(round(data["gcode_move"]["speed"] / 60 * self.speed_factor))
-            with contextlib.suppress(KeyError):
-                self.zoffset = data["gcode_move"]["homing_origin"][2]
-                self.labels['zoffset'].set_text(f"{self.zoffset:.2f}")
         if "motion_report" in data:
             with contextlib.suppress(KeyError):
                 pos = data["motion_report"]["live_position"]
@@ -804,21 +759,6 @@ class JobStatusPanel(ScreenPanel):
             self.buttons['button_grid'].attach(self.buttons['control'], 3, 0, 1, 1)
             self.enable_button("resume", "cancel")
         else:
-            if self.zoffset != 0:
-                endstop = (self._screen.printer.config_section_exists("stepper_z") and
-                           not self._screen.printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"))
-                if endstop:
-                    self.buttons['button_grid'].attach(self.buttons["save_offset_endstop"], 0, 0, 1, 1)
-                else:
-                    self.buttons['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
-                if self._printer.config_section_exists("probe") or self._printer.config_section_exists("bltouch"):
-                    self.buttons['button_grid'].attach(self.buttons["save_offset_probe"], 1, 0, 1, 1)
-                else:
-                    self.buttons['button_grid'].attach(Gtk.Label(""), 1, 0, 1, 1)
-            else:
-                self.buttons['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
-                self.buttons['button_grid'].attach(Gtk.Label(""), 1, 0, 1, 1)
-
             if self.filename is not None:
                 self.buttons['button_grid'].attach(self.buttons['restart'], 2, 0, 1, 1)
             self.buttons['button_grid'].attach(self.buttons['menu'], 3, 0, 1, 1)
