@@ -926,6 +926,7 @@ class KlipperScreen(Gtk.Window):
             self._send_action(widget, method, params)
 
         widget.destroy()
+        
 
     def _send_action(self, widget, method, params):
         self._ws.send_method(method, params)

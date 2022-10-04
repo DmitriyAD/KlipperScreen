@@ -276,3 +276,8 @@ class KlippyGtk:
                           Gdk.EventMask.BUTTON_RELEASE_MASK)
         scroll.set_kinetic_scrolling(True)
         return scroll
+
+    def formatTemperatureString(self, temp, target):
+        if (target > temp-2 and target < temp+2) or round(target, 0) == 0:
+            return str(round(temp, 1)) + "°C"  # °C →"
+        return str(round(temp)) + " → " + str(round(target)) + "°C"    

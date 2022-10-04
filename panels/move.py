@@ -49,11 +49,11 @@ class MovePanel(ScreenPanel):
         self.labels['home-xy'] = self._gtk.ButtonImage("home", _("Home XY"), "color4")
         self.labels['home-xy'].connect("clicked", self.homexy)
 
-        self.labels['z_tilt'] = self._gtk.ButtonImage("z-tilt", _("Z Tilt"), "color4")
-        self.labels['z_tilt'].connect("clicked", self.z_tilt)
+        # self.labels['z_tilt'] = self._gtk.ButtonImage("z-tilt", _("Z Tilt"), "color4")
+        # self.labels['z_tilt'].connect("clicked", self.z_tilt)
 
-        self.labels['quad_gantry_level'] = self._gtk.ButtonImage("z-tilt", _("Quad Gantry Level"), "color4")
-        self.labels['quad_gantry_level'].connect("clicked", self.quad_gantry_level)
+        # self.labels['quad_gantry_level'] = self._gtk.ButtonImage("z-tilt", _("Quad Gantry Level"), "color4")
+        # self.labels['quad_gantry_level'].connect("clicked", self.quad_gantry_level)
 
         self.labels['motors-off'] = self._gtk.ButtonImage("motor-off", _("Disable Motors"), "color4")
         script = {"script": "M18"}
@@ -89,14 +89,14 @@ class MovePanel(ScreenPanel):
 
         grid.attach(self.labels['home'], 0, 0, 1, 1)
 
-        if self._printer.config_section_exists("z_tilt"):
-            grid.attach(self.labels['z_tilt'], 2, 0, 1, 1)
-        elif self._printer.config_section_exists("quad_gantry_level"):
-            grid.attach(self.labels['quad_gantry_level'], 2, 0, 1, 1)
-        elif "delta" in self._screen.printer.get_config_section("printer")['kinematics']:
-            grid.attach(self.labels['motors-off'], 2, 0, 1, 1)
-        else:
-            grid.attach(self.labels['home-xy'], 2, 0, 1, 1)
+        # if self._printer.config_section_exists("z_tilt"):
+        #     grid.attach(self.labels['z_tilt'], 2, 0, 1, 1)
+        # elif self._printer.config_section_exists("quad_gantry_level"):
+        #     grid.attach(self.labels['quad_gantry_level'], 2, 0, 1, 1)
+        # if "delta" in self._screen.printer.get_config_section("printer")['kinematics']:
+        #     grid.attach(self.labels['motors-off'], 2, 0, 1, 1)
+        # else:
+        #     grid.attach(self.labels['home-xy'], 2, 0, 1, 1)
 
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
