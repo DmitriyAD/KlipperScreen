@@ -43,8 +43,8 @@ class JobStatusPanel(ScreenPanel):
     def initialize(self, panel_name):
 
         data = ['pos_x', 'pos_y', 'pos_z', 'time_left', 'duration', 'slicer_time', 'file_time',
-                'filament_time', 'est_time', 'speed_factor', 'req_speed', 'max_accel', 'extrude_factor',
-                'filament_used', 'filament_total', 'advance', 'fan', 'layer', 'total_layers', 'height',
+                'filament_time', 'est_time', 'speed_factor', 'req_speed', 'max_accel', 'extrude_factor', 'zoffset',
+                'zoffset', 'filament_used', 'filament_total', 'advance', 'fan', 'layer', 'total_layers', 'height',
                 'flowrate']
 
         for item in data:
@@ -61,7 +61,7 @@ class JobStatusPanel(ScreenPanel):
         self.labels['speed_lbl'] = Gtk.Label(_("Speed:"))
         self.labels['accel_lbl'] = Gtk.Label(_("Acceleration:"))
         self.labels['flow'] = Gtk.Label(_("Flow:"))
-        # self.labels['zoffset_lbl'] = Gtk.Label(_("Z offset:"))
+        self.labels['zoffset_lbl'] = Gtk.Label(_("Z offset:"))
         self.labels['fila_used_lbl'] = Gtk.Label(_("Filament used:"))
         self.labels['fila_total_lbl'] = Gtk.Label(_("Filament total:"))
         self.labels['pa_lbl'] = Gtk.Label(_("Pressure Advance:"))
@@ -308,8 +308,8 @@ class JobStatusPanel(ScreenPanel):
         info.attach(self.labels['accel_lbl'], 1, 1, 1, 1)
         info.attach(self.labels['max_accel'], 2, 1, 1, 1)
         info.attach(pos_box, 1, 2, 2, 1)
-        # info.attach(self.labels['zoffset_lbl'], 1, 3, 1, 11)
-        # info.attach(self.labels['zoffset'], 2, 3, 1, 1)
+        info.attach(self.labels['zoffset_lbl'], 1, 3, 1, 1)
+        info.attach(self.labels['zoffset'], 2, 3, 1, 1)
         info.attach(self.labels['height_lbl'], 1, 4, 1, 1)
         info.attach(self.labels['height'], 2, 4, 1, 1)
         info.attach(self.labels['layer_lbl'], 1, 5, 1, 1)
