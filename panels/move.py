@@ -93,10 +93,10 @@ class MovePanel(ScreenPanel):
         #     grid.attach(self.labels['z_tilt'], 2, 0, 1, 1)
         # elif self._printer.config_section_exists("quad_gantry_level"):
         #     grid.attach(self.labels['quad_gantry_level'], 2, 0, 1, 1)
-        if "delta" in self._screen.printer.get_config_section("printer")['kinematics']:
-            grid.attach(self.labels['motors-off'], 2, 0, 1, 1)
-        else:
-            grid.attach(self.labels['home-xy'], 2, 0, 1, 1)
+        # if "delta" in self._screen.printer.get_config_section("printer")['kinematics']:
+        #     grid.attach(self.labels['motors-off'], 2, 0, 1, 1)
+        # else:
+        #     grid.attach(self.labels['home-xy'], 2, 0, 1, 1)
 
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
