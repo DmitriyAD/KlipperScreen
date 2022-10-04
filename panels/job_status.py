@@ -309,7 +309,7 @@ class JobStatusPanel(ScreenPanel):
         info.attach(self.labels['max_accel'], 2, 1, 1, 1)
         info.attach(pos_box, 1, 2, 2, 1)
         # info.attach(self.labels['zoffset_lbl'], 1, 3, 1, 11)
-        info.attach(self.labels['zoffset'], 2, 3, 1, 1)
+        # info.attach(self.labels['zoffset'], 2, 3, 1, 1)
         info.attach(self.labels['height_lbl'], 1, 4, 1, 1)
         info.attach(self.labels['height'], 2, 4, 1, 1)
         info.attach(self.labels['layer_lbl'], 1, 5, 1, 1)
