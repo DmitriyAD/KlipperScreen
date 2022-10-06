@@ -448,8 +448,9 @@ class NetworkPanel(ScreenPanel):
     def reload_networks(self, widget=None):
         self.networks = {}
         self.labels['networklist'].remove_column(0)
-        self.wifi.rescan()
+        
         if self.wifi is not None and self.wifi.is_initialized():
+            self.wifi.rescan()
             GLib.idle_add(self.load_networks)
 
     def activate(self):
@@ -464,4 +465,4 @@ class NetworkPanel(ScreenPanel):
     def deactivate(self):
         if self.update_timeout is not None:
             GLib.source_remove(self.update_timeout)
-            self.update_timeout = None
+            self.update_timeout = None  
